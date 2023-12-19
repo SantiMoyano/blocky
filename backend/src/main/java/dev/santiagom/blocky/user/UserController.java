@@ -14,10 +14,10 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<List<User>>(userRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<List<User>>(userService.allUsers(), HttpStatus.OK);
     }
 }
