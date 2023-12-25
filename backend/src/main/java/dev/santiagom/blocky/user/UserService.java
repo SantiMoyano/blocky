@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.user;
 
+import dev.santiagom.blocky.user.exceptions.DuplicateUsernameException;
 import dev.santiagom.blocky.user.exceptions.NoUsersFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class UserService {
     }
 
     public User createUser(User user) {
+
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new DuplicateUsernameException(user.getUsername());
+        }
         return userRepository.save(user);
     }
 }
