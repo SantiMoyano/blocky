@@ -15,19 +15,16 @@ public class UserService {
 
     public List<User> allUsers() {
         List<User> users = userRepository.findAll();
-
-        if (users.isEmpty()) {
-            throw new NoUsersFoundException("No users found in the database.");
-        }
+        if (users.isEmpty())
+            throw new NoUsersFoundException();
 
         return users;
     }
 
     public User createUser(User user) {
-
-        if (userRepository.existsByUsername(user.getUsername())) {
+        if (userRepository.existsByUsername(user.getUsername()))
             throw new DuplicateUsernameException(user.getUsername());
-        }
+
         return userRepository.save(user);
     }
 }
