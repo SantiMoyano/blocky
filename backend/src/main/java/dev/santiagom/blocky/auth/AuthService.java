@@ -5,6 +5,7 @@ import dev.santiagom.blocky.user.Role;
 import dev.santiagom.blocky.user.User;
 import dev.santiagom.blocky.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
     public AuthResponse login(LoginRequest request) {
         return null;
     }
@@ -21,8 +23,8 @@ public class AuthService {
         User user = User.builder()
                 .firstname(request.getFirstname())
                 .username(request.getUsername())
-                .password(request.getPassword())
                 .role(Role.USER)
+                .password(passwordEncoder.encode(request.getPassword()))
                 .build();
 
         userRepository.save(user);
