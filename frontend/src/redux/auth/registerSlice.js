@@ -12,7 +12,9 @@ export const registerUser = createAsyncThunk(
 
       const response = await axios.post("/api/v1/auth/register", userData);
 
-      dispatch(registerSuccess()); // Disparar la acción de éxito
+      dispatch(registerSuccess());
+      // Introducir un pequeño retraso antes de cambiar registrationSuccess a true
+      dispatch(setRegistrationSuccess(true));
     } catch (error) {
       dispatch(registerFailure(error.message)); // Disparar la acción de error
     }
@@ -27,10 +29,10 @@ const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    // Reducers síncronos si es necesario
     registerRequest: (state) => {
       state.registering = true;
       state.error = null;
+      state.registrationSuccess = false;
     },
     registerSuccess: (state) => {
       state.registering = false;
@@ -40,13 +42,16 @@ const authSlice = createSlice({
       state.registering = false;
       state.error = action.payload;
     },
+    setRegistrationSuccess: (state, action) => {
+      state.registrationSuccess = action.payload;
+    },
   },
   extraReducers: (builder) => {
-    // Manejar los casos async de la acción registerUser
     builder
       .addCase(registerUser.pending, (state) => {
         state.registering = true;
         state.error = null;
+        state.registrationSuccess = false;
       })
       .addCase(registerUser.fulfilled, (state) => {
         state.registering = false;
@@ -60,6 +65,10 @@ const authSlice = createSlice({
 });
 
 // Exportar las acciones generadas automáticamente y el reducer
-export const { registerRequest, registerSuccess, registerFailure } =
-  authSlice.actions;
+export const {
+  registerRequest,
+  registerSuccess,
+  registerFailure,
+  setRegistrationSuccess,
+} = authSlice.actions;
 export default authSlice.reducer;
