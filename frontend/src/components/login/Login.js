@@ -1,4 +1,4 @@
-function Register() {
+function Login() {
   return (
     <form>
       <div>
@@ -7,15 +7,11 @@ function Register() {
       </div>
       <div>
         <label>password</label>
-        <input type="password" />
-      </div>
-      <div>
-        <label>repeat password</label>
-        <input type="password" />
+        <input type="text" />
       </div>
       <button>submit</button>
     </form>
   );
 }
 
-export default Register;
+export default Login;
