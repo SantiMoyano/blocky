@@ -10,7 +10,7 @@ export const registerUser = createAsyncThunk(
     try {
       dispatch(registerRequest()); // Disparar la acción de solicitud
 
-      const response = await axios.post("/api/register", userData);
+      const response = await axios.post("/api/v1/auth/register", userData);
 
       dispatch(registerSuccess()); // Disparar la acción de éxito
     } catch (error) {
