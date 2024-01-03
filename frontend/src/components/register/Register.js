@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/registerSlice";
+import Form from "../form/Form";
 
 function Register() {
   const dispatch = useDispatch();
@@ -10,16 +11,45 @@ function Register() {
     (state) => state.auth.registrationSuccess
   );
 
-  const [formData, setFormData] = useState({
+  // Request data for registration
+  const [registerRequest, setRegisterRequest] = useState({
     firstname: "",
     username: "",
     password: "",
     repeatPassword: "",
   });
 
+  // Inputs for registration form
+  const registerData = [
+    {
+      label: "Firstname",
+      type: "text",
+      name: "firstname",
+      value: registerRequest.firstname,
+    },
+    {
+      label: "Username",
+      type: "text",
+      name: "username",
+      value: registerRequest.username,
+    },
+    {
+      label: "Password",
+      type: "password",
+      name: "password",
+      value: registerRequest.password,
+    },
+    {
+      label: "Repeat Password",
+      type: "password",
+      name: "repeatPassword",
+      value: registerRequest.repeatPassword,
+    },
+  ];
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setRegisterRequest({
+      ...registerRequest,
       [e.target.name]: e.target.value,
     });
   };
@@ -27,53 +57,20 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform validations, for example, ensure passwords match
-    const registerData = {
-      firstname: formData.firstname,
-      username: formData.username,
-      password: formData.password,
+
+    // Expected data on API register endpoint
+    const registerReq = {
+      firstname: registerRequest.firstname,
+      username: registerRequest.username,
+      password: registerRequest.password,
     };
     // Dispatch the action to register the user
-    dispatch(registerUser(registerData));
+    dispatch(registerUser(registerReq));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Firstname</label>
-        <input
-          type="text"
-          name="firstname"
-          value={formData.firstname}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeatPassword"
-          value={formData.repeatPassword}
-          onChange={handleChange}
-        />
-      </div>
+      <Form formData={registerData} handleChange={handleChange} />
       <button type="submit" disabled={registering}>
         {registering ? "Registering..." : "Submit"}
       </button>
