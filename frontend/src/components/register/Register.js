@@ -26,13 +26,13 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Realizar validaciones, por ejemplo, asegurarse de que las contraseñas coincidan
+    // Perform validations, for example, ensure passwords match
     const registerData = {
       firstname: formData.firstname,
       username: formData.username,
       password: formData.password,
     };
-    // Despachar la acción para registrar al usuario
+    // Dispatch the action to register the user
     dispatch(registerUser(registerData));
   };
 
@@ -77,16 +77,10 @@ function Register() {
       <button type="submit" disabled={registering}>
         {registering ? "Registering..." : "Submit"}
       </button>
-      {registrationSuccess && (
+      {registrationSuccess ? (
         <p style={{ color: "green" }}>User created successfully!</p>
-      )}
-      {error && (
-        <div>
-          <p style={{ color: "red" }}>{error}</p>
-          <p>
-            Hubo un error durante el registro. Por favor, intenta nuevamente.
-          </p>
-        </div>
+      ) : (
+        error && <p style={{ color: "red" }}>User already exists!</p>
       )}
     </form>
   );
