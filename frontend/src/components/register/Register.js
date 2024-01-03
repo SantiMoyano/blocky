@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/registerSlice";
 import Form from "../form/Form";
+import Notification from "../notification/Notification";
 
 function Register() {
   const dispatch = useDispatch();
@@ -10,6 +11,10 @@ function Register() {
   const registrationSuccess = useSelector(
     (state) => state.auth.registrationSuccess
   );
+  const [formError, setFormError] = useState({
+    message: "",
+    formIsInvalid: false,
+  });
 
   // Request data for registration
   const [registerRequest, setRegisterRequest] = useState({
@@ -47,17 +52,18 @@ function Register() {
     },
   ];
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     setRegisterRequest({
       ...registerRequest,
       [e.target.name]: e.target.value,
     });
-  };
+  }
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     // Perform validations, for example, ensure passwords match
-
+    if (formIsEmpty() || passwordNotMatch()) return;
+    setFormError({ message: "", formIsInvalid: false });
     // Expected data on API register endpoint
     const registerReq = {
       firstname: registerRequest.firstname,
@@ -66,7 +72,26 @@ function Register() {
     };
     // Dispatch the action to register the user
     dispatch(registerUser(registerReq));
-  };
+  }
+
+  function formIsEmpty() {
+    const emptyFields = Object.values(registerRequest).some(
+      (value) => value === ""
+    );
+    if (emptyFields) {
+      setFormError({ message: "There are empty fields", formIsInvalid: true });
+      return true;
+    }
+    return false;
+  }
+
+  function passwordNotMatch() {
+    if (registerRequest.password !== registerRequest.repeatPassword) {
+      setFormError({ message: "Passwords do not match", formIsInvalid: true });
+      return true;
+    }
+    return false;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -75,9 +100,14 @@ function Register() {
         {registering ? "Registering..." : "Submit"}
       </button>
       {registrationSuccess ? (
-        <p style={{ color: "green" }}>User created successfully!</p>
+        <Notification message={"User created successfully!"} type={"success"} />
       ) : (
-        error && <p style={{ color: "red" }}>User already exists!</p>
+        error && (
+          <Notification message={"User already exists!"} type={"failure"} />
+        )
+      )}
+      {formError.formIsInvalid && (
+        <Notification message={formError.message} type={"failure"} />
       )}
     </form>
   );
