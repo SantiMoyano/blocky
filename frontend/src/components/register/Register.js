@@ -6,10 +6,10 @@ import Notification from "../notification/Notification";
 
 function Register() {
   const dispatch = useDispatch();
-  const registering = useSelector((state) => state.auth.registering);
-  const error = useSelector((state) => state.auth.error);
+  const registering = useSelector((state) => state.register.registering);
+  const error = useSelector((state) => state.register.error);
   const registrationSuccess = useSelector(
-    (state) => state.auth.registrationSuccess
+    (state) => state.register.registrationSuccess
   );
   const [formError, setFormError] = useState({
     message: "",

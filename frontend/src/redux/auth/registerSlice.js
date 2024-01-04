@@ -18,8 +18,8 @@ export const registerUser = createAsyncThunk(
 );
 
 // Create a slice using createSlice
-const authSlice = createSlice({
-  name: "auth",
+const registerSlice = createSlice({
+  name: "register",
   initialState: {
     registering: false,
     error: null,
@@ -44,5 +44,5 @@ const authSlice = createSlice({
 
 // Export automatically generated actions and reducer
 export const { registerRequest, registerSuccess, registerFailure } =
-  authSlice.actions;
-export default authSlice.reducer;
+  registerSlice.actions;
+export default registerSlice.reducer;
