@@ -1,6 +1,6 @@
-package dev.santiagom.blocky.user;
+package dev.santiagom.blocky.tables.user;
 
-import dev.santiagom.blocky.user.exceptions.DuplicateUsernameException;
+import dev.santiagom.blocky.tables.user.exceptions.DuplicateUsernameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

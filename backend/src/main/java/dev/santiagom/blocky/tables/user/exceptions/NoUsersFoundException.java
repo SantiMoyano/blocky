@@ -1,4 +1,4 @@
-package dev.santiagom.blocky.user.exceptions;
+package dev.santiagom.blocky.tables.user.exceptions;
 
 public class NoUsersFoundException extends RuntimeException {
 

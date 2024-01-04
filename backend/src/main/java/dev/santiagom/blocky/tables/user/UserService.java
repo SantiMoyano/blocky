@@ -1,7 +1,7 @@
-package dev.santiagom.blocky.user;
+package dev.santiagom.blocky.tables.user;
 
-import dev.santiagom.blocky.user.exceptions.DuplicateUsernameException;
-import dev.santiagom.blocky.user.exceptions.NoUsersFoundException;
+import dev.santiagom.blocky.tables.user.exceptions.DuplicateUsernameException;
+import dev.santiagom.blocky.tables.user.exceptions.NoUsersFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

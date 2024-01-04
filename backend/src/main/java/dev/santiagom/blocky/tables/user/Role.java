@@ -1,4 +1,4 @@
-package dev.santiagom.blocky.user;
+package dev.santiagom.blocky.tables.user;
 
 public enum Role {
     ADMIN,

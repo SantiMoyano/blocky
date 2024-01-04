@@ -1,6 +1,5 @@
 package dev.santiagom.blocky.jwt;
 
-import dev.santiagom.blocky.user.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

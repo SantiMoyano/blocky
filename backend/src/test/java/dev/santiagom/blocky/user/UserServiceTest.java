@@ -1,6 +1,9 @@
 package dev.santiagom.blocky.user;
 
-import dev.santiagom.blocky.user.exceptions.NoUsersFoundException;
+import dev.santiagom.blocky.tables.user.User;
+import dev.santiagom.blocky.tables.user.UserRepository;
+import dev.santiagom.blocky.tables.user.UserService;
+import dev.santiagom.blocky.tables.user.exceptions.NoUsersFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

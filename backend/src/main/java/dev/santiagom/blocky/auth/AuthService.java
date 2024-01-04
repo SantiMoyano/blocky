@@ -1,9 +1,9 @@
 package dev.santiagom.blocky.auth;
 
 import dev.santiagom.blocky.jwt.JwtService;
-import dev.santiagom.blocky.user.Role;
-import dev.santiagom.blocky.user.User;
-import dev.santiagom.blocky.user.UserRepository;
+import dev.santiagom.blocky.tables.user.Role;
+import dev.santiagom.blocky.tables.user.User;
+import dev.santiagom.blocky.tables.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
