@@ -7,8 +7,11 @@ export const loginUser = createAsyncThunk(
     try {
       dispatch(loginRequest());
       const response = await axios.post("/api/v1/auth/login", userData);
+      const token = response.data.token;
+      localStorage.setItem("authToken", token);
       dispatch(loginSuccess());
     } catch (error) {
+      error.message = "Incorrect username or password";
       dispatch(loginFailure(error));
     }
   }
