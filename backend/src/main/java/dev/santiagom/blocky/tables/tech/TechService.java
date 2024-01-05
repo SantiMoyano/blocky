@@ -13,7 +13,7 @@ public class TechService {
     @Autowired
     private TechRepository techRepository;
 
-    public List<Tech> allTech() {
+    public List<Tech> allTechs() {
         return techRepository.findAll();
     }
 }

@@ -19,7 +19,7 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTask() {
-        return new ResponseEntity<List<Task>>(taskService.allTask(), HttpStatus.OK);
+    public ResponseEntity<List<Task>> getAllTasks() {
+        return new ResponseEntity<List<Task>>(taskService.allTasks(), HttpStatus.OK);
     }
 }

@@ -19,7 +19,7 @@ public class TechController {
     private TechService techService;
 
     @GetMapping
-    public ResponseEntity<List<Tech>> getAllTech() {
-        return new ResponseEntity<List<Tech>>(techService.allTech(), HttpStatus.OK);
+    public ResponseEntity<List<Tech>> getAllTechs() {
+        return new ResponseEntity<List<Tech>>(techService.allTechs(), HttpStatus.OK);
     }
 }
