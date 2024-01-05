@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.project;
 
+import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.screenshot.Screenshot;
 import dev.santiagom.blocky.tables.tech.Tech;
 import dev.santiagom.blocky.tables.user.User;
@@ -38,4 +39,8 @@ public class Project {
     // Tech relationship
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Tech> tech;
+
+    // Epics relationship
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Epic> epics;
 }
