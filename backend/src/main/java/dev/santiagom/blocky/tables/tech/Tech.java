@@ -1,4 +1,4 @@
-package dev.santiagom.blocky.tables.screenshot;
+package dev.santiagom.blocky.tables.tech;
 
 import dev.santiagom.blocky.tables.project.Project;
 import jakarta.persistence.*;
@@ -12,14 +12,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Screenshot {
+public class Tech {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String url;
-    private String name; // for alt images
+    private String name;
+    private String color;
 
+    // Project relationship
     @ManyToOne
     @JoinColumn(name = "project_id")  // This is the foreign key column in the Screenshot table
     private Project project;
