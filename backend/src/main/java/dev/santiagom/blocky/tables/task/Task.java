@@ -1,12 +1,16 @@
 package dev.santiagom.blocky.tables.task;
 
+import dev.santiagom.blocky.tables.category.Category;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.project.Project;
+import dev.santiagom.blocky.tables.subtask.Subtask;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +29,13 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "epic_id")
     private Epic epic;
+
+    // Many tasks can have the same category
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    // Subtask relationship
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<Subtask> Subtasks;
 }
