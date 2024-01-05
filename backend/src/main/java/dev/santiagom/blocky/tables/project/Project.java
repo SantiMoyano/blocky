@@ -1,11 +1,14 @@
 package dev.santiagom.blocky.tables.project;
 
+import dev.santiagom.blocky.tables.screenshot.Screenshot;
 import dev.santiagom.blocky.tables.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +28,7 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Screenshot> screenshots;
 }

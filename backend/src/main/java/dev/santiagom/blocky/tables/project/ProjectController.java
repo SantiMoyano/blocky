@@ -17,7 +17,7 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    public ResponseEntity<List<Project>> getAllUsers() {
+    public ResponseEntity<List<Project>> getAllProjects() {
         return new ResponseEntity<List<Project>>(projectService.allProjects(), HttpStatus.OK);
     }
 }
