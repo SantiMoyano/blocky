@@ -11,7 +11,7 @@ public class SubtaskService {
     @Autowired
     private SubtaskRepository subtaskRepository;
 
-    public List<Subtask> getAllSubtasks() {
+    public List<Subtask> allSubtasks() {
         return subtaskRepository.findAll();
     }
 }
