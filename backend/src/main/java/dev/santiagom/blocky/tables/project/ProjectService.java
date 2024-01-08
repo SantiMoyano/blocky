@@ -6,6 +6,7 @@ import dev.santiagom.blocky.tables.screenshot.Screenshot;
 import dev.santiagom.blocky.tables.tech.Tech;
 import dev.santiagom.blocky.tables.user.User;
 import dev.santiagom.blocky.tables.user.UserService;
+import dev.santiagom.blocky.tables.user.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,9 @@ public class ProjectService {
 
     public Project createProject(NewProjectDTO dto, String token) {
         User user = userService.findUserByToken(token);
-        if (user == null)
-            return null;
+        if (user == null) {
+            throw new UserNotFoundException("User not found for token: " + token);
+        }
         return projectRepository.save(Project.builder()
                 .name(dto.getName())
                 .description(dto.getDescription())

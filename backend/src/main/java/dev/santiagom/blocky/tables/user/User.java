@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.santiagom.blocky.tables.project.Project;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Project> projects;
 
     @Override

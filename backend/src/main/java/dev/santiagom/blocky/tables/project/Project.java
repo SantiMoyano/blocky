@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.project;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.screenshot.Screenshot;
 import dev.santiagom.blocky.tables.tech.Tech;
@@ -30,6 +31,7 @@ public class Project {
     // User relationship
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     // Screenshot relationship
