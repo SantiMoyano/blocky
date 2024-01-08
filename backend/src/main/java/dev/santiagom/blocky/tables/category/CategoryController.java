@@ -3,10 +3,7 @@ package dev.santiagom.blocky.tables.category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +18,10 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories(){
         return new ResponseEntity<List<Category>>(categoryService.allCategories(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
+        return new ResponseEntity<Category>(categoryService.createCategory(category), HttpStatus.CREATED);
     }
 }

@@ -4,12 +4,14 @@ import dev.santiagom.blocky.tables.category.Category;
 import dev.santiagom.blocky.tables.category.CategoryRepository;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.epic.EpicRepository;
+import dev.santiagom.blocky.tables.subtask.Subtask;
 import dev.santiagom.blocky.tables.task.dtos.TaskDTO;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,8 +38,10 @@ public class TaskService {
         return taskRepository.save(
                 Task.builder()
                         .name(task.getName())
+                        .progress(0)
                         .category(category)
                         .epic(epic)
+                        .Subtasks(new ArrayList<Subtask>())
                         .build()
         );
     }

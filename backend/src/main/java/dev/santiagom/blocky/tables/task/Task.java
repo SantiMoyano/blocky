@@ -35,6 +35,7 @@ public class Task {
     // Many tasks can have the same category
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     // Subtask relationship

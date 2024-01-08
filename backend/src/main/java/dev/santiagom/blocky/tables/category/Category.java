@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.category;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.santiagom.blocky.tables.task.Task;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,6 @@ public class Category {
 
     // One category can have multiple tasks
     @OneToMany(mappedBy = "category")
+    @JsonManagedReference
     private List<Task> tasks;
 }
