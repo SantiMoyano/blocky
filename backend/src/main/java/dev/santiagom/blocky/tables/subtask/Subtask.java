@@ -1,6 +1,6 @@
 package dev.santiagom.blocky.tables.subtask;
 
-import dev.santiagom.blocky.tables.project.Project;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.santiagom.blocky.tables.task.Task;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,5 +24,6 @@ public class Subtask {
     // Task relationship
     @ManyToOne
     @JoinColumn(name = "task_id")
+    @JsonBackReference
     private Task task;
 }

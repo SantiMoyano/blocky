@@ -1,6 +1,7 @@
 package dev.santiagom.blocky.tables.task;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.santiagom.blocky.tables.category.Category;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.project.Project;
@@ -40,5 +41,6 @@ public class Task {
 
     // Subtask relationship
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Subtask> Subtasks;
 }
