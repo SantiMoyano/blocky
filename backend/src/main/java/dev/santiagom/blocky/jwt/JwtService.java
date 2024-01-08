@@ -39,7 +39,14 @@ public class JwtService {
     }
 
     public String getUsernameFromToken(String token) {
-        return getClaim(token, Claims::getSubject);
+        return getClaim(extractToken(token), Claims::getSubject);
+    }
+
+    public String extractToken(String token) {
+        if (token.startsWith("Bearer")) {
+            return token.substring(7);
+        }
+        return token;
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {

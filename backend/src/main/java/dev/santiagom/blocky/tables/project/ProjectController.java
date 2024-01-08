@@ -1,12 +1,10 @@
 package dev.santiagom.blocky.tables.project;
 
+import dev.santiagom.blocky.tables.project.dtos.NewProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,11 @@ public class ProjectController {
     @GetMapping
     public ResponseEntity<List<Project>> getAllProjects() {
         return new ResponseEntity<List<Project>>(projectService.allProjects(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Project> createProject(@RequestHeader("Authorization") String token,
+            @RequestBody NewProjectDTO dto) {
+        return new ResponseEntity<Project>(projectService.createProject(dto, token), HttpStatus.OK);
     }
 }
