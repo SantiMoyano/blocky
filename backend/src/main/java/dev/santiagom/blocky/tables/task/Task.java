@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.task;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.santiagom.blocky.tables.category.Category;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.project.Project;
@@ -28,6 +29,7 @@ public class Task {
     // Epic relationship
     @ManyToOne
     @JoinColumn(name = "epic_id")
+    @JsonBackReference
     private Epic epic;
 
     // Many tasks can have the same category
