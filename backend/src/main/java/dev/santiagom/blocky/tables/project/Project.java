@@ -37,6 +37,7 @@ public class Project {
 
     // Screenshot relationship
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Screenshot> screenshots;
 
     // Tech relationship
