@@ -1,6 +1,5 @@
 package dev.santiagom.blocky.tables.user;
 
-import dev.santiagom.blocky.tables.user.exceptions.DuplicateUsernameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +18,5 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<List<User>>(userService.allUsers(), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user) {
-        try {
-            return new ResponseEntity<User>(userService.createUser(user), HttpStatus.CREATED);
-        } catch (DuplicateUsernameException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
     }
 }
