@@ -1,12 +1,10 @@
 package dev.santiagom.blocky.tables.epic;
 
+import dev.santiagom.blocky.tables.epic.dtos.EpicDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,10 @@ public class EpicController {
     @GetMapping
     public ResponseEntity<List<Epic>> getAllEpics() {
         return new ResponseEntity<List<Epic>>(epicService.allEpics(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Epic> createEpic(@RequestBody EpicDTO epic) {
+        return new ResponseEntity<Epic>(epicService.createEpic(epic), HttpStatus.CREATED);
     }
 }

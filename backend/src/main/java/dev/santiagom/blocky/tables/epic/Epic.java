@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.epic;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.santiagom.blocky.tables.project.Project;
 import dev.santiagom.blocky.tables.user.User;
 import jakarta.persistence.*;
@@ -24,5 +25,6 @@ public class Epic {
     // Project relationship
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @JsonBackReference
     private Project project;
 }

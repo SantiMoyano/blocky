@@ -47,5 +47,6 @@ public class Project {
 
     // Epics relationship
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Epic> epics;
 }
