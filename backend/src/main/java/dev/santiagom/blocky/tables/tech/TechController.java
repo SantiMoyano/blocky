@@ -1,12 +1,10 @@
 package dev.santiagom.blocky.tables.tech;
 
+import dev.santiagom.blocky.tables.tech.dtos.TechDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,10 @@ public class TechController {
     @GetMapping
     public ResponseEntity<List<Tech>> getAllTechs() {
         return new ResponseEntity<List<Tech>>(techService.allTechs(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Tech> createTech(@RequestBody TechDTO tech) {
+        return new ResponseEntity<Tech>(techService.createTech(tech), HttpStatus.CREATED);
     }
 }

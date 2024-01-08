@@ -1,6 +1,7 @@
 package dev.santiagom.blocky.tables.project;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.screenshot.Screenshot;
 import dev.santiagom.blocky.tables.tech.Tech;
@@ -40,6 +41,7 @@ public class Project {
 
     // Tech relationship
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Tech> tech;
 
     // Epics relationship
