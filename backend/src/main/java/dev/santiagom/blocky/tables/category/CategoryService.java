@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
@@ -14,18 +15,24 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> allCategories() {
-         return categoryRepository.findAll();
+    public List<CategoryResponseDTO> allCategories() {
+        List<Category> categories = categoryRepository.findAll();
+        return categories.stream()
+                .map(category -> new CategoryResponseDTO(category.getName(), category.getColor()))
+                .collect(Collectors.toList());
     }
 
-    public Category createCategory(Category category) {
-        return categoryRepository.save(
+    public CategoryResponseDTO createCategory(Category category) {
+        // Save new Category on repository
+        categoryRepository.save(
                 Category.builder()
                         .name(category.getName())
                         .color(category.getColor())
                         .tasks(new ArrayList<Task>())
                         .build()
         );
+        // Return simple response
+        return new CategoryResponseDTO(category.getName(), category.getColor());
     }
 
     public CategoryResponseDTO updateCategory(Long categoryId, Category category) {
