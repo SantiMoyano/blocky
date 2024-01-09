@@ -26,4 +26,11 @@ public class CategoryService {
                         .build()
         );
     }
+
+    public Category updateCategory(Long categoryId, Category category) {
+        Category categoryToUpdate = categoryRepository.findById(categoryId).orElseThrow();
+        categoryToUpdate.setName(category.getName());
+        categoryToUpdate.setColor(category.getColor());
+        return categoryRepository.save(categoryToUpdate);
+    }
 }

@@ -1,6 +1,8 @@
 package dev.santiagom.blocky.tables.subtask;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import dev.santiagom.blocky.tables.task.Task;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Subtask {
 
     @Id
@@ -24,6 +27,5 @@ public class Subtask {
     // Task relationship
     @ManyToOne
     @JoinColumn(name = "task_id")
-    @JsonBackReference
     private Task task;
 }

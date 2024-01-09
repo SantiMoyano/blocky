@@ -1,6 +1,8 @@
 package dev.santiagom.blocky.tables.category;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import dev.santiagom.blocky.tables.task.Task;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Category {
 
     @Id
@@ -25,6 +28,5 @@ public class Category {
 
     // One category can have multiple tasks
     @OneToMany(mappedBy = "category")
-    @JsonManagedReference
     private List<Task> tasks;
 }

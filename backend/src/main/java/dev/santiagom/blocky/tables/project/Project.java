@@ -1,7 +1,9 @@
 package dev.santiagom.blocky.tables.project;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.screenshot.Screenshot;
 import dev.santiagom.blocky.tables.tech.Tech;
@@ -19,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Project {
 
     @Id
@@ -32,21 +35,17 @@ public class Project {
     // User relationship
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
     private User user;
 
     // Screenshot relationship
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Screenshot> screenshots;
 
     // Tech relationship
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Tech> tech;
 
     // Epics relationship
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Epic> epics;
 }

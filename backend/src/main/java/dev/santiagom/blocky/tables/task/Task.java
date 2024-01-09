@@ -1,7 +1,9 @@
 package dev.santiagom.blocky.tables.task;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import dev.santiagom.blocky.tables.category.Category;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.project.Project;
@@ -19,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Task {
 
     @Id
@@ -30,17 +33,14 @@ public class Task {
     // Epic relationship
     @ManyToOne
     @JoinColumn(name = "epic_id")
-    @JsonBackReference
     private Epic epic;
 
     // Many tasks can have the same category
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonBackReference
     private Category category;
 
     // Subtask relationship
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Subtask> Subtasks;
 }
