@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.category;
 
+import dev.santiagom.blocky.tables.category.dtos.CategoryResponseDTO;
 import dev.santiagom.blocky.tables.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,10 +28,16 @@ public class CategoryService {
         );
     }
 
-    public Category updateCategory(Long categoryId, Category category) {
+    public CategoryResponseDTO updateCategory(Long categoryId, Category category) {
+        // Search category by ID on repository
         Category categoryToUpdate = categoryRepository.findById(categoryId).orElseThrow();
+
+        // Update and save category
         categoryToUpdate.setName(category.getName());
         categoryToUpdate.setColor(category.getColor());
-        return categoryRepository.save(categoryToUpdate);
+        categoryRepository.save(categoryToUpdate);
+
+        // Return response without sensitive data
+        return new CategoryResponseDTO(category.getName(), category.getColor());
     }
 }

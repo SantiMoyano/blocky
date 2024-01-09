@@ -1,5 +1,6 @@
 package dev.santiagom.blocky.tables.category;
 
+import dev.santiagom.blocky.tables.category.dtos.CategoryResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,8 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryId}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Long categoryId,
-                                                   @RequestBody Category category) {
-        return new ResponseEntity<Category>(categoryService.updateCategory(categoryId, category), HttpStatus.OK);
+    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable Long categoryId,
+                                                              @RequestBody Category category) {
+        return new ResponseEntity<CategoryResponseDTO>(categoryService.updateCategory(categoryId, category), HttpStatus.OK);
     }
 }
