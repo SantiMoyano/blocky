@@ -1,6 +1,7 @@
 package dev.santiagom.blocky.tables.epic;
 
 import dev.santiagom.blocky.tables.epic.dtos.EpicDTO;
+import dev.santiagom.blocky.tables.epic.dtos.EpicResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,12 @@ public class EpicController {
     private EpicService epicService;
 
     @GetMapping
-    public ResponseEntity<List<Epic>> getAllEpics() {
-        return new ResponseEntity<List<Epic>>(epicService.allEpics(), HttpStatus.OK);
+    public ResponseEntity<List<EpicResponseDTO>> getAllEpics() {
+        return new ResponseEntity<List<EpicResponseDTO>>(epicService.allEpics(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Epic> createEpic(@RequestBody EpicDTO epic) {
-        return new ResponseEntity<Epic>(epicService.createEpic(epic), HttpStatus.CREATED);
+    public ResponseEntity<EpicResponseDTO> createEpic(@RequestBody EpicDTO epic) {
+        return new ResponseEntity<EpicResponseDTO>(epicService.createEpic(epic), HttpStatus.CREATED);
     }
 }
