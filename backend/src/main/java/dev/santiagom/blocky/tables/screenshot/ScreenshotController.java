@@ -26,4 +26,10 @@ public class ScreenshotController {
     public ResponseEntity<ScreenshotResponseDTO> addScreenshot(@RequestBody ScreenshotDTO screenshot) {
         return new ResponseEntity<ScreenshotResponseDTO>(screenshotService.addScreenshot(screenshot), HttpStatus.CREATED);
     }
+
+    @PutMapping("/{screenshotId}")
+    public ResponseEntity<ScreenshotResponseDTO> updateScreenshot(
+            @PathVariable Long screenshotId, @RequestBody ScreenshotDTO screenshot) {
+        return new ResponseEntity<ScreenshotResponseDTO>(screenshotService.updateScreenshot(screenshotId, screenshot), HttpStatus.OK);
+    }
 }

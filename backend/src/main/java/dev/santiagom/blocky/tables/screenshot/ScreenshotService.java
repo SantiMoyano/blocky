@@ -44,4 +44,17 @@ public class ScreenshotService {
         // Return simple Screenshot Response
         return new ScreenshotResponseDTO(screenshot.getName(), screenshot.getUrl());
     }
+
+    public ScreenshotResponseDTO updateScreenshot(Long screenshotId, ScreenshotDTO newData) {
+        // Search screenshot to update by ID
+        Screenshot screenshotToUpdate = screenshotRepository.findById(screenshotId).orElseThrow();
+
+        // Update fields with new data and save it
+        screenshotToUpdate.setName(newData.getName());
+        screenshotToUpdate.setUrl(newData.getUrl());
+        screenshotRepository.save(screenshotToUpdate);
+
+        // Return simple screenshot response
+        return new ScreenshotResponseDTO(newData.getName(), newData.getUrl());
+    }
 }
