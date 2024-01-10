@@ -44,4 +44,13 @@ public class SubtaskService {
 
         return new SubtaskResponseDTO(subtask.getDescription(), false, subtask.getTaskId());
     }
+
+    public SubtaskResponseDTO updateSubtask(Long subtaskId, SubtaskDTO subtask) {
+        Subtask subtaskToUpdate = subtaskRepository.findById(subtaskId).orElseThrow();
+
+        subtaskToUpdate.setDescription(subtask.getDescription());
+        subtaskRepository.save(subtaskToUpdate);
+
+        return new SubtaskResponseDTO(subtask.getDescription(), subtaskToUpdate.isDone(), subtaskToUpdate.getTask().getId());
+    }
 }
