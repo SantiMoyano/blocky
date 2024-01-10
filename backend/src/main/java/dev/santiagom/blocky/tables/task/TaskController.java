@@ -1,6 +1,7 @@
 package dev.santiagom.blocky.tables.task;
 
 import dev.santiagom.blocky.tables.task.dtos.TaskDTO;
+import dev.santiagom.blocky.tables.task.dtos.TaskResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,12 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks() {
-        return new ResponseEntity<List<Task>>(taskService.allTasks(), HttpStatus.OK);
+    public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
+        return new ResponseEntity<List<TaskResponseDTO>>(taskService.allTasks(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody TaskDTO task) {
-        return new ResponseEntity<Task>(taskService.createTask(task), HttpStatus.CREATED);
+    public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskDTO task) {
+        return new ResponseEntity<TaskResponseDTO>(taskService.createTask(task), HttpStatus.CREATED);
     }
 }
