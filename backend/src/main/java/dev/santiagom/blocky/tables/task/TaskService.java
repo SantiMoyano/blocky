@@ -57,4 +57,23 @@ public class TaskService {
 
         return new TaskResponseDTO(task.getName(), 0, task.getCategoryId(), task.getEpicId());
     }
+
+    public TaskResponseDTO updateTask(Long taskId, TaskDTO task) {
+        // Retrieve the task to be updated from the repository
+        Task taskToUpdate = taskRepository.findById(taskId).orElseThrow();
+
+        // Update task details with the new data
+        taskToUpdate.setName(task.getName());
+
+        // Check if a new category is selected and update the task's category accordingly
+        if (taskToUpdate.getCategory().getId() != task.getCategoryId()) {
+            Category newCategory = categoryRepository.findById(task.getCategoryId()).orElseThrow();
+            taskToUpdate.setCategory(newCategory);
+        }
+        taskRepository.save(taskToUpdate);
+
+        // Return a TaskResponseDTO containing the updated task details
+        return new TaskResponseDTO(
+                task.getName(), taskToUpdate.getProgress(), task.getCategoryId(), task.getEpicId());
+    }
 }
