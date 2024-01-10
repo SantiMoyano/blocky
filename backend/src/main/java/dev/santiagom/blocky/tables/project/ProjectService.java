@@ -2,6 +2,7 @@ package dev.santiagom.blocky.tables.project;
 
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.project.dtos.NewProjectDTO;
+import dev.santiagom.blocky.tables.project.dtos.ProjectResponseDTO;
 import dev.santiagom.blocky.tables.screenshot.Screenshot;
 import dev.santiagom.blocky.tables.tech.Tech;
 import dev.santiagom.blocky.tables.user.User;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -22,16 +24,28 @@ public class ProjectService {
     @Autowired
     private UserService userService;
 
-    public List<Project> allProjects() {
-        return projectRepository.findAll();
+    public List<ProjectResponseDTO> allProjects() {
+        return projectRepository.findAll()
+                .stream()
+                .map(project -> new ProjectResponseDTO(
+                        project.getName(),
+                        project.getDescription(),
+                        project.getGoal(),
+                        project.getProgress()))
+                .collect(Collectors.toList());
     }
 
-    public Project createProject(NewProjectDTO dto, String token) {
+    public ProjectResponseDTO createProject(NewProjectDTO dto, String token) {
+        // Retrieve user based on the provided authentication token
         User user = userService.findUserByToken(token);
+
+        // Throw error if user was not found
         if (user == null) {
             throw new UserNotFoundException("User not found for token: " + token);
         }
-        return projectRepository.save(Project.builder()
+
+        // Save new project on the repository
+        projectRepository.save(Project.builder()
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .goal(dto.getGoal())
@@ -41,5 +55,8 @@ public class ProjectService {
                 .tech(new ArrayList<Tech>())
                 .screenshots(new ArrayList<Screenshot>())
                 .build());
+
+        // Return DTO saving sensitive data
+        return new ProjectResponseDTO(dto.getName(), dto.getDescription(), dto.getGoal(), 0);
     }
 }
