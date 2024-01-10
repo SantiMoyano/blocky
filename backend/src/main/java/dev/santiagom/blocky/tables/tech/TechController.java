@@ -26,4 +26,10 @@ public class TechController {
     public ResponseEntity<TechResponseDTO> createTech(@RequestBody TechDTO tech) {
         return new ResponseEntity<TechResponseDTO>(techService.createTech(tech), HttpStatus.CREATED);
     }
+
+    @PutMapping("/{techId}")
+    public ResponseEntity<TechResponseDTO> updateTech(
+            @PathVariable Long techId, @RequestBody TechDTO tech) {
+        return new ResponseEntity<TechResponseDTO>(techService.updateTech(techId, tech), HttpStatus.OK);
+    }
 }

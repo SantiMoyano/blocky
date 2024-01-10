@@ -40,4 +40,14 @@ public class TechService {
         );
         return new TechResponseDTO(tech.getName(), tech.getColor(), tech.getProjectId());
     }
+
+    public TechResponseDTO updateTech(Long techId, TechDTO tech) {
+        Tech techToUpdate = techRepository.findById(techId).orElseThrow();
+
+        techToUpdate.setName(tech.getName());
+        techToUpdate.setColor(tech.getColor());
+        techRepository.save(techToUpdate);
+
+        return new TechResponseDTO(tech.getName(), tech.getColor(), tech.getProjectId());
+    }
 }
