@@ -39,6 +39,5 @@ public class ProjectController {
     public ResponseEntity<ProjectResponseDTO>
         updateProject(@PathVariable Long projectId, @RequestBody NewProjectDTO project) {
         return new ResponseEntity<ProjectResponseDTO>(projectService.updateProject(projectId, project), HttpStatus.OK);
-
     }
 }
