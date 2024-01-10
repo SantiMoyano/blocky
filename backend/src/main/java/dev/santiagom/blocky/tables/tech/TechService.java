@@ -2,14 +2,13 @@ package dev.santiagom.blocky.tables.tech;
 
 import dev.santiagom.blocky.tables.project.Project;
 import dev.santiagom.blocky.tables.project.ProjectRepository;
-import dev.santiagom.blocky.tables.project.ProjectService;
 import dev.santiagom.blocky.tables.tech.dtos.TechDTO;
+import dev.santiagom.blocky.tables.tech.dtos.TechResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TechService {
@@ -20,18 +19,25 @@ public class TechService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public List<Tech> allTechs() {
-        return techRepository.findAll();
+    public List<TechResponseDTO> allTechs() {
+        return techRepository.findAll()
+                .stream()
+                .map(t -> new TechResponseDTO(
+                        t.getName(),
+                        t.getColor(),
+                        t.getProject().getId()))
+                .collect(Collectors.toList());
     }
 
-    public Tech createTech(TechDTO tech) {
+    public TechResponseDTO createTech(TechDTO tech) {
         Project project = projectRepository.findById(tech.getProjectId()).orElseThrow();
-        return techRepository.save(
+        techRepository.save(
                 Tech.builder()
                         .name(tech.getName())
                         .color(tech.getColor())
                         .project(project)
                         .build()
         );
+        return new TechResponseDTO(tech.getName(), tech.getColor(), tech.getProjectId());
     }
 }
