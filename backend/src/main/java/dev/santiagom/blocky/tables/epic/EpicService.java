@@ -8,6 +8,7 @@ import dev.santiagom.blocky.tables.project.dtos.NewProjectDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,5 +49,17 @@ public class EpicService {
 
         // Return simple Epic response
         return new EpicResponseDTO(epic.getName(), project.getProgress());
+    }
+
+    public EpicResponseDTO updateEpic(Long epicId, String epicName) {
+        // Search epic by ID
+        Epic epicToUpdate = epicRepository.findById(epicId).orElseThrow();
+
+        // Update and save Epic
+        epicToUpdate.setName(epicName);
+        epicRepository.save(epicToUpdate);
+
+        // Return simple Epic response
+        return new EpicResponseDTO(epicName, epicToUpdate.getProgress());
     }
 }
