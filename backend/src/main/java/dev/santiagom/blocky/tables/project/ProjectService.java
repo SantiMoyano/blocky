@@ -59,4 +59,18 @@ public class ProjectService {
         // Return DTO saving sensitive data
         return new ProjectResponseDTO(dto.getName(), dto.getDescription(), dto.getGoal(), 0);
     }
+
+    public ProjectResponseDTO updateProject(Long projectId, NewProjectDTO data) {
+        // Find project to update by ID
+        Project projectToUpdate = projectRepository.findById(projectId).orElseThrow();
+
+        // Update and save new data
+        projectToUpdate.setName(data.getName());
+        projectToUpdate.setDescription(data.getDescription());
+        projectToUpdate.setGoal(data.getGoal());
+        projectRepository.save(projectToUpdate);
+
+        // return Project Response
+        return new ProjectResponseDTO(data.getName(), data.getDescription(), data.getGoal(), projectToUpdate.getProgress());
+    }
 }

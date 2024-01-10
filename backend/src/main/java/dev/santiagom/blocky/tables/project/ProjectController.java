@@ -34,4 +34,11 @@ public class ProjectController {
             return new ResponseEntity<>("Error creating project", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/{projectId}")
+    public ResponseEntity<ProjectResponseDTO>
+        updateProject(@PathVariable Long projectId, @RequestBody NewProjectDTO project) {
+        return new ResponseEntity<ProjectResponseDTO>(projectService.updateProject(projectId, project), HttpStatus.OK);
+
+    }
 }
