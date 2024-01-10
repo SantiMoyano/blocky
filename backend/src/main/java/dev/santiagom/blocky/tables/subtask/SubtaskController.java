@@ -1,6 +1,7 @@
 package dev.santiagom.blocky.tables.subtask;
 
 import dev.santiagom.blocky.tables.subtask.dtos.SubtaskDTO;
+import dev.santiagom.blocky.tables.subtask.dtos.SubtaskResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,12 @@ public class SubtaskController {
     private SubtaskService subtaskService;
 
     @GetMapping
-    public ResponseEntity<List<Subtask>> getAllSubtasks() {
-        return new ResponseEntity<List<Subtask>>(subtaskService.allSubtasks(), HttpStatus.OK);
+    public ResponseEntity<List<SubtaskResponseDTO>> getAllSubtasks() {
+        return new ResponseEntity<List<SubtaskResponseDTO>>(subtaskService.allSubtasks(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Subtask> createSubtask(@RequestBody SubtaskDTO subtask) {
-        return new ResponseEntity<Subtask>(subtaskService.createSubtask(subtask), HttpStatus.CREATED);
+    public ResponseEntity<SubtaskResponseDTO> createSubtask(@RequestBody SubtaskDTO subtask) {
+        return new ResponseEntity<SubtaskResponseDTO>(subtaskService.createSubtask(subtask), HttpStatus.CREATED);
     }
 }

@@ -1,6 +1,7 @@
 package dev.santiagom.blocky.tables.subtask;
 
 import dev.santiagom.blocky.tables.subtask.dtos.SubtaskDTO;
+import dev.santiagom.blocky.tables.subtask.dtos.SubtaskResponseDTO;
 import dev.santiagom.blocky.tables.task.Task;
 import dev.santiagom.blocky.tables.task.TaskRepository;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -21,18 +23,25 @@ public class SubtaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public List<Subtask> allSubtasks() {
-        return subtaskRepository.findAll();
+    public List<SubtaskResponseDTO> allSubtasks() {
+        return subtaskRepository.findAll()
+                .stream()
+                .map(st -> new SubtaskResponseDTO(st.getDescription(), st.isDone(), st.getTask().getId()))
+                .collect(Collectors.toList());
     }
 
-    public Subtask createSubtask(SubtaskDTO subtask) {
+    public SubtaskResponseDTO createSubtask(SubtaskDTO subtask) {
         Task task = taskRepository.findById(subtask.getTaskId()).orElseThrow();
-        return subtaskRepository.save(
+
+        // Create and save new Subtask
+        subtaskRepository.save(
                 Subtask.builder()
                         .description(subtask.getDescription())
                         .isDone(false)
                         .task(task)
                         .build()
         );
+
+        return new SubtaskResponseDTO(subtask.getDescription(), false, subtask.getTaskId());
     }
 }
