@@ -24,8 +24,16 @@ public class ProjectService {
     @Autowired
     private UserService userService;
 
-    public List<ProjectResponseDTO> allProjects() {
-        return projectRepository.findAll()
+    public List<ProjectResponseDTO> allProjects(String token) {
+        // Retrieve user based on the provided authentication token
+        User user = userService.findUserByToken(token);
+
+        // Throw error if user was not found
+        if (user == null) {
+            throw new UserNotFoundException("User not found for token: " + token);
+        }
+
+        return projectRepository.findAllByUser(user)
                 .stream()
                 .map(project -> new ProjectResponseDTO(
                         project.getName(),

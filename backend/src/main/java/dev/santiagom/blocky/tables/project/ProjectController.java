@@ -19,8 +19,9 @@ public class ProjectController {
     private ProjectService projectService;
 
     @GetMapping
-    public ResponseEntity<List<ProjectResponseDTO>> getAllProjects() {
-        return new ResponseEntity<List<ProjectResponseDTO>>(projectService.allProjects(), HttpStatus.OK);
+    public ResponseEntity<List<ProjectResponseDTO>> getAllProjects(
+            @RequestHeader("Authorization") String token) {
+        return new ResponseEntity<List<ProjectResponseDTO>>(projectService.allProjects(token), HttpStatus.OK);
     }
 
     @PostMapping
