@@ -2,21 +2,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Define an async thunk for getting all projects
-export const getAllProjects = createAsyncThunk("project/getAllProjects", async (token, { dispatch }) => {
-  try {
-    dispatch(getAllProjectsRequest());
-    console.log(`Bearer ${token}`);
-    const response = await axios.get("/api/v1/project", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    dispatch(getAllProjectsSuccess(response.data));
-  } catch (error) {
-    dispatch(getAllProjectsFailure(error.response.data));
-    throw error.response.data;
+export const getAllProjects = createAsyncThunk(
+  "project/getAllProjects",
+  async (token, { dispatch }) => {
+    try {
+      dispatch(getAllProjectsRequest());
+      console.log(`Bearer ${token}`);
+      const response = await axios.get("/api/v1/project", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(getAllProjectsSuccess(response.data));
+    } catch (error) {
+      dispatch(getAllProjectsFailure(error.response.data));
+      throw error.response.data;
+    }
   }
-});
+);
 
 const projectSlice = createSlice({
   name: "project",
@@ -48,7 +51,9 @@ const projectSlice = createSlice({
   },
 });
 
-export const { getAllProjectsRequest, getAllProjectsSuccess, getAllProjectsFailure } = projectSlice.actions;
+export const {
+  getAllProjectsRequest,
+  getAllProjectsSuccess,
+  getAllProjectsFailure,
+} = projectSlice.actions;
 export default projectSlice.reducer;
-
-
