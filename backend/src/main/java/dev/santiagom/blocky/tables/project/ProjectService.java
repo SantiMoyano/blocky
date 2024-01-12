@@ -82,4 +82,9 @@ public class ProjectService {
         // return Project Response
         return new ProjectResponseDTO(projectToUpdate.getId(), data.getName(), data.getDescription(), data.getGoal(), projectToUpdate.getProgress());
     }
+
+    public ProjectResponseDTO getProject(Long id) {
+        Project p = projectRepository.findById(id).orElseThrow();
+        return new ProjectResponseDTO(p.getId(), p.getName(), p.getDescription(), p.getGoal(), p.getProgress());
+    }
 }

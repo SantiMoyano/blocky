@@ -27,6 +27,11 @@ public class ProjectController {
         return new ResponseEntity<List<ProjectResponseDTO>>(projectService.allProjects(token), HttpStatus.OK);
     }
 
+    @GetMapping("/{projectId}")
+    public ResponseEntity<ProjectResponseDTO> getProject(@PathVariable Long id) {
+        return new ResponseEntity<ProjectResponseDTO>(projectService.getProject(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> createProject(@RequestHeader("Authorization") String token,
             @RequestBody NewProjectDTO dto) {
