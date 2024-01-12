@@ -1,7 +1,6 @@
 package dev.santiagom.blocky.tables.user;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import dev.santiagom.blocky.tables.project.Project;
 import jakarta.persistence.*;

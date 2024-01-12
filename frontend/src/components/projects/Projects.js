@@ -10,8 +10,10 @@ function Projects() {
 
   useEffect(() => {
     // Dispatch the getAllProjects action when the component mounts
-    console.log(localStorage.getItem("authToken"))
-    dispatch(getAllProjects(localStorage.getItem("authToken")));
+    
+    const token = localStorage.getItem("authToken");
+    console.log(token);
+    dispatch(getAllProjects(token));
   }, [dispatch]);
 
   return (

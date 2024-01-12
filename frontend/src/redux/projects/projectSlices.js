@@ -5,9 +5,10 @@ import axios from "axios";
 export const getAllProjects = createAsyncThunk("project/getAllProjects", async (token, { dispatch }) => {
   try {
     dispatch(getAllProjectsRequest());
-    const response = await axios.get("http://localhost/api/v1/project", {
+    console.log(`Bearer ${token}`);
+    const response = await axios.get("/api/v1/project", {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
     dispatch(getAllProjectsSuccess(response.data));

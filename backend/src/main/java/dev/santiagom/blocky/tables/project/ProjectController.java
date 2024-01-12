@@ -3,6 +3,7 @@ package dev.santiagom.blocky.tables.project;
 import dev.santiagom.blocky.tables.project.dtos.NewProjectDTO;
 import dev.santiagom.blocky.tables.project.dtos.ProjectResponseDTO;
 import dev.santiagom.blocky.tables.user.exceptions.UserNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/project")
+@RequiredArgsConstructor
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class ProjectController {
 
@@ -21,6 +23,7 @@ public class ProjectController {
     @GetMapping
     public ResponseEntity<List<ProjectResponseDTO>> getAllProjects(
             @RequestHeader("Authorization") String token) {
+        System.out.println(token);
         return new ResponseEntity<List<ProjectResponseDTO>>(projectService.allProjects(token), HttpStatus.OK);
     }
 

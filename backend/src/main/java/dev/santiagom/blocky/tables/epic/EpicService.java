@@ -4,11 +4,8 @@ import dev.santiagom.blocky.tables.epic.dtos.EpicDTO;
 import dev.santiagom.blocky.tables.epic.dtos.EpicResponseDTO;
 import dev.santiagom.blocky.tables.project.Project;
 import dev.santiagom.blocky.tables.project.ProjectRepository;
-import dev.santiagom.blocky.tables.project.dtos.NewProjectDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -5,7 +5,6 @@ import dev.santiagom.blocky.tables.project.ProjectRepository;
 import dev.santiagom.blocky.tables.screenshot.dtos.ScreenshotDTO;
 import dev.santiagom.blocky.tables.screenshot.dtos.ScreenshotResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
