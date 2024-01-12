@@ -2,6 +2,7 @@ import "./App.css";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import Projects from "./components/projects/Projects";
+import DetailedProject from "./components/detailedProject/DetailedProject";
 import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />}></Route>
         <Route path="/projects" element={<Projects />}></Route>
+        <Route path="/project/:projectId" element={<DetailedProject />} />
       </Routes>
     </div>
   );
