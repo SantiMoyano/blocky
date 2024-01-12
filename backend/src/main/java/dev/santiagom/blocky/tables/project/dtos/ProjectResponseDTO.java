@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProjectResponseDTO {
 
+    private Long id;
     private String name;
     private String description;
     private String goal;

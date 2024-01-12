@@ -36,6 +36,7 @@ public class ProjectService {
         return projectRepository.findAllByUser(user)
                 .stream()
                 .map(project -> new ProjectResponseDTO(
+                        project.getId(),
                         project.getName(),
                         project.getDescription(),
                         project.getGoal(),
@@ -65,7 +66,7 @@ public class ProjectService {
                 .build());
 
         // Return DTO saving sensitive data
-        return new ProjectResponseDTO(dto.getName(), dto.getDescription(), dto.getGoal(), 0);
+        return new ProjectResponseDTO(null, dto.getName(), dto.getDescription(), dto.getGoal(), 0);
     }
 
     public ProjectResponseDTO updateProject(Long projectId, NewProjectDTO data) {
@@ -79,6 +80,6 @@ public class ProjectService {
         projectRepository.save(projectToUpdate);
 
         // return Project Response
-        return new ProjectResponseDTO(data.getName(), data.getDescription(), data.getGoal(), projectToUpdate.getProgress());
+        return new ProjectResponseDTO(projectToUpdate.getId(), data.getName(), data.getDescription(), data.getGoal(), projectToUpdate.getProgress());
     }
 }
