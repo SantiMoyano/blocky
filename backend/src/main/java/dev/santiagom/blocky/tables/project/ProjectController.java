@@ -28,8 +28,8 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity<ProjectResponseDTO> getProject(@PathVariable Long id) {
-        return new ResponseEntity<ProjectResponseDTO>(projectService.getProject(id), HttpStatus.OK);
+    public ResponseEntity<ProjectResponseDTO> getProject(@PathVariable Long projectId) {
+        return new ResponseEntity<ProjectResponseDTO>(projectService.getProject(projectId), HttpStatus.OK);
     }
 
     @PostMapping

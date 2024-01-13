@@ -7,7 +7,6 @@ export const getAllProjects = createAsyncThunk(
   async (token, { dispatch }) => {
     try {
       dispatch(getAllProjectsRequest());
-      console.log(`Bearer ${token}`);
       const response = await axios.get("/api/v1/project", {
         headers: {
           Authorization: `Bearer ${token}`,

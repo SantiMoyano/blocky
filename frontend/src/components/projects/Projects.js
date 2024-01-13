@@ -24,7 +24,6 @@ function Projects() {
     // Dispatch the getAllProjects action when the component mounts
 
     const token = localStorage.getItem("authToken");
-    console.log(token);
     dispatch(getAllProjects(token));
   }, [dispatch]);
 
@@ -36,7 +35,6 @@ function Projects() {
       <ul>
         {projects.map((project) => (
           <li key={project.id} onClick={() => handleProjectClick(project.id)}>
-            {console.log(project)}
             {project.name}, {project.progress}%
           </li>
         ))}
