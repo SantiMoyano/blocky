@@ -7,9 +7,7 @@ export const getProjects = createAsyncThunk(
   async (id, { dispatch }) => {
     try {
       dispatch(getProjectsRequest());
-
       const response = await axios.get("/api/v1/project/" + id);
-      console.log("Project data for projectId", id, response.data);
       dispatch(getProjectsSuccess(response.data));
     } catch (error) {
       dispatch(getProjectsFailure(error.response.data));
