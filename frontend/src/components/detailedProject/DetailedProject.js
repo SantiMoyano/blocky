@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjects } from "../../redux/projects/projectSlice";
 import { useParams } from "react-router-dom";
+import Epics from "../epics/Epics";
 
 function DetailedProject() {
   const dispatch = useDispatch();
@@ -28,16 +29,8 @@ function DetailedProject() {
           <p>Goal: {project.goal}</p>
         </div>
       </section>
-      <BlockSection />
+      <Epics projectId={projectId} />
     </>
-  );
-}
-
-function BlockSection() {
-  return (
-    <div>
-      <h1>HI!</h1>
-    </div>
   );
 }
 
