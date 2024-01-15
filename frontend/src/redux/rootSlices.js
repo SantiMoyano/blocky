@@ -4,6 +4,7 @@ import loginSlice from "./auth/loginSlice";
 import projectSlices from "./projects/projectSlices";
 import projectSlice from "./projects/projectSlice";
 import epicsSlice from "./epics/epicsSlice";
+import epicDetailSlice from "./epics/epicDetailSlice";
 
 const rootSlices = combineReducers({
   register: registerSlice,
@@ -11,6 +12,7 @@ const rootSlices = combineReducers({
   projects: projectSlices,
   project: projectSlice,
   epics: epicsSlice,
+  epic: epicDetailSlice,
 });
 
 export default rootSlices;

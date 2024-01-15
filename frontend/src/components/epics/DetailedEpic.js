@@ -11,6 +11,7 @@ function DetailedEpic() {
   useEffect(() => {
     if (epicId) {
       dispatch(getEpicDetails(epicId));
+      console.log(epicId);
     }
   }, [dispatch, epicId]);
 
@@ -23,8 +24,8 @@ function DetailedEpic() {
       <section>
         <h2>Detailed Epic {epicId}</h2>
         <div className="epic-info">
-          <p>Name: {epic.name}</p>
-          <p>Description: {epic.progress}</p>
+          <p>{epic.name}</p>
+          <p>{epic.progress}</p>
         </div>
       </section>
       {/**<Task epicId={epicId} /> */}

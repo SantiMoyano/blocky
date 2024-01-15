@@ -31,6 +31,11 @@ public class EpicService {
                 .collect(Collectors.toList());
     }
 
+    public EpicResponseDTO epicDetails(Long id) {
+        Epic epic = epicRepository.findById(id).orElseThrow();
+        return new EpicResponseDTO(epic.getId(), epic.getName(), epic.getProgress());
+    }
+
     public EpicResponseDTO createEpic(EpicDTO epic) {
         // Search project by ID on project repository
         Project project = projectRepository.findById(epic.getProjectId()).orElseThrow();

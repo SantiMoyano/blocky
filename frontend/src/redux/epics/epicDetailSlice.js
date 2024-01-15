@@ -3,13 +3,12 @@ import axios from "axios";
 
 // Define an async thunk for getting epic details
 export const getEpicDetails = createAsyncThunk(
-  "epics/getEpicDetails",
+  "epic/getEpicDetails",
   async (epicId, { dispatch }) => {
     try {
       dispatch(getEpicDetailsRequest());
-      const response = await axios.get(`/api/v1/epic/${epicId}`);
-      dispatch(getEpicDetailsSuccess());
-      return response.data; // Assuming the backend returns details of the epic
+      const response = await axios.get(`/api/v1/epic/details/${epicId}`);
+      dispatch(getEpicDetailsSuccess(response.data));
     } catch (error) {
       dispatch(getEpicDetailsFailure());
       throw error.response.data;
@@ -26,7 +25,7 @@ const initialState = {
 
 // Create the Redux slice for epic details
 const epicDetailSlice = createSlice({
-  name: "epicDetail",
+  name: "epic",
   initialState,
   reducers: {
     getEpicDetailsRequest: (state) => {

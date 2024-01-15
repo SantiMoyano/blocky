@@ -22,6 +22,11 @@ public class EpicController {
         return new ResponseEntity<List<EpicResponseDTO>>(epicService.allEpics(projectId), HttpStatus.OK);
     }
 
+    @GetMapping("/details/{id}")
+    public ResponseEntity<EpicResponseDTO> getEpicDetails(@PathVariable Long id) {
+        return new ResponseEntity<EpicResponseDTO>(epicService.epicDetails(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<EpicResponseDTO> createEpic(@RequestBody EpicDTO epic) {
         return new ResponseEntity<EpicResponseDTO>(epicService.createEpic(epic), HttpStatus.CREATED);
