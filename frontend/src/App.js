@@ -3,6 +3,7 @@ import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import Projects from "./components/projects/Projects";
 import DetailedProject from "./components/detailedProject/DetailedProject";
+import DetailedEpic from "./components/epics/DetailedEpic";
 import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/projects" element={<Projects />}></Route>
         <Route path="/project/:projectId" element={<DetailedProject />} />
+        <Route path="/epic/:epicId" element={<DetailedEpic />} />
       </Routes>
     </div>
   );

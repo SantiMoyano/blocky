@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAllProjects } from "../../redux/projects/projectSlices";
 import BlockSection from "../blocks/BlockSection";
 
 function Projects() {
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.projects.projects);
-  const loading = useSelector((state) => state.projects.loading);
-  const error = useSelector((state) => state.projects.error);
+  const { projects, loading, error } = useSelector((state) => state.projects);
   const navigate = useNavigate();
 
   const handleProjectClick = (projectId) => {
@@ -18,7 +16,6 @@ function Projects() {
 
   useEffect(() => {
     // Dispatch the getAllProjects action when the component mounts
-
     const token = localStorage.getItem("authToken");
     dispatch(getAllProjects(token));
   }, [dispatch]);
