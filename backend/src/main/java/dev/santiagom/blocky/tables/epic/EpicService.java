@@ -27,7 +27,7 @@ public class EpicService {
 
         // Use Stream API to transform each Epic into EpicResponseDTO and collect them into a list
         return epics.stream()
-                .map(epic -> new EpicResponseDTO(epic.getName(), epic.getProgress()))
+                .map(epic -> new EpicResponseDTO(epic.getId(), epic.getName(), epic.getProgress()))
                 .collect(Collectors.toList());
     }
 
@@ -45,7 +45,7 @@ public class EpicService {
         );
 
         // Return simple Epic response
-        return new EpicResponseDTO(epic.getName(), project.getProgress());
+        return new EpicResponseDTO(null, epic.getName(), project.getProgress());
     }
 
     public EpicResponseDTO updateEpic(Long epicId, String epicName) {
@@ -57,6 +57,6 @@ public class EpicService {
         epicRepository.save(epicToUpdate);
 
         // Return simple Epic response
-        return new EpicResponseDTO(epicName, epicToUpdate.getProgress());
+        return new EpicResponseDTO(epicId, epicName, epicToUpdate.getProgress());
     }
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EpicResponseDTO {
 
+    private Long id;
     private String name;
     private int progress;
 }
