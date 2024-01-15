@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEpicDetails } from "../../redux/epics/epicDetailSlice";
 import { useParams } from "react-router-dom";
+import Tasks from "../tasks/Tasks";
 
 function DetailedEpic() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function DetailedEpic() {
           <p>{epic.progress}</p>
         </div>
       </section>
-      <Task epicId={epicId} />
+      <Tasks epicId={epicId} />
     </>
   );
 }

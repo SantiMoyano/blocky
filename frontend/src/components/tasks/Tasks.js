@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getAllTasks } from "../../redux/tasks/tasksSlice";
 import BlockSection from "../blocks/BlockSection";
 
 function Tasks(epicId) {
