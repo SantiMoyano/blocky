@@ -17,9 +17,9 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping
-    public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
-        return new ResponseEntity<List<TaskResponseDTO>>(taskService.allTasks(), HttpStatus.OK);
+    @GetMapping("/{epicId}")
+    public ResponseEntity<List<TaskResponseDTO>> getAllTasks(@PathVariable Long epicId) {
+        return new ResponseEntity<List<TaskResponseDTO>>(taskService.allTasks(epicId), HttpStatus.OK);
     }
 
     @PostMapping

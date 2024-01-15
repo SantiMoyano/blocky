@@ -30,10 +30,11 @@ public class TaskService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<TaskResponseDTO> allTasks() {
-        return taskRepository.findAll()
+    public List<TaskResponseDTO> allTasks(Long epicId) {
+        return taskRepository.findAllByEpic_Id(epicId)
                 .stream()
                 .map(t -> new TaskResponseDTO(
+                        t.getId(),
                         t.getName(),
                         t.getProgress(),
                         t.getCategory().getId(),
@@ -55,7 +56,7 @@ public class TaskService {
                         .build()
         );
 
-        return new TaskResponseDTO(task.getName(), 0, task.getCategoryId(), task.getEpicId());
+        return new TaskResponseDTO(null, task.getName(), 0, task.getCategoryId(), task.getEpicId());
     }
 
     public TaskResponseDTO updateTask(Long taskId, TaskDTO task) {
@@ -74,6 +75,10 @@ public class TaskService {
 
         // Return a TaskResponseDTO containing the updated task details
         return new TaskResponseDTO(
-                task.getName(), taskToUpdate.getProgress(), task.getCategoryId(), task.getEpicId());
+                taskId,
+                task.getName(),
+                taskToUpdate.getProgress(),
+                task.getCategoryId(),
+                task.getEpicId());
     }
 }

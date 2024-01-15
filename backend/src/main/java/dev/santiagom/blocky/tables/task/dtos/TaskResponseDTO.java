@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskResponseDTO {
+    private Long id;
     private String name;
     private int progress;
     private Long categoryId;
