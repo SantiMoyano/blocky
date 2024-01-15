@@ -9,7 +9,7 @@ export const getAllEpics = createAsyncThunk(
       // Dispatch the action to indicate the start of the request
       dispatch(getAllEpicsRequest());
       // Make the API request to fetch all epics for the given project
-      const response = await axios.get(`/api/v1/epic/project/${projectId}`);
+      const response = await axios.get(`/api/v1/epic/${projectId}`);
       // Dispatch the action with the received data on success
       dispatch(getAllEpicsSuccess(response.data));
     } catch (error) {

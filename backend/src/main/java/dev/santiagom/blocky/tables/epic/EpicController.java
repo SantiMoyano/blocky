@@ -17,9 +17,9 @@ public class EpicController {
     @Autowired
     private EpicService epicService;
 
-    @GetMapping
-    public ResponseEntity<List<EpicResponseDTO>> getAllEpics() {
-        return new ResponseEntity<List<EpicResponseDTO>>(epicService.allEpics(), HttpStatus.OK);
+    @GetMapping("/{projectId}")
+    public ResponseEntity<List<EpicResponseDTO>> getAllEpics(@PathVariable Long projectId) {
+        return new ResponseEntity<List<EpicResponseDTO>>(epicService.allEpics(projectId), HttpStatus.OK);
     }
 
     @PostMapping

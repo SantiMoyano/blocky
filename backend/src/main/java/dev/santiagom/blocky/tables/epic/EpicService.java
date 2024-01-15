@@ -21,9 +21,9 @@ public class EpicService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public List<EpicResponseDTO> allEpics() {
+    public List<EpicResponseDTO> allEpics(Long projectId) {
         // Retrieve a list of Epics from the repository
-        List<Epic> epics = epicRepository.findAll();
+        List<Epic> epics = epicRepository.findAllByProject_Id(projectId);
 
         // Use Stream API to transform each Epic into EpicResponseDTO and collect them into a list
         return epics.stream()
