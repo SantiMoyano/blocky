@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllEpics } from "../../redux/epics/epicsSlice";
+import BlockSection from "../blocks/BlockSection";
 
 function Epics({ projectId }) {
   const dispatch = useDispatch();
@@ -14,21 +15,8 @@ function Epics({ projectId }) {
   return (
     <>
       {/* Add any filtering or other options here if needed */}
-      <ul>
-        {epics.map((epic) => (
-          // Pass the epic details to the Epic component
-          <Epic key={epic.id} name={epic.name} />
-        ))}
-      </ul>
+      <BlockSection list={epics} />
     </>
-  );
-}
-
-function Epic({ name }) {
-  return (
-    <li>
-      <p>{name}</p>
-    </li>
   );
 }
 
