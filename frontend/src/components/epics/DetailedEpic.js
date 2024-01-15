@@ -11,7 +11,6 @@ function DetailedEpic() {
   useEffect(() => {
     if (epicId) {
       dispatch(getEpicDetails(epicId));
-      console.log(epicId);
     }
   }, [dispatch, epicId]);
 
@@ -28,7 +27,7 @@ function DetailedEpic() {
           <p>{epic.progress}</p>
         </div>
       </section>
-      {/**<Task epicId={epicId} /> */}
+      <Task epicId={epicId} />
     </>
   );
 }

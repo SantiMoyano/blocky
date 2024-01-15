@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllEpics } from "../../redux/epics/epicsSlice";
 import { useNavigate } from "react-router-dom";
 import BlockSection from "../blocks/BlockSection";
+import Tasks from "../tasks/Tasks";
 
 function Epics({ projectId }) {
   const dispatch = useDispatch();
