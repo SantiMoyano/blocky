@@ -1,6 +1,6 @@
-function Block({ name, progress }) {
+function Block({ name, progress, handleElemClick }) {
   return (
-    <li>
+    <li onClick={handleElemClick}>
       <p>{name}</p>
       <p>{progress}</p>
     </li>

@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  getAllProjects,
-  getAllProjectsRequest,
-  getAllProjectsSuccess,
-  getAllProjectsFailure,
-} from "../../redux/projects/projectSlices";
+import { getAllProjects } from "../../redux/projects/projectSlices";
+import BlockSection from "../blocks/BlockSection";
 
 function Projects() {
   const dispatch = useDispatch();
@@ -32,13 +28,7 @@ function Projects() {
       <h1>Projects</h1>
       {loading && <p>Loading projects...</p>}
       {error && <p>Error: {error}</p>}
-      <ul>
-        {projects.map((project) => (
-          <li key={project.id} onClick={() => handleProjectClick(project.id)}>
-            {project.name}, {project.progress}%
-          </li>
-        ))}
-      </ul>
+      <BlockSection list={projects} handleElemClick={handleProjectClick} />
     </div>
   );
 }

@@ -12,10 +12,14 @@ function Epics({ projectId }) {
     dispatch(getAllEpics(projectId));
   }, [dispatch, projectId]);
 
+  function handleEpicClick() {
+    console.log("move to epic details");
+  }
+
   return (
     <>
       {/* Add any filtering or other options here if needed */}
-      <BlockSection list={epics} />
+      <BlockSection list={epics} handleElemClick={handleEpicClick} />
     </>
   );
 }
