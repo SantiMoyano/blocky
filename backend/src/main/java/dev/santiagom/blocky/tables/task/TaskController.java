@@ -21,6 +21,10 @@ public class TaskController {
     public ResponseEntity<List<TaskResponseDTO>> getAllTasks(@PathVariable Long epicId) {
         return new ResponseEntity<List<TaskResponseDTO>>(taskService.allTasks(epicId), HttpStatus.OK);
     }
+    @GetMapping("/details/{id}")
+    public ResponseEntity<TaskResponseDTO> getTaskDetails(@PathVariable Long id) {
+        return new ResponseEntity<TaskResponseDTO>(taskService.getTaskDetails(id), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskDTO task) {

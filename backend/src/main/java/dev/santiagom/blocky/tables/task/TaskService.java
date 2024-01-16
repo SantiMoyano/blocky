@@ -36,6 +36,7 @@ public class TaskService {
                 .map(t -> new TaskResponseDTO(
                         t.getId(),
                         t.getName(),
+                        t.getDescription(),
                         t.getProgress(),
                         t.getCategory().getId(),
                         t.getEpic().getId()))
@@ -56,7 +57,7 @@ public class TaskService {
                         .build()
         );
 
-        return new TaskResponseDTO(null, task.getName(), 0, task.getCategoryId(), task.getEpicId());
+        return new TaskResponseDTO(null, task.getName(), task.getDescription(), 0, task.getCategoryId(), task.getEpicId());
     }
 
     public TaskResponseDTO updateTask(Long taskId, TaskDTO task) {
@@ -76,9 +77,21 @@ public class TaskService {
         // Return a TaskResponseDTO containing the updated task details
         return new TaskResponseDTO(
                 taskId,
+                task.getDescription(),
                 task.getName(),
                 taskToUpdate.getProgress(),
                 task.getCategoryId(),
                 task.getEpicId());
+    }
+
+    public TaskResponseDTO getTaskDetails(Long id) {
+        Task task = taskRepository.findById(id).orElseThrow();
+        return new TaskResponseDTO(
+                task.getId(),
+                task.getName(),
+                task.getDescription(),
+                task.getProgress(),
+                task.getCategory().getId(),
+                task.getEpic().getId());
     }
 }
