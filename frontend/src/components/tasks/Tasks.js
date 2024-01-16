@@ -10,7 +10,6 @@ function Tasks({ epicId }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(epicId);
     // Dispatch the action to get all epics for the specified epic
     dispatch(getAllTasks(epicId));
   }, [dispatch, epicId]);

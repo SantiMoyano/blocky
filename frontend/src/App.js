@@ -2,8 +2,9 @@ import "./App.css";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import Projects from "./components/projects/Projects";
-import DetailedProject from "./components/detailedProject/DetailedProject";
+import DetailedProject from "./components/projects/DetailedProject";
 import DetailedEpic from "./components/epics/DetailedEpic";
+import DetailedTask from "./components/tasks/DetailedTask";
 import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/projects" element={<Projects />}></Route>
         <Route path="/project/:projectId" element={<DetailedProject />} />
         <Route path="/epic/:epicId" element={<DetailedEpic />} />
+        <Route path="/task/:taskId" element={<DetailedTask />} />
       </Routes>
     </div>
   );
