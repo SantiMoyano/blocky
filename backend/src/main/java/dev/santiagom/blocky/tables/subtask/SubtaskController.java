@@ -17,9 +17,9 @@ public class SubtaskController {
     @Autowired
     private SubtaskService subtaskService;
 
-    @GetMapping
-    public ResponseEntity<List<SubtaskResponseDTO>> getAllSubtasks() {
-        return new ResponseEntity<List<SubtaskResponseDTO>>(subtaskService.allSubtasks(), HttpStatus.OK);
+    @GetMapping("/{taskId}")
+    public ResponseEntity<List<SubtaskResponseDTO>> getAllSubtasks(@PathVariable Long taskId) {
+        return new ResponseEntity<List<SubtaskResponseDTO>>(subtaskService.allSubtasks(taskId), HttpStatus.OK);
     }
 
     @PostMapping

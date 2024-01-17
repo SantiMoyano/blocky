@@ -23,10 +23,10 @@ public class SubtaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public List<SubtaskResponseDTO> allSubtasks() {
-        return subtaskRepository.findAll()
+    public List<SubtaskResponseDTO> allSubtasks(Long taskId) {
+        return subtaskRepository.findAllByTask_Id(taskId)
                 .stream()
-                .map(st -> new SubtaskResponseDTO(st.getDescription(), st.isDone(), st.getTask().getId()))
+                .map(st -> new SubtaskResponseDTO(st.getId(), st.getDescription(), st.isDone(), st.getTask().getId()))
                 .collect(Collectors.toList());
     }
 
@@ -42,7 +42,7 @@ public class SubtaskService {
                         .build()
         );
 
-        return new SubtaskResponseDTO(subtask.getDescription(), false, subtask.getTaskId());
+        return new SubtaskResponseDTO(null, subtask.getDescription(), false, subtask.getTaskId());
     }
 
     public SubtaskResponseDTO updateSubtask(Long subtaskId, SubtaskDTO subtask) {
@@ -51,6 +51,6 @@ public class SubtaskService {
         subtaskToUpdate.setDescription(subtask.getDescription());
         subtaskRepository.save(subtaskToUpdate);
 
-        return new SubtaskResponseDTO(subtask.getDescription(), subtaskToUpdate.isDone(), subtaskToUpdate.getTask().getId());
+        return new SubtaskResponseDTO(subtaskToUpdate.getId(), subtask.getDescription(), subtaskToUpdate.isDone(), subtaskToUpdate.getTask().getId());
     }
 }

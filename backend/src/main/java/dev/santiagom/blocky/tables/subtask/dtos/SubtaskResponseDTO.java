@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubtaskResponseDTO {
+    private Long id;
     private String description;
     private Boolean isDone;
     private Long taskId;

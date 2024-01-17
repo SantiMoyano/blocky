@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSubtasks } from "../../redux/subtasks/subtasksSlice";
+import SubtasksList from "./SubtasksList";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();
@@ -31,23 +32,6 @@ function Subtasks({ taskId }) {
       <SubtasksList list={doneSubtasks} isDone={true} />
     </>
   );
-}
-
-function SubtasksList({ list, isDone }) {
-  return (
-    <>
-      {!isDone ? <h2>To Do</h2> : <h2>Done tasks</h2>}
-      <ul>
-        {list.map((elem) => (
-          <Subtask key={elem.id} name={elem.name} color={elem.color} />
-        ))}
-      </ul>
-    </>
-  );
-}
-
-function Subtask({ name, color }) {
-  return <li style={{ backgroundColor: color }}>{name}</li>;
 }
 
 export default Subtasks;
