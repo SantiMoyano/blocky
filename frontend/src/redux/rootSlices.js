@@ -7,6 +7,7 @@ import epicsSlice from "./epics/epicsSlice";
 import epicDetailSlice from "./epics/epicDetailSlice";
 import tasksSlice from "./tasks/tasksSlice";
 import taskDetailSlice from "./tasks/taskDetailSlice";
+import subtasksSlice from "./subtasks/subtasksSlice";
 
 const rootSlices = combineReducers({
   register: registerSlice,
@@ -17,6 +18,7 @@ const rootSlices = combineReducers({
   epic: epicDetailSlice,
   tasks: tasksSlice,
   task: taskDetailSlice,
+  subtasks: subtasksSlice,
 });
 
 export default rootSlices;

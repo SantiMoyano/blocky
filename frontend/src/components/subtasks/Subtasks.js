@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSubtasks } from "./yourSubtasksSlice"; // Import your actual subtasks slice
+import { getAllSubtasks } from "../../redux/subtasks/subtasksSlice";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function Subtasks({ taskId }) {
   const { subtasks, loading, error } = useSelector((state) => state.subtasks);
 
   useEffect(() => {
-    dispatch(getSubtasks(taskId));
+    dispatch(getAllSubtasks(taskId));
   }, [dispatch, taskId]);
 
   useEffect(() => {
