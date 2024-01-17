@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Form from "../form/Form";
+import { createProject } from "../../redux/projects/createProjectSlice";
 
 function CreateProject() {
   const [projectRequest, setProjectRequest] = useState({
@@ -38,7 +39,8 @@ function CreateProject() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(projectRequest);
+    const token = localStorage.getItem("authToken");
+    dispatch(createProject(token, projectRequest));
   }
 
   return (
