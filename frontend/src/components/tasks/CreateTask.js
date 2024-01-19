@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createTask } from "../../redux/tasks/createTaskSlice";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
+import Categories from "../category/Categories";
 
 function CreateTask({ loadTasks, projectId }) {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function CreateTask({ loadTasks, projectId }) {
   return (
     <div>
       <h1>Create new Task</h1>
+      <Categories />
       <Form
         formData={taskData}
         handleChange={handleChange}
