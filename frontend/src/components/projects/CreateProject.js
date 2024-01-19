@@ -1,8 +1,15 @@
-import { useState } from "react";
-import Form from "../form/Form";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createProject } from "../../redux/projects/createProjectSlice";
+import Form from "../form/Form";
+import Notification from "../notification/Notification";
 
 function CreateProject() {
+  const dispatch = useDispatch();
+  const { creating, success, error } = useSelector(
+    (state) => state.createProject
+  );
+
   const [projectRequest, setProjectRequest] = useState({
     name: "",
     description: "",
@@ -40,7 +47,7 @@ function CreateProject() {
   function handleSubmit(e) {
     e.preventDefault();
     const token = localStorage.getItem("authToken");
-    dispatch(createProject(token, projectRequest));
+    dispatch(createProject({ token, request: projectRequest }));
   }
 
   return (
@@ -48,8 +55,15 @@ function CreateProject() {
       <h1>CREATE EL PROJECT</h1>
       <form onSubmit={handleSubmit}>
         <Form formData={projectData} handleChange={handleChange} />
-        <button type="submit">Create project</button>
+        <button type="submit" disabled={creating}>
+          {creating ? "Creating..." : "Create project"}
+        </button>
       </form>
+
+      {success && (
+        <Notification message="Project created successfully" type="success" />
+      )}
+      {error && <Notification message="An error has ocurred" type="error" />}
     </div>
   );
 }

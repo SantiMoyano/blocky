@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const createProject = createAsyncThunk(
   "project/createProject",
-  async (token, request, { dispatch }) => {
+  async ({ token, request }, { dispatch }) => {
     try {
       dispatch(createProjectRequest());
-      const response = await axios.post("/api/v1/project", {
+      const response = await axios.post("/api/v1/project", request, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        request,
       });
       dispatch(createProjectSuccess(response.data));
     } catch (error) {
