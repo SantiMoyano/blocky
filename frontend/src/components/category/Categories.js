@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "../../redux/categories/categoriesSlice";
 
-function Categories() {
+function CategoriesList({ handleSetCategory }) {
   const dispatch = useDispatch();
   const { categories, success, error } = useSelector(
     (state) => state.categories
@@ -9,15 +10,20 @@ function Categories() {
 
   useEffect(() => {
     dispatch(getAllCategories());
-  });
+  }, [dispatch]);
+
+  if (error) return "error";
 
   return (
-    <select>
+    <select onChange={handleSetCategory}>
+      <option value="">Select a category</option>
       {categories.map((category) => (
-        <option value={category}>{category.name}</option>
+        <option key={category.id} value={category.id}>
+          {category.name}
+        </option>
       ))}
     </select>
   );
 }
 
-export default Categories;
+export default CategoriesList;

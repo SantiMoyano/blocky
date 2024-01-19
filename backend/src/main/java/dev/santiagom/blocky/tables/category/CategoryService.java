@@ -18,7 +18,7 @@ public class CategoryService {
     public List<CategoryResponseDTO> allCategories() {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream()
-                .map(category -> new CategoryResponseDTO(category.getName(), category.getColor()))
+                .map(category -> new CategoryResponseDTO(category.getId(), category.getName(), category.getColor()))
                 .collect(Collectors.toList());
     }
 
@@ -32,7 +32,7 @@ public class CategoryService {
                         .build()
         );
         // Return simple response
-        return new CategoryResponseDTO(category.getName(), category.getColor());
+        return new CategoryResponseDTO(null, category.getName(), category.getColor());
     }
 
     public CategoryResponseDTO updateCategory(Long categoryId, Category category) {
@@ -45,6 +45,6 @@ public class CategoryService {
         categoryRepository.save(categoryToUpdate);
 
         // Return response without sensitive data
-        return new CategoryResponseDTO(category.getName(), category.getColor());
+        return new CategoryResponseDTO(categoryId, category.getName(), category.getColor());
     }
 }

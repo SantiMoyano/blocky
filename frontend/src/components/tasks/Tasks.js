@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllTasks } from "../../redux/tasks/tasksSlice";
 import BlockSection from "../blocks/BlockSection";
+import CreateTask from "./CreateTask";
 
 function Tasks({ epicId }) {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ function Tasks({ epicId }) {
 
   useEffect(() => {
     loadTasks();
-  });
+  }, []);
 
   function handleTaskClick(taskId) {
     navigate(`/task/${taskId}`);
@@ -25,7 +26,7 @@ function Tasks({ epicId }) {
   return (
     <section>
       <h2>Tasks</h2>
-      <button onClick={() => setShowForm(!showForm)}>Add project +</button>
+      <button onClick={() => setShowForm(!showForm)}>Add Task +</button>
       {showForm && <CreateTask loadTasks={loadTasks} epicId={epicId} />}
       <BlockSection list={tasks} handleElemClick={handleTaskClick} />
     </section>

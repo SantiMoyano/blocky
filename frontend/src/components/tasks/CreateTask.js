@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createTask } from "../../redux/tasks/createTaskSlice";
+//import { createTask } from "../../redux/tasks/createTaskSlice";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
-import Categories from "../category/Categories";
+import CategoriesList from "../category/Categories";
 
-function CreateTask({ loadTasks, projectId }) {
-  const dispatch = useDispatch();
-  const { creating, success, error } = useSelector((state) => state.createTask);
+function CreateTask({ loadTasks, epicId }) {
+  //const dispatch = useDispatch();
+  //const { creating, success, error } = useSelector((state) => state.createTask);
+  const [categoryId, setCategoryId] = useState(0);
 
   const [taskRequest, setTaskRequest] = useState({
     name: "",
     description: "",
-    projectId: projectId,
+    epicId: epicId,
+    categoryId: categoryId,
   });
 
   const taskData = [
@@ -30,6 +32,10 @@ function CreateTask({ loadTasks, projectId }) {
     },
   ];
 
+  function handleSetCategory(e) {
+    setCategoryId(e.target.value);
+  }
+
   function handleChange(e) {
     setTaskRequest({
       ...taskRequest,
@@ -39,24 +45,25 @@ function CreateTask({ loadTasks, projectId }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createTask(taskRequest));
+    taskRequest.categoryId = categoryId;
+    //dispatch(createTask(taskRequest));
     setTimeout(() => loadTasks(), 50);
   }
 
   return (
     <div>
       <h1>Create new Task</h1>
-      <Categories />
+      <CategoriesList handleSetCategory={handleSetCategory} />
       <Form
         formData={taskData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         buttonInfo="Create task"
       />
-      {success && (
+      {/* {success && (
         <Notification message="Task created successfully" type="success" />
       )}
-      {error && <Notification message="An error has occurred" type="error" />}
+      {error && <Notification message="An error has occurred" type="error" />} */}
     </div>
   );
 }

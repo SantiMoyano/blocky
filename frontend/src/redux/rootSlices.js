@@ -10,6 +10,7 @@ import taskDetailSlice from "./tasks/taskDetailSlice";
 import subtasksSlice from "./subtasks/subtasksSlice";
 import createProjectSlice from "./projects/createProjectSlice";
 import createEpicSlice from "./epics/createEpicSlice";
+import categoriesSlice from "./categories/categoriesSlice";
 
 const rootSlices = combineReducers({
   register: registerSlice,
@@ -23,6 +24,7 @@ const rootSlices = combineReducers({
   tasks: tasksSlice,
   task: taskDetailSlice,
   subtasks: subtasksSlice,
+  categories: categoriesSlice,
 });
 
 export default rootSlices;
