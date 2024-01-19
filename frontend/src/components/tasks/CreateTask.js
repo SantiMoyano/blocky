@@ -1,63 +1,62 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createEpic } from "../../redux/epics/createEpicSlice";
+import { createTask } from "../../redux/tasks/createTaskSlice";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
 
-function CreateEpic({ loadEpics, projectId }) {
+function CreateTask({ loadTasks, projectId }) {
   const dispatch = useDispatch();
-  const { creating, success, error } = useSelector((state) => state.createEpic);
+  const { creating, success, error } = useSelector((state) => state.createTask);
 
-  const [epicRequest, setEpicRequest] = useState({
+  const [taskRequest, setTaskRequest] = useState({
     name: "",
     description: "",
     projectId: projectId,
   });
 
-  const epicData = [
+  const taskData = [
     {
-      label: "Epic Name",
+      label: "Task Name",
       type: "text",
       name: "name",
-      value: epicRequest.name,
+      value: taskRequest.name,
     },
     {
       label: "Description",
       type: "text",
       name: "description",
-      value: epicRequest.description,
+      value: taskRequest.description,
     },
   ];
 
   function handleChange(e) {
-    setEpicRequest({
-      ...epicRequest,
+    setTaskRequest({
+      ...taskRequest,
       [e.target.name]: e.target.value,
     });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createEpic(epicRequest));
-    setTimeout(() => loadEpics(), 50);
+    dispatch(createTask(taskRequest));
+    setTimeout(() => loadTasks(), 50);
   }
 
   return (
     <div>
-      <h1>Create new Epic</h1>
+      <h1>Create new Task</h1>
       <Form
-        formData={epicData}
+        formData={taskData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Create epic"
+        buttonInfo="Create task"
       />
-
       {success && (
-        <Notification message="Epic created successfully" type="success" />
+        <Notification message="Task created successfully" type="success" />
       )}
       {error && <Notification message="An error has occurred" type="error" />}
     </div>
   );
 }
 
-export default CreateEpic;
+export default CreateTask;

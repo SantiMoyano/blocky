@@ -53,7 +53,7 @@ function CreateProject({ loadProjects }) {
 
   return (
     <div>
-      <h1>CREATE EL PROJECT</h1>
+      <h1>Create new Project</h1>
       <Form
         formData={projectData}
         handleChange={handleChange}

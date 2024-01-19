@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/auth/loginSlice";
+import { useNavigate } from "react-router-dom";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loggingIn = useSelector((state) => state.login.loggingIn);
   const error = useSelector((state) => state.login.error);
   const loginSuccess = useSelector((state) => state.login.loginSuccess);
@@ -55,6 +57,11 @@ function Login() {
     };
     // Dispatch the action to log in the user
     dispatch(loginUser(loginReq));
+    navigateToProjects();
+  }
+
+  function navigateToProjects() {
+    navigate(`/projects`);
   }
 
   function formIsEmpty() {
