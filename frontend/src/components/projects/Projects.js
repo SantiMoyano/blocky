@@ -18,15 +18,19 @@ function Projects() {
 
   useEffect(() => {
     // Dispatch the getAllProjects action when the component mounts
+    loadProjects();
+  }, []);
+
+  function loadProjects() {
     const token = localStorage.getItem("authToken");
     dispatch(getAllProjects(token));
-  }, [dispatch]);
+  }
 
   return (
     <section>
       <h2>Projects</h2>
       <button onClick={() => setShowForm(!showForm)}>Add project +</button>
-      {showForm && <CreateProject />}
+      {showForm && <CreateProject loadProjects={loadProjects} />}
       {loading && <p>Loading projects...</p>}
       {error && <p>Error: {error}</p>}
       <BlockSection list={projects} handleElemClick={handleProjectClick} />

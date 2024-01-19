@@ -4,7 +4,7 @@ import { createProject } from "../../redux/projects/createProjectSlice";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
 
-function CreateProject() {
+function CreateProject({ loadProjects }) {
   const dispatch = useDispatch();
   const { creating, success, error } = useSelector(
     (state) => state.createProject
@@ -48,6 +48,7 @@ function CreateProject() {
     e.preventDefault();
     const token = localStorage.getItem("authToken");
     dispatch(createProject({ token, request: projectRequest }));
+    setTimeout(() => loadProjects(), 50);
   }
 
   return (

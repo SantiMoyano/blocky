@@ -36,13 +36,13 @@ const createProjectSlice = createSlice({
     },
     createProjectSuccess: (state, action) => {
       state.creating = false;
-      state.success = action.payload;
+      state.success = true;
       state.error = null;
     },
     createProjectFailure: (state, action) => {
       state.creating = false;
       state.success = null;
-      state.error = action.payload;
+      state.error = true;
     },
   },
 });
