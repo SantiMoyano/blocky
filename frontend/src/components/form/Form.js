@@ -1,9 +1,9 @@
 import React from "react";
 import FormInput from "./FormInput";
 
-function Form({ formData, handleChange }) {
+function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       {formData.map((el) => (
         <FormInput
           label={el.label}
@@ -14,7 +14,8 @@ function Form({ formData, handleChange }) {
           key={el.name}
         />
       ))}
-    </>
+      <button type="submit">{buttonInfo}</button>
+    </form>
   );
 }
 

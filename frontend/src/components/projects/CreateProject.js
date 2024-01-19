@@ -54,12 +54,12 @@ function CreateProject({ loadProjects }) {
   return (
     <div>
       <h1>CREATE EL PROJECT</h1>
-      <form onSubmit={handleSubmit}>
-        <Form formData={projectData} handleChange={handleChange} />
-        <button type="submit" disabled={creating}>
-          {creating ? "Creating..." : "Create project"}
-        </button>
-      </form>
+      <Form
+        formData={projectData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        buttonInfo="Create project"
+      />
 
       {success && (
         <Notification message="Project created successfully" type="success" />

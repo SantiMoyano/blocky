@@ -69,11 +69,13 @@ function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Form formData={loginData} handleChange={handleChange} />
-      <button type="submit" disabled={loggingIn}>
-        {loggingIn ? "Logging in..." : "Login"}
-      </button>
+    <>
+      <Form
+        formData={loginData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        buttonInfo="Login"
+      />
       {loginSuccess ? (
         <Notification message={"Login successful!"} type={"success"} />
       ) : (
@@ -82,7 +84,7 @@ function Login() {
       {formError.formIsInvalid && (
         <Notification message={formError.message} type={"failure"} />
       )}
-    </form>
+    </>
   );
 }
 
