@@ -34,7 +34,7 @@ public class EpicController {
 
     @PutMapping("/{epicId}")
     public ResponseEntity<EpicResponseDTO> updateEpic(
-            @PathVariable Long epicId, @RequestBody String epicName) {
-        return new ResponseEntity<EpicResponseDTO>(epicService.updateEpic(epicId, epicName), HttpStatus.OK);
+            @PathVariable Long epicId, @RequestBody EpicDTO epic) {
+        return new ResponseEntity<EpicResponseDTO>(epicService.updateEpic(epicId, epic), HttpStatus.OK);
     }
 }

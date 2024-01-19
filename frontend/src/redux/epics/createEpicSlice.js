@@ -3,10 +3,10 @@ import axios from "axios";
 
 export const createEpic = createAsyncThunk(
   "epic/createEpic",
-  async (request, { dispatch }) => {
+  async (epicRequest, { dispatch }) => {
     try {
       dispatch(createEpicRequest());
-      const response = await axios.post("/api/v1/epic", request);
+      const response = await axios.post("/api/v1/epic", epicRequest);
       dispatch(createEpicSuccess(response.data));
     } catch (error) {
       dispatch(createEpicFailure(error.response.data));

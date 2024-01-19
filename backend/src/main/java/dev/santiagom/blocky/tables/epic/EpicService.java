@@ -49,6 +49,7 @@ public class EpicService {
         epicRepository.save(
                 Epic.builder()
                         .name(epic.getName())
+                        .description(epic.getDescription())
                         .progress(0)
                         .project(project)
                         .build()
