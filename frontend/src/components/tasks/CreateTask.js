@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { createTask } from "../../redux/tasks/createTaskSlice";
+import { createTask } from "../../redux/tasks/createTaskSlice";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
 import CategoriesList from "../category/Categories";
 
 function CreateTask({ loadTasks, epicId }) {
-  //const dispatch = useDispatch();
-  //const { creating, success, error } = useSelector((state) => state.createTask);
+  const dispatch = useDispatch();
+  const { creating, success, error } = useSelector((state) => state.createTask);
   const [categoryId, setCategoryId] = useState(0);
 
   const [taskRequest, setTaskRequest] = useState({
     name: "",
     description: "",
-    epicId: epicId,
     categoryId: categoryId,
+    epicId: epicId,
   });
 
   const taskData = [
@@ -46,7 +46,7 @@ function CreateTask({ loadTasks, epicId }) {
   function handleSubmit(e) {
     e.preventDefault();
     taskRequest.categoryId = categoryId;
-    //dispatch(createTask(taskRequest));
+    dispatch(createTask(taskRequest));
     setTimeout(() => loadTasks(), 50);
   }
 
@@ -60,10 +60,10 @@ function CreateTask({ loadTasks, epicId }) {
         handleSubmit={handleSubmit}
         buttonInfo="Create task"
       />
-      {/* {success && (
+      {success && (
         <Notification message="Task created successfully" type="success" />
       )}
-      {error && <Notification message="An error has occurred" type="error" />} */}
+      {error && <Notification message="An error has occurred" type="error" />}
     </div>
   );
 }

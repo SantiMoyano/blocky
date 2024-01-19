@@ -50,6 +50,7 @@ public class TaskService {
         taskRepository.save(
                 Task.builder()
                         .name(task.getName())
+                        .description(task.getDescription())
                         .progress(0)
                         .category(category)
                         .epic(epic)
