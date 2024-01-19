@@ -14,7 +14,7 @@ function Epics({ projectId }) {
   useEffect(() => {
     // Dispatch the action to get all epics for the specified project
     loadEpics(projectId);
-  });
+  }, []);
 
   function handleEpicClick(epicId) {
     navigate(`/epic/${epicId}`);
@@ -27,7 +27,7 @@ function Epics({ projectId }) {
   return (
     <>
       {/* Add any filtering or other options here if needed */}
-      <button onClick={() => setShowForm(!showForm)}>Add project +</button>
+      <button onClick={() => setShowForm(!showForm)}>Add epic +</button>
       {showForm && <CreateEpic loadEpics={loadEpics} />}
       <BlockSection list={epics} handleElemClick={handleEpicClick} />
     </>
