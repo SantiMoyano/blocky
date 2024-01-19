@@ -27,13 +27,18 @@ public class EpicService {
 
         // Use Stream API to transform each Epic into EpicResponseDTO and collect them into a list
         return epics.stream()
-                .map(epic -> new EpicResponseDTO(epic.getId(), epic.getName(), epic.getProgress()))
+                .map(epic -> new EpicResponseDTO(
+                        epic.getId(),
+                        epic.getName(),
+                        epic.getDescription(),
+                        epic.getProgress()))
                 .collect(Collectors.toList());
     }
 
     public EpicResponseDTO epicDetails(Long id) {
         Epic epic = epicRepository.findById(id).orElseThrow();
-        return new EpicResponseDTO(epic.getId(), epic.getName(), epic.getProgress());
+        return new EpicResponseDTO(
+                epic.getId(), epic.getName(), epic.getDescription(), epic.getProgress());
     }
 
     public EpicResponseDTO createEpic(EpicDTO epic) {
@@ -50,18 +55,19 @@ public class EpicService {
         );
 
         // Return simple Epic response
-        return new EpicResponseDTO(null, epic.getName(), project.getProgress());
+        return new EpicResponseDTO(null, epic.getName(), epic.getDescription(), project.getProgress());
     }
 
-    public EpicResponseDTO updateEpic(Long epicId, String epicName) {
+    public EpicResponseDTO updateEpic(Long epicId, EpicDTO epic) {
         // Search epic by ID
         Epic epicToUpdate = epicRepository.findById(epicId).orElseThrow();
 
         // Update and save Epic
-        epicToUpdate.setName(epicName);
+        epicToUpdate.setName(epic.getName());
+        epicToUpdate.setDescription(epic.getDescription());
         epicRepository.save(epicToUpdate);
 
         // Return simple Epic response
-        return new EpicResponseDTO(epicId, epicName, epicToUpdate.getProgress());
+        return new EpicResponseDTO(epicId, epic.getName(), epicToUpdate.getDescription(), epicToUpdate.getProgress());
     }
 }

@@ -24,6 +24,7 @@ public class Epic {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String description;
     private int progress;
 
     // Project relationship

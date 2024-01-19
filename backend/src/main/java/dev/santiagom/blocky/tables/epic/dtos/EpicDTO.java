@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class EpicDTO {
 
     private String name;
+    private String description;
     private Long projectId;
 }
