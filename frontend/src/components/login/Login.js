@@ -61,7 +61,10 @@ function Login() {
   }
 
   function navigateToProjects() {
-    navigate(`/projects`);
+    // Hardcoded solution for giving projects the necessary time to load
+    setTimeout(() => {
+      navigate(`/projects`);
+    }, 300);
   }
 
   function formIsEmpty() {
