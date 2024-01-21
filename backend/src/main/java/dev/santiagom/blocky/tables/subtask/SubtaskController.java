@@ -33,4 +33,9 @@ public class SubtaskController {
         return new ResponseEntity<SubtaskResponseDTO>(subtaskService.updateSubtask(subtaskId, subtask), HttpStatus.OK);
     }
 
+    @PutMapping("/toggle/{subtaskId}")
+    public ResponseEntity<SubtaskResponseDTO> toggleIsDone(@PathVariable Long subtaskId) {
+        return new ResponseEntity<SubtaskResponseDTO>(subtaskService.toggleIsDone(subtaskId), HttpStatus.OK);
+    }
+
 }

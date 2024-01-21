@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllSubtasks } from "../../redux/subtasks/subtasksSlice";
+import {
+  getAllSubtasks,
+  toggleIsDone,
+} from "../../redux/subtasks/subtasksSlice";
 import SubtasksList from "./SubtasksList";
 import CreateSubtask from "./CreateSubtask";
 
@@ -30,7 +33,7 @@ function Subtasks({ taskId }) {
   }
 
   function handleClick(subtaskId) {
-    //dispatch(toggleIsDone(subtaskId));
+    dispatch(toggleIsDone(subtaskId));
     loadSubtasks();
   }
 

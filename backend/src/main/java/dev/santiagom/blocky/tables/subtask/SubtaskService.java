@@ -53,4 +53,13 @@ public class SubtaskService {
 
         return new SubtaskResponseDTO(subtaskToUpdate.getId(), subtask.getDescription(), subtaskToUpdate.isDone(), subtaskToUpdate.getTask().getId());
     }
+
+    public SubtaskResponseDTO toggleIsDone(Long subtaskId) {
+        Subtask subtaskToToggle = subtaskRepository.findById(subtaskId).orElseThrow();
+
+        subtaskToToggle.setDone(!subtaskToToggle.isDone());
+        subtaskRepository.save(subtaskToToggle);
+
+        return new SubtaskResponseDTO(subtaskId, subtaskToToggle.getDescription(), subtaskToToggle.isDone(), subtaskToToggle.getTask().getId());
+    }
 }

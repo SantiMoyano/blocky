@@ -16,6 +16,22 @@ export const getAllSubtasks = createAsyncThunk(
   }
 );
 
+// Define a separate async thunk for toggling the "isDone" property
+export const toggleIsDone = createAsyncThunk(
+  "subtask/toggleIsDone",
+  async (subtaskId, { dispatch }) => {
+    try {
+      // Use separate action types and action creators for this thunk
+      dispatch(toggleIsDoneRequest());
+      const response = await axios.put(`/api/v1/subtask/toggle/${subtaskId}`);
+      dispatch(toggleIsDoneSuccess(response.data));
+    } catch (error) {
+      dispatch(toggleIsDoneFailure(error.response.data));
+      throw error.response.data;
+    }
+  }
+);
+
 const subtaskSlice = createSlice({
   name: "subtask",
   initialState: {
@@ -36,6 +52,19 @@ const subtaskSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    // Define separate action types and action creators for toggleIsDone
+    toggleIsDoneRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    toggleIsDoneSuccess: (state, action) => {
+      state.loading = false;
+      state.subtasks = action.payload; // Update the state accordingly
+    },
+    toggleIsDoneFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // Handle the pending action for getAllSubtasks
@@ -50,5 +79,8 @@ export const {
   getAllSubtasksRequest,
   getAllSubtasksSuccess,
   getAllSubtasksFailure,
+  toggleIsDoneRequest,
+  toggleIsDoneSuccess,
+  toggleIsDoneFailure,
 } = subtaskSlice.actions;
 export default subtaskSlice.reducer;
