@@ -57,7 +57,7 @@ function Login() {
     };
     // Dispatch the action to log in the user
     dispatch(loginUser(loginReq));
-    navigateToProjects();
+    if (!error) navigateToProjects();
   }
 
   function navigateToProjects() {

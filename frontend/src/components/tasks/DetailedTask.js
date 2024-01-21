@@ -21,6 +21,7 @@ function DetailedTask() {
     <section>
       <h2>Detailed Task {taskId}</h2>
       <p>{task.name}</p>
+      <p>{task.categoryId}</p>
       <p>{task.progress}</p>
       <p>{task.description}</p>
       <Subtasks taskId={taskId} />

@@ -94,11 +94,13 @@ function Register() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Form formData={registerData} handleChange={handleChange} />
-      <button type="submit" disabled={registering}>
-        {registering ? "Registering..." : "Submit"}
-      </button>
+    <>
+      <Form
+        formData={registerData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        buttonInfo="Register"
+      />
       {registrationSuccess ? (
         <Notification message={"User created successfully!"} type={"success"} />
       ) : (
@@ -109,7 +111,7 @@ function Register() {
       {formError.formIsInvalid && (
         <Notification message={formError.message} type={"failure"} />
       )}
-    </form>
+    </>
   );
 }
 

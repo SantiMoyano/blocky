@@ -29,14 +29,27 @@ function Subtasks({ taskId }) {
     setToDoSubtasks(subtasksList.filter((subtask) => !subtask.isDone));
   }
 
+  function handleClick(subtaskId) {
+    //dispatch(toggleIsDone(subtaskId));
+    loadSubtasks();
+  }
+
   return (
     <>
       <button onClick={() => setShowForm(!showForm)}>Add Subtask +</button>
       {showForm && (
         <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
       )}
-      <SubtasksList list={toDoSubtasks} isDone={false} />
-      <SubtasksList list={doneSubtasks} isDone={true} />
+      <SubtasksList
+        list={toDoSubtasks}
+        isDone={false}
+        handleClick={handleClick}
+      />
+      <SubtasksList
+        list={doneSubtasks}
+        isDone={true}
+        handleClick={handleClick}
+      />
     </>
   );
 }
