@@ -1,7 +1,7 @@
 import React from "react";
 import Subtask from "./Subtask";
 
-function SubtasksList({ list, isDone, handleClick }) {
+function SubtasksList({ list, isDone, handleClick, handleEdit }) {
   return (
     <>
       {!isDone ? <h2>To Do</h2> : <h2>Done tasks</h2>}
@@ -13,6 +13,13 @@ function SubtasksList({ list, isDone, handleClick }) {
             color={elem.color}
             isDone={isDone}
             handleClick={() => handleClick(elem.id)}
+            handleEdit={() =>
+              handleEdit({
+                subtaskId: elem.id,
+                description: elem.description,
+                taskId: elem.taskId,
+              })
+            }
           />
         ))}
       </ul>

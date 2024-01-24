@@ -6,6 +6,7 @@ import {
 } from "../../redux/subtasks/subtasksSlice";
 import SubtasksList from "./SubtasksList";
 import CreateSubtask from "./CreateSubtask";
+import UpdateSubtask from "./UpdateSubtask";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();
@@ -14,6 +15,12 @@ function Subtasks({ taskId }) {
   const [doneSubtasks, setDoneSubtasks] = useState([]);
   const [toDoSubtasks, setToDoSubtasks] = useState([]);
   const { subtasks, loading, error } = useSelector((state) => state.subtasks);
+
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [subtaskToUpdate, setSubtaskToUpdate] = useState({
+    subtaskId: 0,
+    description: "",
+  });
 
   useEffect(() => {
     dispatch(getAllSubtasks(taskId));
@@ -26,15 +33,27 @@ function Subtasks({ taskId }) {
     }
   }, [subtasks]);
 
-  function loadSubtasks() {
+  async function loadSubtasks() {
     dispatch(getAllSubtasks(taskId));
-    setDoneSubtasks(subtasksList.filter((subtask) => subtask.isDone));
-    setToDoSubtasks(subtasksList.filter((subtask) => !subtask.isDone));
+    setSubtasksList(subtasks);
+    if (subtasksList.length > 0) {
+      setDoneSubtasks(subtasksList.filter((subtask) => subtask.isDone));
+      setToDoSubtasks(subtasksList.filter((subtask) => !subtask.isDone));
+    }
   }
 
   function handleClick(subtaskId) {
     dispatch(toggleIsDone(subtaskId));
     loadSubtasks();
+  }
+
+  function handleEdit({ subtaskId, description, taskId }) {
+    setShowUpdateForm(!showUpdateForm);
+    setSubtaskToUpdate({
+      subtaskId,
+      description,
+      taskId,
+    });
   }
 
   return (
@@ -43,15 +62,23 @@ function Subtasks({ taskId }) {
       {showForm && (
         <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
       )}
+      {showUpdateForm && (
+        <UpdateSubtask
+          subtaskToUpdate={subtaskToUpdate}
+          loadSubtasks={loadSubtasks}
+        />
+      )}
       <SubtasksList
         list={toDoSubtasks}
         isDone={false}
         handleClick={handleClick}
+        handleEdit={handleEdit}
       />
       <SubtasksList
         list={doneSubtasks}
         isDone={true}
         handleClick={handleClick}
+        handleEdit={handleEdit}
       />
     </>
   );
