@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
 import CategoriesList from "../category/Categories";
+import { updateTask } from "../../redux/tasks/updateTaskSlice";
 
-function UpdateTask({ task }) {
+function UpdateTask({ task, loadTask }) {
   const dispatch = useDispatch();
   const { updating, success, error } = useSelector(
     (state) => state.updateSubtask
@@ -12,8 +13,8 @@ function UpdateTask({ task }) {
   const [categoryId, setCategoryId] = useState(0);
 
   const [taskRequest, setTaskRequest] = useState({
-    name: "",
-    description: "",
+    name: task.name,
+    description: task.description,
     categoryId: task.categoryId,
     epicId: task.epicId,
   });
@@ -47,10 +48,10 @@ function UpdateTask({ task }) {
   function handleSubmit(e) {
     e.preventDefault();
     if (categoryId !== 0) taskRequest.categoryId = categoryId;
-    //dispatch(updateTask(task));
+    dispatch(updateTask({ taskId: task.id, request: taskRequest }));
     setTimeout(() => {
-      //loadSubtasks();
-    }, 50);
+      loadTask();
+    }, 100);
   }
 
   return (

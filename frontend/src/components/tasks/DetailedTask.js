@@ -12,7 +12,7 @@ function DetailedTask() {
   const { task, loading, error } = useSelector((state) => state.task);
 
   useEffect(() => {
-    if (taskId) dispatch(getTaskDetails(taskId));
+    if (taskId) loadTask();
   }, [dispatch, taskId]);
 
   if (loading) return <p>Loading Task details...</p>;
@@ -23,11 +23,15 @@ function DetailedTask() {
     setShowEditForm(!showEditForm);
   }
 
+  function loadTask() {
+    dispatch(getTaskDetails(taskId));
+  }
+
   return (
     <section>
       <h2>Detailed Task {taskId}</h2>
       <button onClick={handleEdit}>Edit task</button>
-      {showEditForm && <UpdateTask task={task} />}
+      {showEditForm && <UpdateTask task={task} loadTask={loadTask} />}
       <p>{task.name}</p>
       <p>{task.categoryId}</p>
       <p>{task.progress}</p>

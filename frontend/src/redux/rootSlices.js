@@ -14,6 +14,7 @@ import categoriesSlice from "./categories/categoriesSlice";
 import createTaskSlice from "./tasks/createTaskSlice";
 import createSubtaskSlice from "./subtasks/createSubtaskSlice";
 import updateSubtaskSlice from "./subtasks/updateSubtaskSlice";
+import updateTaskSlice from "./tasks/updateTaskSlice";
 
 const rootSlices = combineReducers({
   register: registerSlice,
@@ -27,6 +28,7 @@ const rootSlices = combineReducers({
   tasks: tasksSlice,
   task: taskDetailSlice,
   createTask: createTaskSlice,
+  updateTask: updateTaskSlice,
   subtasks: subtasksSlice,
   createSubtask: createSubtaskSlice,
   updateSubtask: updateSubtaskSlice,

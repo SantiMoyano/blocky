@@ -67,6 +67,7 @@ public class TaskService {
 
         // Update task details with the new data
         taskToUpdate.setName(task.getName());
+        taskToUpdate.setDescription(task.getDescription());
 
         // Check if a new category is selected and update the task's category accordingly
         if (taskToUpdate.getCategory().getId() != task.getCategoryId()) {
