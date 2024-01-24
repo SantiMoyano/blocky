@@ -47,8 +47,12 @@ function Subtasks({ taskId }) {
     loadSubtasks();
   }
 
-  function handleEdit({ subtaskId, description, taskId }) {
+  function toggleUpdateForm() {
     setShowUpdateForm(!showUpdateForm);
+  }
+
+  function handleEdit({ subtaskId, description, taskId }) {
+    toggleUpdateForm();
     setSubtaskToUpdate({
       subtaskId,
       description,

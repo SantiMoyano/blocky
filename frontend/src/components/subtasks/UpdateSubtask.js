@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
+import { updateSubtask } from "../../redux/subtasks/updateSubtaskSlice";
 
 function UpdateSubtask({ subtaskToUpdate, loadSubtasks }) {
   const dispatch = useDispatch();
-  const { creating, success, error } = useSelector(
-    (state) => state.createSubtask
+  const { updating, success, error } = useSelector(
+    (state) => state.updateSubtask
   );
 
   const [subtaskRequest, setSubtaskRequest] = useState({
@@ -32,8 +33,15 @@ function UpdateSubtask({ subtaskToUpdate, loadSubtasks }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    //dispatch(updateSubtask(subtaskRequest));
-    setTimeout(() => loadSubtasks(), 50);
+    dispatch(
+      updateSubtask({
+        subtaskId: subtaskToUpdate.subtaskId,
+        request: subtaskRequest,
+      })
+    );
+    setTimeout(() => {
+      loadSubtasks();
+    }, 50);
   }
 
   return (
