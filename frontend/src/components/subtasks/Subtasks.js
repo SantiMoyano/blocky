@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteSubtask } from "../../redux/subtasks/deleteSubtaskSlice";
 import {
   getAllSubtasks,
   toggleIsDone,
@@ -15,6 +16,7 @@ function Subtasks({ taskId }) {
   const [doneSubtasks, setDoneSubtasks] = useState([]);
   const [toDoSubtasks, setToDoSubtasks] = useState([]);
   const { subtasks, loading, error } = useSelector((state) => state.subtasks);
+  const { deleting } = useSelector((state) => state.deleteSubtask);
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [subtaskToUpdate, setSubtaskToUpdate] = useState({
@@ -60,6 +62,11 @@ function Subtasks({ taskId }) {
     });
   }
 
+  function handleDelete(subtaskId) {
+    dispatch(deleteSubtask(subtaskId));
+    loadSubtasks();
+  }
+
   return (
     <>
       <button onClick={() => setShowForm(!showForm)}>Add Subtask +</button>
@@ -77,12 +84,14 @@ function Subtasks({ taskId }) {
         isDone={false}
         handleClick={handleClick}
         handleEdit={handleEdit}
+        handleDelete={handleDelete}
       />
       <SubtasksList
         list={doneSubtasks}
         isDone={true}
         handleClick={handleClick}
         handleEdit={handleEdit}
+        handleDelete={handleDelete}
       />
     </>
   );

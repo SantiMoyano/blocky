@@ -1,7 +1,7 @@
 import React from "react";
 import Subtask from "./Subtask";
 
-function SubtasksList({ list, isDone, handleClick, handleEdit }) {
+function SubtasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
   return (
     <>
       {!isDone ? <h2>To Do</h2> : <h2>Done tasks</h2>}
@@ -20,6 +20,7 @@ function SubtasksList({ list, isDone, handleClick, handleEdit }) {
                 taskId: elem.taskId,
               })
             }
+            handleDelete={() => handleDelete(elem.id)}
           />
         ))}
       </ul>
