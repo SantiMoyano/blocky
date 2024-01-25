@@ -71,4 +71,10 @@ public class EpicService {
         // Return simple Epic response
         return new EpicResponseDTO(epicId, epic.getName(), epicToUpdate.getDescription(), epicToUpdate.getProgress());
     }
+
+    public EpicResponseDTO deleteEpic(Long epicId) {
+        Epic epic = epicRepository.findById(epicId).orElseThrow();
+        epicRepository.delete(epic);
+        return new EpicResponseDTO(epicId, epic.getName(), epic.getDescription(), epic.getProgress());
+    }
 }

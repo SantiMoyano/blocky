@@ -49,4 +49,9 @@ public class ProjectController {
         updateProject(@PathVariable Long projectId, @RequestBody NewProjectDTO project) {
         return new ResponseEntity<ProjectResponseDTO>(projectService.updateProject(projectId, project), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<ProjectResponseDTO> deleteProject(@PathVariable Long projectId) {
+        return new ResponseEntity<ProjectResponseDTO>(projectService.deleteProject(projectId), HttpStatus.OK);
+    }
 }

@@ -87,4 +87,10 @@ public class ProjectService {
         Project p = projectRepository.findById(id).orElseThrow();
         return new ProjectResponseDTO(p.getId(), p.getName(), p.getDescription(), p.getGoal(), p.getProgress());
     }
+
+    public ProjectResponseDTO deleteProject(Long projectId) {
+        Project project = projectRepository.findById(projectId).orElseThrow();
+        projectRepository.delete(project);
+        return new ProjectResponseDTO(project.getId(), project.getName(), project.getDescription(), project.getGoal(), project.getProgress());
+    }
 }

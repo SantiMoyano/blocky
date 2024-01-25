@@ -37,4 +37,9 @@ public class EpicController {
             @PathVariable Long epicId, @RequestBody EpicDTO epic) {
         return new ResponseEntity<EpicResponseDTO>(epicService.updateEpic(epicId, epic), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{epicId}")
+    public ResponseEntity<EpicResponseDTO> deleteEpic(@PathVariable Long epicId) {
+        return new ResponseEntity<EpicResponseDTO>(epicService.deleteEpic(epicId), HttpStatus.OK);
+    }
 }

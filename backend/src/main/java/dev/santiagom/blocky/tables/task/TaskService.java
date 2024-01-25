@@ -96,4 +96,16 @@ public class TaskService {
                 task.getCategory().getId(),
                 task.getEpic().getId());
     }
+
+    public TaskResponseDTO deleteTask(Long taskId) {
+        Task task = taskRepository.findById(taskId).orElseThrow();
+        taskRepository.delete(task);
+        return new TaskResponseDTO(
+                task.getId(),
+                task.getName(),
+                task.getDescription(),
+                task.getProgress(),
+                task.getCategory().getId(),
+                task.getEpic().getId());
+    }
 }

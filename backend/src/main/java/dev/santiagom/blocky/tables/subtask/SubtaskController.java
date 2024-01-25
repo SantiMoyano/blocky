@@ -38,4 +38,9 @@ public class SubtaskController {
         return new ResponseEntity<SubtaskResponseDTO>(subtaskService.toggleIsDone(subtaskId), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{subtaskId}")
+    public ResponseEntity<SubtaskResponseDTO> deleteSubtask(@PathVariable Long subtaskId) {
+        return new ResponseEntity<SubtaskResponseDTO>(subtaskService.deleteSubtask(subtaskId), HttpStatus.OK);
+    }
+
 }
