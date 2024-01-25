@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
 import { useState } from "react";
+import { updateEpic } from "../../redux/epics/updateEpicSlice";
 
 function UpdateEpic({ epic, loadEpic }) {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function UpdateEpic({ epic, loadEpic }) {
     e.preventDefault();
     dispatch(
       updateEpic({
-        projectId: epic.projectId,
+        epicId: epic.id,
         request: epicRequest,
       })
     );

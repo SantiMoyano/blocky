@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEpicDetails } from "../../redux/epics/epicDetailSlice";
 import { useParams } from "react-router-dom";
 import Tasks from "../tasks/Tasks";
+import UpdateEpic from "./UpdateEpic";
 
 function DetailedEpic() {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ function DetailedEpic() {
 
   useEffect(() => {
     if (epicId) {
-      dispatch(getEpicDetails(epicId));
+      loadEpic();
     }
   }, [dispatch, epicId]);
 
@@ -25,17 +26,18 @@ function DetailedEpic() {
   }
 
   function loadEpic() {
-    console.log("reload");
+    dispatch(getEpicDetails(epicId));
   }
 
   return (
     <>
       <section>
         <h2>Detailed Epic {epicId}</h2>
-        <button onClick={handleEdit}>Edit task</button>
+        <button onClick={handleEdit}>Edit epic</button>
         {showEditForm && <UpdateEpic epic={epic} loadEpic={loadEpic} />}
         <div className="epic-info">
           <p>{epic.name}</p>
+          <p>{epic.description}</p>
           <p>{epic.progress}</p>
         </div>
       </section>
