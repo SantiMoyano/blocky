@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTaskDetails } from "../../redux/tasks/taskDetailSlice";
+import { getTaskDetails, deleteTask } from "../../redux/tasks/taskDetailSlice";
 import { useParams } from "react-router-dom";
 import Subtasks from "../subtasks/Subtasks";
 import UpdateTask from "./UpdateTask";
@@ -27,10 +27,15 @@ function DetailedTask() {
     dispatch(getTaskDetails(taskId));
   }
 
+  function handleDelete() {
+    dispatch(deleteTask(taskId));
+  }
+
   return (
     <section>
       <h2>Detailed Task {taskId}</h2>
       <button onClick={handleEdit}>Edit task</button>
+      <button onClick={handleDelete}>Delete task</button>
       {showEditForm && <UpdateTask task={task} loadTask={loadTask} />}
       <p>{task.name}</p>
       <p>{task.categoryId}</p>

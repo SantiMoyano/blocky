@@ -16,6 +16,21 @@ export const getTaskDetails = createAsyncThunk(
   }
 );
 
+// Define an async thunk for deleting a task
+export const deleteTask = createAsyncThunk(
+  "task/deleteTask",
+  async (taskId, { dispatch }) => {
+    try {
+      dispatch(deleteTaskRequest());
+      await axios.delete(`/api/v1/task/${taskId}`);
+      dispatch(deleteTaskSuccess(taskId));
+    } catch (error) {
+      dispatch(deleteTaskFailure(error.response.data));
+      throw error.response.data;
+    }
+  }
+);
+
 // Define the initial state for the task detail slice
 const initialState = {
   task: {},
@@ -40,6 +55,22 @@ const taskDetailSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    // Reducer for delete task request
+    deleteTaskRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    // Reducer for delete task success
+    deleteTaskSuccess: (state, action) => {
+      state.loading = false;
+      // Handle task deletion in the state
+      state.task = null; // or handle according to your use case
+    },
+    // Reducer for delete task failure
+    deleteTaskFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -48,5 +79,8 @@ export const {
   getTaskDetailsRequest,
   getTaskDetailsSuccess,
   getTaskDetailsFailure,
+  deleteTaskRequest,
+  deleteTaskSuccess,
+  deleteTaskFailure,
 } = taskDetailSlice.actions;
 export default taskDetailSlice.reducer;
