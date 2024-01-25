@@ -16,6 +16,21 @@ export const getProjects = createAsyncThunk(
   }
 );
 
+// Define an async thunk for deleting a project
+export const deleteProject = createAsyncThunk(
+  "project/deleteProject",
+  async (projectId, { dispatch }) => {
+    try {
+      dispatch(deleteProjectRequest());
+      await axios.delete(`/api/v1/project/${projectId}`);
+      dispatch(deleteProjectSuccess(projectId));
+    } catch (error) {
+      dispatch(deleteProjectFailure(error.response.data));
+      throw error.response.data;
+    }
+  }
+);
+
 const projectSlice = createSlice({
   name: "project",
   initialState: {
@@ -41,6 +56,23 @@ const projectSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    // Reducer for delete project request
+    deleteProjectRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    // Reducer for delete project success
+    deleteProjectSuccess: (state, action) => {
+      state.loading = false;
+      state.project = state.project.filter(
+        (project) => project.id !== action.payload
+      );
+    },
+    // Reducer for delete project failure
+    deleteProjectFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // Handle the pending action for getProjects
@@ -56,5 +88,8 @@ export const {
   getProjectsSuccess,
   getProjectsFailure,
   resetProject,
+  deleteProjectRequest,
+  deleteProjectSuccess,
+  deleteProjectFailure,
 } = projectSlice.actions;
 export default projectSlice.reducer;

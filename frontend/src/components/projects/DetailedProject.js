@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/projects/projectSlice";
+import { getProjects, deleteProject } from "../../redux/projects/projectSlice";
 import { useParams } from "react-router-dom";
 import Epics from "../epics/Epics";
 import UpdateProject from "./UpdateProject";
@@ -29,11 +29,16 @@ function DetailedProject() {
     dispatch(getProjects(projectId));
   }
 
+  function handleDelete() {
+    dispatch(deleteProject(projectId));
+  }
+
   return (
     <>
       <section>
         <h2>Detailed Project {projectId}</h2>
         <button onClick={handleEdit}>Edit project</button>
+        <button onClick={handleDelete}>Delete project</button>
         {showEditForm && (
           <UpdateProject project={project} loadProject={loadProject} />
         )}
