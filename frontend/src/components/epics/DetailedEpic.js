@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEpicDetails } from "../../redux/epics/epicDetailSlice";
+import { getEpicDetails, deleteEpic } from "../../redux/epics/epicDetailSlice";
 import { useParams } from "react-router-dom";
 import Tasks from "../tasks/Tasks";
 import UpdateEpic from "./UpdateEpic";
@@ -29,11 +29,16 @@ function DetailedEpic() {
     dispatch(getEpicDetails(epicId));
   }
 
+  function handleDelete() {
+    dispatch(deleteEpic(epicId));
+  }
+
   return (
     <>
       <section>
         <h2>Detailed Epic {epicId}</h2>
         <button onClick={handleEdit}>Edit epic</button>
+        <button onClick={handleDelete}>Delete epic</button>
         {showEditForm && <UpdateEpic epic={epic} loadEpic={loadEpic} />}
         <div className="epic-info">
           <p>{epic.name}</p>

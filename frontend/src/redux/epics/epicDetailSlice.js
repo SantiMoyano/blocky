@@ -16,6 +16,21 @@ export const getEpicDetails = createAsyncThunk(
   }
 );
 
+// Define an async thunk for deleting an epic
+export const deleteEpic = createAsyncThunk(
+  "epic/deleteEpic",
+  async (epicId, { dispatch }) => {
+    try {
+      dispatch(deleteEpicRequest());
+      await axios.delete(`/api/v1/epic/${epicId}`);
+      dispatch(deleteEpicSuccess(epicId));
+    } catch (error) {
+      dispatch(deleteEpicFailure(error.response.data));
+      throw error.response.data;
+    }
+  }
+);
+
 // Define the initial state for the epic detail slice
 const initialState = {
   epic: {},
@@ -40,6 +55,22 @@ const epicDetailSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    // Reducer for delete epic request
+    deleteEpicRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    // Reducer for delete epic success
+    deleteEpicSuccess: (state, action) => {
+      state.loading = false;
+      // Filter out the deleted epic from the state
+      state.epic = null; // or handle according to your use case
+    },
+    // Reducer for delete epic failure
+    deleteEpicFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -48,5 +79,8 @@ export const {
   getEpicDetailsRequest,
   getEpicDetailsSuccess,
   getEpicDetailsFailure,
+  deleteEpicRequest,
+  deleteEpicSuccess,
+  deleteEpicFailure,
 } = epicDetailSlice.actions;
 export default epicDetailSlice.reducer;
