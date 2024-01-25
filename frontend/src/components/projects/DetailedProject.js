@@ -33,7 +33,7 @@ function DetailedProject() {
     <>
       <section>
         <h2>Detailed Project {projectId}</h2>
-        <button onClick={handleEdit}>Edit epic</button>
+        <button onClick={handleEdit}>Edit project</button>
         {showEditForm && (
           <UpdateProject project={project} loadProject={loadProject} />
         )}

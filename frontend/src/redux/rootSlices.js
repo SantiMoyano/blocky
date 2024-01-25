@@ -16,6 +16,7 @@ import createSubtaskSlice from "./subtasks/createSubtaskSlice";
 import updateSubtaskSlice from "./subtasks/updateSubtaskSlice";
 import updateTaskSlice from "./tasks/updateTaskSlice";
 import updateEpicSlice from "./epics/updateEpicSlice";
+import updateProjectSlice from "./projects/updateProjectSlice";
 
 const rootSlices = combineReducers({
   register: registerSlice,
@@ -23,6 +24,7 @@ const rootSlices = combineReducers({
   projects: projectSlices,
   project: projectSlice,
   createProject: createProjectSlice,
+  updateProject: updateProjectSlice,
   epics: epicsSlice,
   epic: epicDetailSlice,
   createEpic: createEpicSlice,

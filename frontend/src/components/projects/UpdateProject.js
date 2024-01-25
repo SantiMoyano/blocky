@@ -2,6 +2,7 @@ import { useState } from "react";
 import Form from "../form/Form";
 import Notification from "../notification/Notification";
 import { useDispatch, useSelector } from "react-redux";
+import { updateProject } from "../../redux/projects/updateProjectSlice";
 
 function UpdateProject({ project, loadProject }) {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ function UpdateProject({ project, loadProject }) {
 
   return (
     <div>
-      <h1>Update Epic</h1>
+      <h1>Update Project</h1>
       <Form
         formData={projectData}
         handleChange={handleChange}
