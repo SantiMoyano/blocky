@@ -1,0 +1,27 @@
+section {
+  min-height: 100dvh;
+  padding: 80px 0;
+  background-color: #aaf683;
+  text-align: center;
+}
+
+.top {
+  padding: 0 18px;
+}
+
+h2 {
+  font-size: 60px;
+  font-weight: bolder;
+  width: 100%;
+}
+
+p {
+  padding: 0 18px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.buttonsInfo {
+  padding: 0 18px;
+  padding-top: 40px;
+}

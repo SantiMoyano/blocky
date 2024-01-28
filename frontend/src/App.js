@@ -6,6 +6,7 @@ import DetailedProject from "./components/projects/DetailedProject";
 import DetailedEpic from "./components/epics/DetailedEpic";
 import DetailedTask from "./components/tasks/DetailedTask";
 import { Routes, Route, Link } from "react-router-dom";
+import Home from "./components/home/Home";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         </ul>
       </nav>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />}></Route>
         <Route path="/projects" element={<Projects />}></Route>

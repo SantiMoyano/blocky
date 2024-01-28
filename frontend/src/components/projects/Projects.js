@@ -28,7 +28,7 @@ function Projects() {
 
   return (
     <section>
-      <h2>Projects</h2>
+      <h2>PROJECTS</h2>
       <button onClick={() => setShowForm(!showForm)}>Add project +</button>
       {showForm && <CreateProject loadProjects={loadProjects} />}
       {loading && <p>Loading projects...</p>}
