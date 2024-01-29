@@ -4,7 +4,7 @@ import ButtonWithArrow from "../utils/buttons/ButtonWithArrow";
 
 function Home() {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} pt-20`}>
       <div className={styles.top}>
         <h2>BLOCKY</h2>
       </div>

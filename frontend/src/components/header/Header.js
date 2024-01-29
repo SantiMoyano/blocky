@@ -13,39 +13,30 @@ function NavList() {
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as={Link} // Render Link component instead of 'a' tag
-        to="/pages"
+        to="/login"
         variant="small"
         color="blue-gray"
         className="p-1 font-medium font-custom"
       >
-        Pages
+        Login
       </Typography>
       <Typography
         as={Link} // Render Link component instead of 'a' tag
-        to="/account"
+        to="/register"
         variant="small"
         color="blue-gray"
         className="p-1 font-medium font-custom"
       >
-        Account
+        Register
       </Typography>
       <Typography
         as={Link} // Render Link component instead of 'a' tag
-        to="/blocks"
+        to="/projects"
         variant="small"
         color="blue-gray"
         className="p-1 font-medium font-custom"
       >
-        Blocks
-      </Typography>
-      <Typography
-        as={Link} // Render Link component instead of 'a' tag
-        to="/docs"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium font-custom"
-      >
-        Docs
+        Projects
       </Typography>
     </ul>
   );
