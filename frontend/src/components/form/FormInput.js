@@ -4,17 +4,18 @@ import React from "react";
 function FormInput({ label, type, name, value, handleChange }) {
   return (
     <>
-      <Typography variant="h6" color="blue-gray" className="-mb-3">
+      <Typography variant="h6" color="white" className="-mb-3 font-custom">
         {label}
       </Typography>
       <Input
+        color="black"
         size="lg"
         type={type}
         value={value}
         name={name}
-        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+        className=" !border-white focus:!border-white bg-white"
         labelProps={{
-          className: "before:content-none after:content-none",
+          className: "before:content-none after:content-none ",
         }}
         onChange={handleChange}
       />

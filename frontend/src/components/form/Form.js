@@ -1,18 +1,20 @@
 import React from "react";
 import FormInput from "./FormInput";
 
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, Button, Typography } from "@material-tailwind/react";
+import ButtonCustom from "../utils/buttons/ButtonCustom";
 
 function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen red-bg">
       <Card color="transparent" shadow={false}>
+        <Typography
+          variant="h2"
+          color="white"
+          className="text-center font-custom pb-4"
+        >
+          {buttonInfo}
+        </Typography>
         <form
           onSubmit={handleSubmit}
           className="mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -29,9 +31,9 @@ function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
               />
             ))}
           </div>
-          <Button type="submit" className="mt-6" fullWidth>
-            {buttonInfo}
-          </Button>
+          <div className="pt-10">
+            <ButtonCustom buttonText={buttonInfo} type="submit" fullWidth />
+          </div>
         </form>
       </Card>
     </div>
