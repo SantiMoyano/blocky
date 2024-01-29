@@ -7,21 +7,22 @@ section {
 
 .top {
   padding: 0 18px;
+  background-color: black;
 }
 
 h2 {
+  color: #aaf683;
   font-size: 60px;
   font-weight: bolder;
   width: 100%;
 }
 
 p {
-  padding: 0 18px;
+  padding: 0px 18px;
   font-size: 24px;
   font-weight: 600;
 }
 
 .buttonsInfo {
   padding: 0 18px;
-  padding-top: 40px;
 }

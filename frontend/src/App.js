@@ -7,23 +7,12 @@ import DetailedEpic from "./components/epics/DetailedEpic";
 import DetailedTask from "./components/tasks/DetailedTask";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./components/home/Home";
+import Header from "./components/header/Header";
 
 function App() {
   return (
     <div className="App">
-      <nav>
-        <ul>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/projects">Projects</Link>
-          </li>
-        </ul>
-      </nav>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />

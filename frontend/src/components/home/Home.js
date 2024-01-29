@@ -7,12 +7,12 @@ function Home() {
     <section className={styles.section}>
       <div className={styles.top}>
         <h2>BLOCKY</h2>
-        <p>Application for project management</p>
       </div>
       <div className={styles.bottom}>
+        <p className="p-4">App for project management</p>
         <div className={`${styles.buttonsInfo} flex flex-col items-center`}>
-          <ButtonWithArrow buttonText="View example" />
-          <p className="m-2">or</p>
+          <ButtonWithArrow buttonText="Quick example" />
+          <p className="p-2">or</p>
           <ButtonWithArrow buttonText="Create account" />
         </div>
       </div>
