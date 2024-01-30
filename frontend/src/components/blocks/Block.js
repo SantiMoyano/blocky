@@ -1,8 +1,9 @@
+import SimpleCard from "./SimpleCard";
+
 function Block({ name, progress, handleElemClick }) {
   return (
-    <li onClick={handleElemClick}>
-      <p>{name}</p>
-      <p>{progress}</p>
+    <li className="flex items-center justify-center" onClick={handleElemClick}>
+      <SimpleCard name={name} progress={progress} />
     </li>
   );
 }

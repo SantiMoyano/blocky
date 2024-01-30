@@ -6,7 +6,7 @@ import ButtonCustom from "../buttons/ButtonCustom";
 
 function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
   return (
-    <div className="flex justify-center pt-6 h-screen red-bg">
+    <div className="flex justify-center pt-6 h-screen blue-bg">
       <Card color="transparent" shadow={false}>
         <Typography
           variant="h2"

@@ -3,15 +3,19 @@
 @tailwind utilities;
 
 .blue-bg {
-  background-color: #5bc0eb;
+  background-color: #2892d7;
 }
 
 .yellow-bg {
-  background-color: #fde74c;
+  background-color: #f1d302;
 }
 
 .red-bg {
   background-color: #c1292e;
+}
+
+.dark-red-bg {
+  background-color: #1d70a2;
 }
 
 .green-bg {
