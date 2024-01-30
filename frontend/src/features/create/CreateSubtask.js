@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createSubtask } from "../../redux/subtasks/createSubtaskSlice";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
+import { createSubtask } from "../../services/redux/subtasks/createSubtaskSlice";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
 
 function CreateSubtask({ loadSubtasks, taskId }) {
   const dispatch = useDispatch();

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTaskDetails, deleteTask } from "../../redux/tasks/taskDetailSlice";
+import {
+  getTaskDetails,
+  deleteTask,
+} from "../services/redux/tasks/taskDetailSlice";
 import { useParams } from "react-router-dom";
-import Subtasks from "../subtasks/Subtasks";
-import UpdateTask from "./UpdateTask";
+import Subtasks from "../components/subtasks/Subtasks";
+import UpdateTask from "../features/update/UpdateTask";
 
 function DetailedTask() {
   const dispatch = useDispatch();

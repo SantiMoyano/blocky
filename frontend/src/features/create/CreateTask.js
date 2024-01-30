@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createTask } from "../../redux/tasks/createTaskSlice";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
-import CategoriesList from "../category/Categories";
+import { createTask } from "../../services/redux/tasks/createTaskSlice";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
+import CategoriesList from "../../components/Categories";
 
 function CreateTask({ loadTasks, epicId }) {
   const dispatch = useDispatch();

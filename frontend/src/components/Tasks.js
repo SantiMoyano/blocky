@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAllTasks } from "../../redux/tasks/tasksSlice";
-import BlockSection from "../blocks/BlockSection";
-import CreateTask from "./CreateTask";
+import { getAllTasks } from "../services/redux/tasks/tasksSlice";
+import BlockSection from "./blocks/BlockSection";
+import CreateTask from "../features/create/CreateTask";
 
 function Tasks({ epicId }) {
   const dispatch = useDispatch();

@@ -1,19 +1,19 @@
-import { useState } from "react";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProject } from "../../redux/projects/updateProjectSlice";
+import { createProject } from "../../services/redux/projects/createProjectSlice";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
 
-function UpdateProject({ project, loadProject }) {
+function CreateProject({ loadProjects }) {
   const dispatch = useDispatch();
-  const { updating, success, error } = useSelector(
-    (state) => state.updateProject
+  const { creating, success, error } = useSelector(
+    (state) => state.createProject
   );
 
   const [projectRequest, setProjectRequest] = useState({
-    name: project.name,
-    description: project.description,
-    goal: project.goal,
+    name: "",
+    description: "",
+    goal: "",
   });
 
   const projectData = [
@@ -46,32 +46,27 @@ function UpdateProject({ project, loadProject }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(
-      updateProject({
-        projectId: project.id,
-        request: projectRequest,
-      })
-    );
-    setTimeout(() => {
-      loadProject();
-    }, 50);
+    const token = localStorage.getItem("authToken");
+    dispatch(createProject({ token, request: projectRequest }));
+    setTimeout(() => loadProjects(), 50);
   }
 
   return (
     <div>
-      <h1>Update Project</h1>
+      <h1>Create new Project</h1>
       <Form
         formData={projectData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Update project"
+        buttonInfo="Create project"
       />
+
       {success && (
-        <Notification message="Project updated successfully" type="success" />
+        <Notification message="Project created successfully" type="success" />
       )}
-      {error && <Notification message="An error has occurred" type="error" />}
+      {error && <Notification message="An error has ocurred" type="error" />}
     </div>
   );
 }
 
-export default UpdateProject;
+export default CreateProject;

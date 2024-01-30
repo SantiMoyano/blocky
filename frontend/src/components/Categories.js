@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../redux/categories/categoriesSlice";
+import { getAllCategories } from "../services/redux/categories/categoriesSlice";
 
 function CategoriesList({ handleSetCategory }) {
   const dispatch = useDispatch();

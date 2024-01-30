@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../redux/auth/loginSlice";
+import { loginUser } from "../../services/redux/auth/loginSlice";
 import { useNavigate } from "react-router-dom";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
 
 function Login() {
   const dispatch = useDispatch();

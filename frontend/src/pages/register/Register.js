@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../redux/auth/registerSlice";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
+import { registerUser } from "../../services/redux/auth/registerSlice";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
 
 function Register() {
   const dispatch = useDispatch();

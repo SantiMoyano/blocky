@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteSubtask } from "../../redux/subtasks/deleteSubtaskSlice";
+import { deleteSubtask } from "../../services/redux/subtasks/deleteSubtaskSlice";
 import {
   getAllSubtasks,
   toggleIsDone,
-} from "../../redux/subtasks/subtasksSlice";
+} from "../../services/redux/subtasks/subtasksSlice";
 import SubtasksList from "./SubtasksList";
-import CreateSubtask from "./CreateSubtask";
-import UpdateSubtask from "./UpdateSubtask";
+import CreateSubtask from "../../features/create/CreateSubtask";
+import UpdateSubtask from "../../features/update/UpdateSubtask";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();

@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
 import { useDispatch, useSelector } from "react-redux";
-import { createProject } from "../../redux/projects/createProjectSlice";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
+import { updateProject } from "../../services/redux/projects/updateProjectSlice";
 
-function CreateProject({ loadProjects }) {
+function UpdateProject({ project, loadProject }) {
   const dispatch = useDispatch();
-  const { creating, success, error } = useSelector(
-    (state) => state.createProject
+  const { updating, success, error } = useSelector(
+    (state) => state.updateProject
   );
 
   const [projectRequest, setProjectRequest] = useState({
-    name: "",
-    description: "",
-    goal: "",
+    name: project.name,
+    description: project.description,
+    goal: project.goal,
   });
 
   const projectData = [
@@ -46,27 +46,32 @@ function CreateProject({ loadProjects }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
-    dispatch(createProject({ token, request: projectRequest }));
-    setTimeout(() => loadProjects(), 50);
+    dispatch(
+      updateProject({
+        projectId: project.id,
+        request: projectRequest,
+      })
+    );
+    setTimeout(() => {
+      loadProject();
+    }, 50);
   }
 
   return (
     <div>
-      <h1>Create new Project</h1>
+      <h1>Update Project</h1>
       <Form
         formData={projectData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Create project"
+        buttonInfo="Update project"
       />
-
       {success && (
-        <Notification message="Project created successfully" type="success" />
+        <Notification message="Project updated successfully" type="success" />
       )}
-      {error && <Notification message="An error has ocurred" type="error" />}
+      {error && <Notification message="An error has occurred" type="error" />}
     </div>
   );
 }
 
-export default CreateProject;
+export default UpdateProject;

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import axios from "axios";
 import "./index.css";
 import App from "./App";
-import store from "./redux/store";
+import store from "./services/store/store";
 import { ThemeProvider } from "@material-tailwind/react";
 
 axios.defaults.baseURL = "http://localhost:8080";

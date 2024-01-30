@@ -2,7 +2,7 @@ import React from "react";
 import FormInput from "./FormInput";
 
 import { Card, Button, Typography } from "@material-tailwind/react";
-import ButtonCustom from "../utils/buttons/ButtonCustom";
+import ButtonCustom from "../buttons/ButtonCustom";
 
 function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
   return (

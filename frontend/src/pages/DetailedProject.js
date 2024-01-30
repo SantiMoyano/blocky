@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProjects, deleteProject } from "../../redux/projects/projectSlice";
+import {
+  getProjects,
+  deleteProject,
+} from "../services/redux/projects/projectSlice";
 import { useParams } from "react-router-dom";
-import Epics from "../epics/Epics";
-import UpdateProject from "./UpdateProject";
+import Epics from "../components/Epics";
+import UpdateProject from "../features/update/UpdateProject";
 
 function DetailedProject() {
   const dispatch = useDispatch();

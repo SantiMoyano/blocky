@@ -1,13 +1,13 @@
 import "./App.css";
-import Register from "./components/register/Register";
-import Login from "./components/login/Login";
-import Projects from "./components/projects/Projects";
-import DetailedProject from "./components/projects/DetailedProject";
-import DetailedEpic from "./components/epics/DetailedEpic";
-import DetailedTask from "./components/tasks/DetailedTask";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./components/home/Home";
-import Header from "./components/header/Header";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
+import Projects from "./components/Projects";
+import DetailedProject from "./pages/DetailedProject";
+import DetailedEpic from "./pages/DetailedEpic";
+import DetailedTask from "./pages/DetailedTask";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home";
+import Header from "./layout/Header";
 
 function App() {
   return (

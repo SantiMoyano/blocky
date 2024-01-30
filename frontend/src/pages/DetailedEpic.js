@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEpicDetails, deleteEpic } from "../../redux/epics/epicDetailSlice";
+import {
+  getEpicDetails,
+  deleteEpic,
+} from "../services/redux/epics/epicDetailSlice";
 import { useParams } from "react-router-dom";
-import Tasks from "../tasks/Tasks";
-import UpdateEpic from "./UpdateEpic";
+import Tasks from "../components/Tasks";
+import UpdateEpic from "../features/update/UpdateEpic";
 
 function DetailedEpic() {
   const dispatch = useDispatch();

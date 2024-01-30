@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAllProjects } from "../../redux/projects/projectSlices";
-import BlockSection from "../blocks/BlockSection";
-import CreateProject from "./CreateProject";
+import { getAllProjects } from "../services/redux/projects/projectSlices";
+import BlockSection from "./blocks/BlockSection";
+import CreateProject from "../features/create/CreateProject";
 
 function Projects() {
   const dispatch = useDispatch();

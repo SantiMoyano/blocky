@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllEpics } from "../../redux/epics/epicsSlice";
+import { getAllEpics } from "../services/redux/epics/epicsSlice";
 import { useNavigate } from "react-router-dom";
-import BlockSection from "../blocks/BlockSection";
-import CreateEpic from "./CreateEpic";
+import BlockSection from "./blocks/BlockSection";
+import CreateEpic from "../features/create/CreateEpic";
 
 function Epics({ projectId }) {
   const dispatch = useDispatch();

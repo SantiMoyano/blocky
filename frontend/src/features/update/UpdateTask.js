@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
-import CategoriesList from "../category/Categories";
-import { updateTask } from "../../redux/tasks/updateTaskSlice";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
+import CategoriesList from "../../components/Categories";
+import { updateTask } from "../../services/redux/tasks/updateTaskSlice";
 
 function UpdateTask({ task, loadTask }) {
   const dispatch = useDispatch();

@@ -1,17 +1,17 @@
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Form from "../form/Form";
-import Notification from "../notification/Notification";
-import { useState } from "react";
-import { updateEpic } from "../../redux/epics/updateEpicSlice";
+import { createEpic } from "../../services/redux/epics/createEpicSlice";
+import Form from "../../components/ui/form/Form";
+import Notification from "../../utils/Notification";
 
-function UpdateEpic({ epic, loadEpic }) {
+function CreateEpic({ loadEpics, projectId }) {
   const dispatch = useDispatch();
-  const { updating, success, error } = useSelector((state) => state.updateEpic);
+  const { creating, success, error } = useSelector((state) => state.createEpic);
 
   const [epicRequest, setEpicRequest] = useState({
-    name: epic.name,
-    description: epic.description,
-    projectId: epic.projectId,
+    name: "",
+    description: "",
+    projectId: projectId,
   });
 
   const epicData = [
@@ -38,32 +38,26 @@ function UpdateEpic({ epic, loadEpic }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(
-      updateEpic({
-        epicId: epic.id,
-        request: epicRequest,
-      })
-    );
-    setTimeout(() => {
-      loadEpic();
-    }, 50);
+    dispatch(createEpic(epicRequest));
+    setTimeout(() => loadEpics(), 50);
   }
 
   return (
     <div>
-      <h1>Update Epic</h1>
+      <h1>Create new Epic</h1>
       <Form
         formData={epicData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Update epic"
+        buttonInfo="Create epic"
       />
+
       {success && (
-        <Notification message="Epic updated successfully" type="success" />
+        <Notification message="Epic created successfully" type="success" />
       )}
       {error && <Notification message="An error has occurred" type="error" />}
     </div>
   );
 }
 
-export default UpdateEpic;
+export default CreateEpic;

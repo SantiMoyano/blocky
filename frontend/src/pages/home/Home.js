@@ -1,6 +1,6 @@
 import styles from "./Home.module.css";
 import "./Home.module.css";
-import ButtonWithArrow from "../utils/buttons/ButtonWithArrow";
+import ButtonWithArrow from "../../components/ui/buttons/ButtonWithArrow";
 
 function Home() {
   return (
