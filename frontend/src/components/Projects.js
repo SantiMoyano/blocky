@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { getAllProjects } from "../services/redux/projects/projectSlices";
 import BlockSection from "./blocks/BlockSection";
 import CreateProject from "../features/create/CreateProject";
+import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Title from "./ui/Title";
 
 function Projects() {
   const dispatch = useDispatch();
@@ -12,7 +14,6 @@ function Projects() {
   const [showForm, setShowForm] = useState(false);
 
   const handleProjectClick = (projectId) => {
-    // Redirige a la nueva ruta con el ID del proyecto
     navigate(`/project/${projectId}`);
   };
 
@@ -24,12 +25,27 @@ function Projects() {
   function loadProjects() {
     const token = localStorage.getItem("authToken");
     dispatch(getAllProjects(token));
+    setShowForm(false);
   }
 
   return (
     <section>
-      <h2>PROJECTS</h2>
-      <button onClick={() => setShowForm(!showForm)}>Add project +</button>
+      <Title titleName="PROJECTS" />
+      <div className="flex justify-end pr-8 pl-8 pb-4 pt-4">
+        <button onClick={() => setShowForm(!showForm)}>
+          {!showForm ? (
+            <div className="flex items-center justify-center">
+              <p className=" pr-2 pl-2">New Project</p>
+              <PlusIcon color="white" strokeWidth={4} className="h-6 w-6" />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center">
+              <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
+            </div>
+          )}
+        </button>
+      </div>
+
       {showForm && <CreateProject loadProjects={loadProjects} />}
       {loading && <p>Loading projects...</p>}
       {error && <p>Error: {error}</p>}

@@ -1,12 +1,12 @@
 import React from "react";
 import FormInput from "./FormInput";
 
-import { Card, Button, Typography } from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import ButtonCustom from "../buttons/ButtonCustom";
 
 function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
   return (
-    <div className="flex justify-center items-center h-screen red-bg">
+    <div className="flex justify-center pt-6 h-screen red-bg">
       <Card color="transparent" shadow={false}>
         <Typography
           variant="h2"
@@ -32,7 +32,12 @@ function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
             ))}
           </div>
           <div className="pt-10">
-            <ButtonCustom buttonText={buttonInfo} type="submit" fullWidth />
+            <ButtonCustom
+              buttonText={buttonInfo}
+              handleSubmit={handleSubmit}
+              type="submit"
+              fullWidth
+            />
           </div>
         </form>
       </Card>

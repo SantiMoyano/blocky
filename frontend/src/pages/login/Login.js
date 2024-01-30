@@ -61,7 +61,6 @@ function Login() {
   }
 
   function navigateToProjects() {
-    // Hardcoded solution for giving projects the necessary time to load
     setTimeout(() => {
       navigate(`/projects`);
     }, 300);
@@ -87,7 +86,10 @@ function Login() {
         buttonInfo="Login"
       />
       {loginSuccess ? (
-        <Notification message={"Login successful!"} type={"success"} />
+        <>
+          <Notification message={"Login successful!"} type={"success"} />
+          {navigateToProjects()}
+        </>
       ) : (
         error && <Notification message={error.message} type={"failure"} />
       )}
