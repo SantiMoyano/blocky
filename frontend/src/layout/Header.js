@@ -57,7 +57,7 @@ function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className="blue-bg mx-auto max-w-screen-xl px-6 py-3 rounded-none border-none">
+    <Navbar className="dark-red-bg mx-auto max-w-screen-xl px-6 py-3 rounded-none border-none">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"

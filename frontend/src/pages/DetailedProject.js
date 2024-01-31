@@ -7,6 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 import Epics from "../components/Epics";
 import UpdateProject from "../features/update/UpdateProject";
+import Title from "../components/ui/Title";
 
 function DetailedProject() {
   const dispatch = useDispatch();
@@ -37,22 +38,20 @@ function DetailedProject() {
   }
 
   return (
-    <>
-      <section>
-        <h2>Detailed Project {projectId}</h2>
-        <button onClick={handleEdit}>Edit project</button>
-        <button onClick={handleDelete}>Delete project</button>
-        {showEditForm && (
-          <UpdateProject project={project} loadProject={loadProject} />
-        )}
-        <div className="project-info">
-          <p>Name: {project.name}</p>
-          <p>Description: {project.description}</p>
-          <p>Goal: {project.goal}</p>
-        </div>
-      </section>
+    <section>
+      <Title titleName={project.name} />
+      <button onClick={handleEdit}>Edit project</button>
+      <button onClick={handleDelete}>Delete project</button>
+      {showEditForm && (
+        <UpdateProject project={project} loadProject={loadProject} />
+      )}
+      <div className="project-info">
+        <p>Name: {project.name}</p>
+        <p>Description: {project.description}</p>
+        <p>Goal: {project.goal}</p>
+      </div>
       <Epics projectId={projectId} />
-    </>
+    </section>
   );
 }
 

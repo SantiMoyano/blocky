@@ -6,7 +6,7 @@ function ButtonCustom({ buttonText, handleSubmit }) {
       onClick={handleSubmit}
       size="lg"
       fullWidth
-      className="flex items-center justify-center font-custom rounded-none py-5 text-lg bg-black" // Adjusted padding
+      className="flex items-center justify-center font-custom rounded-none py-5 text-lg dark-red-bg" // Adjusted padding
     >
       {buttonText}
     </Button>
