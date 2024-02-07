@@ -8,12 +8,17 @@ import { useParams } from "react-router-dom";
 import Tasks from "../components/Tasks";
 import UpdateEpic from "../features/update/UpdateEpic";
 import Title from "../components/ui/Title";
+import DialogDefault from "../utils/Dialog";
+import { Chip } from "@material-tailwind/react";
+import ChipDismissible from "../utils/ChipDismissible";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function DetailedEpic() {
   const dispatch = useDispatch();
   const { epicId } = useParams();
   const [showEditForm, setShowEditForm] = useState();
   const { epic, loading, error } = useSelector((state) => state.epic);
+  const [actionClicked, setActionClicked] = useState(false);
 
   useEffect(() => {
     if (epicId) {
@@ -25,10 +30,6 @@ function DetailedEpic() {
 
   if (error) return <p>Error: {error}</p>;
 
-  function handleEdit() {
-    setShowEditForm(!showEditForm);
-  }
-
   function loadEpic() {
     dispatch(getEpicDetails(epicId));
   }
@@ -37,20 +38,41 @@ function DetailedEpic() {
     dispatch(deleteEpic(epicId));
   }
 
+  function handleEdit() {
+    setShowEditForm(!showEditForm);
+    setActionClicked(!actionClicked);
+  }
+
   return (
     <>
       <section>
         <Title titleName={epic.name} />
-        <button onClick={handleEdit}>Edit epic</button>
-        <button onClick={handleDelete}>Delete epic</button>
-        {showEditForm && <UpdateEpic epic={epic} loadEpic={loadEpic} />}
-        <div className="epic-info">
-          <p>{epic.name}</p>
-          <p>{epic.description}</p>
-          <p>{epic.progress}</p>
+        <div className="">
+          <DialogDefault
+            dialogName="Description"
+            dialogDescription={epic.description}
+          />
         </div>
+        {!actionClicked ? (
+          <div className="flex justify-evenly mt-4">
+            <Chip onClick={handleEdit} variant="ghost" value="Edit epic" />
+            <ChipDismissible
+              handleAction={handleDelete}
+              actionText="delete epic"
+            />
+          </div>
+        ) : (
+          <div className="flex justify-end mt-4 mr-8">
+            <button onClick={handleEdit} className="focus:outline-none">
+              <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
+            </button>
+          </div>
+        )}
+        {showEditForm && (
+          <UpdateEpic epic={epic} loadEpic={loadEpic} toggleForm={handleEdit} />
+        )}
+        <Tasks epicId={epicId} />
       </section>
-      <Tasks epicId={epicId} />
     </>
   );
 }

@@ -4,7 +4,7 @@ import Notification from "../../utils/Notification";
 import { useState } from "react";
 import { updateEpic } from "../../services/redux/epics/updateEpicSlice";
 
-function UpdateEpic({ epic, loadEpic }) {
+function UpdateEpic({ epic, loadEpic, toggleForm }) {
   const dispatch = useDispatch();
   const { updating, success, error } = useSelector((state) => state.updateEpic);
 
@@ -45,18 +45,18 @@ function UpdateEpic({ epic, loadEpic }) {
       })
     );
     setTimeout(() => {
+      toggleForm();
       loadEpic();
     }, 50);
   }
 
   return (
     <div>
-      <h1>Update Epic</h1>
       <Form
         formData={epicData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Update epic"
+        buttonInfo="Edit epic"
       />
       {success && (
         <Notification message="Epic updated successfully" type="success" />

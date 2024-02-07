@@ -4,7 +4,7 @@ import Notification from "../../utils/Notification";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProject } from "../../services/redux/projects/updateProjectSlice";
 
-function UpdateProject({ project, loadProject }) {
+function UpdateProject({ project, loadProject, toggleForm }) {
   const dispatch = useDispatch();
   const { updating, success, error } = useSelector(
     (state) => state.updateProject
@@ -52,6 +52,7 @@ function UpdateProject({ project, loadProject }) {
         request: projectRequest,
       })
     );
+    toggleForm();
     setTimeout(() => {
       loadProject();
     }, 50);

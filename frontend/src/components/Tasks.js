@@ -31,7 +31,6 @@ function Tasks({ epicId }) {
 
   return (
     <section>
-      <h2>Tasks</h2>
       <SwitchButton text="New Task" handleClick={handleSwitchClick} />
       {showForm && <CreateTask loadTasks={loadTasks} epicId={epicId} />}
       <BlockSection list={tasks} handleElemClick={handleTaskClick} />

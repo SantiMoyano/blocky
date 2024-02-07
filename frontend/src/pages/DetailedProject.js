@@ -35,12 +35,17 @@ function DetailedProject() {
   }
 
   function handleEdit() {
-    setShowEditForm(!showEditForm);
+    toggleForm();
     setActionClicked(!actionClicked);
   }
 
   function handleDelete() {
     dispatch(deleteProject(projectId));
+  }
+
+  function toggleForm() {
+    setShowEditForm(!showEditForm);
+    setActionClicked(!actionClicked);
   }
 
   return (
@@ -72,7 +77,11 @@ function DetailedProject() {
       )}
 
       {showEditForm && (
-        <UpdateProject project={project} loadProject={loadProject} />
+        <UpdateProject
+          project={project}
+          loadProject={loadProject}
+          toggleForm={toggleForm}
+        />
       )}
       <Epics projectId={projectId} />
     </section>
