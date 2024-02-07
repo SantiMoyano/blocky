@@ -39,7 +39,6 @@ function CreateSubtask({ loadSubtasks, taskId }) {
 
   return (
     <div>
-      <h1>Create new Subtask</h1>
       <Form
         formData={subtaskData}
         handleChange={handleChange}

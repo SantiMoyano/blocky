@@ -4,6 +4,7 @@ import { getAllEpics } from "../services/redux/epics/epicsSlice";
 import { useNavigate } from "react-router-dom";
 import BlockSection from "./blocks/BlockSection";
 import CreateEpic from "../features/create/CreateEpic";
+import SwitchButton from "../utils/SwitchButton";
 
 function Epics({ projectId }) {
   const dispatch = useDispatch();
@@ -24,10 +25,14 @@ function Epics({ projectId }) {
     dispatch(getAllEpics(projectId));
   }
 
+  function handleSwitchClick() {
+    setShowForm(!showForm);
+  }
+
   return (
     <>
       {/* Add any filtering or other options here if needed */}
-      <button onClick={() => setShowForm(!showForm)}>Add epic +</button>
+      <SwitchButton text="Add Epic" handleClick={handleSwitchClick} />
       {showForm && <CreateEpic loadEpics={loadEpics} projectId={projectId} />}
       <BlockSection list={epics} handleElemClick={handleEpicClick} />
     </>

@@ -7,6 +7,8 @@ import {
 import { useParams } from "react-router-dom";
 import Subtasks from "../components/subtasks/Subtasks";
 import UpdateTask from "../features/update/UpdateTask";
+import SwitchButton from "../utils/SwitchButton";
+import Title from "../components/ui/Title";
 
 function DetailedTask() {
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ function DetailedTask() {
 
   useEffect(() => {
     if (taskId) loadTask();
-  }, [dispatch, taskId]);
+  }, []);
 
   if (loading) return <p>Loading Task details...</p>;
 
@@ -36,14 +38,15 @@ function DetailedTask() {
 
   return (
     <section>
-      <h2>Detailed Task {taskId}</h2>
+      <Title titleName={task.name} />
       <button onClick={handleEdit}>Edit task</button>
       <button onClick={handleDelete}>Delete task</button>
-      {showEditForm && <UpdateTask task={task} loadTask={loadTask} />}
       <p>{task.name}</p>
       <p>{task.categoryId}</p>
       <p>{task.progress}</p>
       <p>{task.description}</p>
+
+      {showEditForm && <UpdateTask task={task} loadTask={loadTask} />}
       <Subtasks taskId={taskId} />
     </section>
   );

@@ -8,6 +8,7 @@ import {
 import SubtasksList from "./SubtasksList";
 import CreateSubtask from "../../features/create/CreateSubtask";
 import UpdateSubtask from "../../features/update/UpdateSubtask";
+import SwitchButton from "../../utils/SwitchButton";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function Subtasks({ taskId }) {
       setSubtasksList(subtasks);
       loadSubtasks();
     }
-  }, [subtasks]);
+  }, []);
 
   async function loadSubtasks() {
     dispatch(getAllSubtasks(taskId));
@@ -67,9 +68,13 @@ function Subtasks({ taskId }) {
     loadSubtasks();
   }
 
+  function handleSwitchClick() {
+    setShowForm(!showForm);
+  }
+
   return (
     <>
-      <button onClick={() => setShowForm(!showForm)}>Add Subtask +</button>
+      <SwitchButton text="Add Subtask" handleClick={handleSwitchClick} />
       {showForm && (
         <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
       )}

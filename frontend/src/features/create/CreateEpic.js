@@ -44,7 +44,6 @@ function CreateEpic({ loadEpics, projectId }) {
 
   return (
     <div>
-      <h1>Create new Epic</h1>
       <Form
         formData={epicData}
         handleChange={handleChange}

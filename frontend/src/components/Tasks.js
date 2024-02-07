@@ -5,6 +5,7 @@ import { getAllTasks } from "../services/redux/tasks/tasksSlice";
 import BlockSection from "./blocks/BlockSection";
 import CreateTask from "../features/create/CreateTask";
 import SwitchButton from "../utils/SwitchButton";
+import Title from "./ui/Title";
 
 function Tasks({ epicId }) {
   const dispatch = useDispatch();
@@ -31,8 +32,7 @@ function Tasks({ epicId }) {
   return (
     <section>
       <h2>Tasks</h2>
-      <button onClick={() => setShowForm(!showForm)}>Add Task +</button>
-      <SwitchButton text="New Project" handleClick={handleSwitchClick} />
+      <SwitchButton text="New Task" handleClick={handleSwitchClick} />
       {showForm && <CreateTask loadTasks={loadTasks} epicId={epicId} />}
       <BlockSection list={tasks} handleElemClick={handleTaskClick} />
     </section>

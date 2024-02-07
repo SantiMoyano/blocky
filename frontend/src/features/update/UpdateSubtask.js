@@ -46,7 +46,6 @@ function UpdateSubtask({ subtaskToUpdate, loadSubtasks }) {
 
   return (
     <div>
-      <h1>Update Subtask</h1>
       <Form
         formData={subtaskData}
         handleChange={handleChange}

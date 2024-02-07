@@ -7,6 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 import Tasks from "../components/Tasks";
 import UpdateEpic from "../features/update/UpdateEpic";
+import Title from "../components/ui/Title";
 
 function DetailedEpic() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function DetailedEpic() {
   return (
     <>
       <section>
-        <h2>Detailed Epic {epicId}</h2>
+        <Title titleName={epic.name} />
         <button onClick={handleEdit}>Edit epic</button>
         <button onClick={handleDelete}>Delete epic</button>
         {showEditForm && <UpdateEpic epic={epic} loadEpic={loadEpic} />}

@@ -11,6 +11,7 @@ function Projects() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { projects, loading, error } = useSelector((state) => state.projects);
+  const [projectList, setProjectList] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -22,9 +23,10 @@ function Projects() {
     navigate(`/project/${projectId}`);
   };
 
-  function loadProjects() {
+  async function loadProjects() {
     const token = localStorage.getItem("authToken");
     dispatch(getAllProjects(token));
+    // No need to set projectList here
     setShowForm(false);
   }
 
@@ -32,14 +34,20 @@ function Projects() {
     setShowForm(!showForm);
   }
 
+  // Check if loading is true or error exists
+  if (loading || error) {
+    return <h1>Loading</h1>;
+  }
+
   return (
     <section>
       <Title titleName="PROJECTS" />
       <SwitchButton text="New Project" handleClick={handleSwitchClick} />
       {showForm && <CreateProject loadProjects={loadProjects} />}
-      {loading && <p>Loading projects...</p>}
-      {error && <p>Error: {error}</p>}
-      <BlockSection list={projects} handleElemClick={handleProjectClick} />
+      {/* Render only if projects exists */}
+      {projects && (
+        <BlockSection list={projects} handleElemClick={handleProjectClick} />
+      )}
     </section>
   );
 }

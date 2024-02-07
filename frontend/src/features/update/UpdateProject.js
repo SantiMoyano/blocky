@@ -59,12 +59,11 @@ function UpdateProject({ project, loadProject }) {
 
   return (
     <div>
-      <h1>Update Project</h1>
       <Form
         formData={projectData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Update project"
+        buttonInfo="Edit project"
       />
       {success && (
         <Notification message="Project updated successfully" type="success" />
