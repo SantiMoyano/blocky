@@ -94,7 +94,7 @@ function Register() {
   }
 
   return (
-    <>
+    <div className="h-screen blue-bg">
       <Form
         formData={registerData}
         handleChange={handleChange}
@@ -111,7 +111,7 @@ function Register() {
       {formError.formIsInvalid && (
         <Notification message={formError.message} type={"failure"} />
       )}
-    </>
+    </div>
   );
 }
 

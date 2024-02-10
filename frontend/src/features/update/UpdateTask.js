@@ -5,7 +5,7 @@ import Notification from "../../utils/Notification";
 import CategoriesList from "../../components/Categories";
 import { updateTask } from "../../services/redux/tasks/updateTaskSlice";
 
-function UpdateTask({ task, loadTask }) {
+function UpdateTask({ task, loadTask, toggleForm }) {
   const dispatch = useDispatch();
   const { updating, success, error } = useSelector(
     (state) => state.updateSubtask
@@ -50,6 +50,7 @@ function UpdateTask({ task, loadTask }) {
     if (categoryId !== 0) taskRequest.categoryId = categoryId;
     dispatch(updateTask({ taskId: task.id, request: taskRequest }));
     setTimeout(() => {
+      toggleForm();
       loadTask();
     }, 100);
   }

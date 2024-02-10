@@ -38,7 +38,7 @@ function CreateSubtask({ loadSubtasks, taskId }) {
   }
 
   return (
-    <div>
+    <>
       <Form
         formData={subtaskData}
         handleChange={handleChange}
@@ -49,7 +49,7 @@ function CreateSubtask({ loadSubtasks, taskId }) {
         <Notification message="Subtask created successfully" type="success" />
       )}
       {error && <Notification message="An error has occurred" type="error" />}
-    </div>
+    </>
   );
 }
 

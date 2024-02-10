@@ -78,7 +78,7 @@ function Login() {
   }
 
   return (
-    <>
+    <div className="h-screen blue-bg">
       <Form
         formData={loginData}
         handleChange={handleChange}
@@ -96,7 +96,7 @@ function Login() {
       {formError.formIsInvalid && (
         <Notification message={formError.message} type={"failure"} />
       )}
-    </>
+    </div>
   );
 }
 

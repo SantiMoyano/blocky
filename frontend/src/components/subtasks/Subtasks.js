@@ -9,95 +9,121 @@ import SubtasksList from "./SubtasksList";
 import CreateSubtask from "../../features/create/CreateSubtask";
 import UpdateSubtask from "../../features/update/UpdateSubtask";
 import SwitchButton from "../../utils/SwitchButton";
+import { Chip } from "@material-tailwind/react";
+import Title from "../ui/Title";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
-  const [subtasksList, setSubtasksList] = useState([]);
-  const [doneSubtasks, setDoneSubtasks] = useState([]);
-  const [toDoSubtasks, setToDoSubtasks] = useState([]);
+  const [subtaskList, setSubtaskList] = useState([]);
+  const [showDoneSubtask, setShowDoneSubtask] = useState(false);
+  const [doneSubtaskList, setDoneSubtaskList] = useState([]);
+  const [showSubtaskToUpdate, setShowSubtaskToUpdate] = useState(false);
+  const [subtaskToUpdate, setSubtaskToUpdate] = useState(null);
+  const [showSubtasks, setShowSubtasks] = useState(false);
   const { subtasks, loading, error } = useSelector((state) => state.subtasks);
   const { deleting } = useSelector((state) => state.deleteSubtask);
-
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const [subtaskToUpdate, setSubtaskToUpdate] = useState({
-    subtaskId: 0,
-    description: "",
-  });
 
   useEffect(() => {
     dispatch(getAllSubtasks(taskId));
   }, [dispatch, taskId]);
 
   useEffect(() => {
-    if (subtasks) {
-      setSubtasksList(subtasks);
-      loadSubtasks();
+    if (subtasks.length > 0) {
+      setSubtaskList(subtasks.filter((subtask) => !subtask.isDone));
+      setDoneSubtaskList(subtasks.filter((subtask) => subtask.isDone));
     }
-  }, []);
+  }, [subtasks]);
 
-  async function loadSubtasks() {
+  function loadSubtasks() {
     dispatch(getAllSubtasks(taskId));
-    setSubtasksList(subtasks);
-    if (subtasksList.length > 0) {
-      setDoneSubtasks(subtasksList.filter((subtask) => subtask.isDone));
-      setToDoSubtasks(subtasksList.filter((subtask) => !subtask.isDone));
-    }
   }
 
-  function handleClick(subtaskId) {
+  function handleToggleIsDone(subtaskId) {
     dispatch(toggleIsDone(subtaskId));
-    loadSubtasks();
+    setTimeout(() => {
+      loadSubtasks();
+    }, 200);
   }
 
-  function toggleUpdateForm() {
-    setShowUpdateForm(!showUpdateForm);
-  }
-
-  function handleEdit({ subtaskId, description, taskId }) {
-    toggleUpdateForm();
-    setSubtaskToUpdate({
-      subtaskId,
-      description,
-      taskId,
-    });
+  function handleEdit(subtaskToUpdate) {
+    setSubtaskToUpdate(subtaskToUpdate);
+    setShowSubtaskToUpdate(true);
   }
 
   function handleDelete(subtaskId) {
     dispatch(deleteSubtask(subtaskId));
-    loadSubtasks();
+    setTimeout(() => {
+      loadSubtasks();
+    }, 200);
   }
 
   function handleSwitchClick() {
     setShowForm(!showForm);
   }
 
+  function handleCloseUpdate() {
+    setSubtaskToUpdate(null);
+    setShowSubtaskToUpdate(false);
+  }
+
   return (
     <>
-      <SwitchButton text="Add Subtask" handleClick={handleSwitchClick} />
-      {showForm && (
-        <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
+      <Title titleName="Subtasks" />
+      <button onClick={() => setShowSubtasks(!showSubtasks)}>
+        {!showSubtasks ? (
+          <ChevronDownIcon className="w-8 h-8 text-white border-2 mt-2 rounded-md" />
+        ) : (
+          <ChevronUpIcon className="w-8 h-8 text-white border-2 mt-2 rounded-md" />
+        )}
+      </button>
+
+      {showSubtasks && (
+        <>
+          <div className="flex items-center justify-between">
+            <div className="flex justify-center items-center">
+              <Chip
+                value={!showDoneSubtask ? "Done" : "Todo"}
+                onClick={() => setShowDoneSubtask(!showDoneSubtask)}
+                className="w-20 dark-red-bg ml-8"
+              />
+            </div>
+            <div className="pb-2 ml-6">
+              <SwitchButton
+                text="Add Subtask +"
+                handleClick={handleSwitchClick}
+              />
+            </div>
+          </div>
+          {showForm && (
+            <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
+          )}
+          {showSubtaskToUpdate && (
+            <UpdateSubtask
+              subtaskToUpdate={subtaskToUpdate}
+              loadSubtasks={() => dispatch(getAllSubtasks(taskId))}
+              closeUpdateForm={handleCloseUpdate}
+            />
+          )}
+          {showDoneSubtask ? (
+            <SubtasksList
+              list={doneSubtaskList}
+              isDone={true}
+              handleClick={() => console.log("click")}
+              handleEdit={() => console.log("click")}
+              handleDelete={handleDelete}
+            />
+          ) : (
+            <SubtasksList
+              list={subtaskList}
+              handleClick={handleToggleIsDone}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+          )}
+        </>
       )}
-      {showUpdateForm && (
-        <UpdateSubtask
-          subtaskToUpdate={subtaskToUpdate}
-          loadSubtasks={loadSubtasks}
-        />
-      )}
-      <SubtasksList
-        list={toDoSubtasks}
-        isDone={false}
-        handleClick={handleClick}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
-      <SubtasksList
-        list={doneSubtasks}
-        isDone={true}
-        handleClick={handleClick}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
     </>
   );
 }

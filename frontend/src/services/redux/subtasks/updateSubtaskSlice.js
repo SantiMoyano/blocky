@@ -40,6 +40,11 @@ const updateSubtaskSlice = createSlice({
       state.success = null;
       state.error = true;
     },
+    reset: (state) => {
+      state.updating = false;
+      state.success = null;
+      state.error = null;
+    },
   },
 });
 
@@ -47,6 +52,7 @@ export const {
   updateSubtaskRequest,
   updateSubtaskSuccess,
   updateSubtaskFailure,
+  reset,
 } = updateSubtaskSlice.actions;
 
 export default updateSubtaskSlice.reducer;

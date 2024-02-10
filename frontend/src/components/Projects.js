@@ -15,9 +15,11 @@ function Projects() {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    // Dispatch the getAllProjects action when the component mounts
-    loadProjects();
-  }, []);
+    const token = localStorage.getItem("authToken");
+    dispatch(getAllProjects(token));
+    // No need to set projectList here
+    setShowForm(false);
+  }, [dispatch]);
 
   const handleProjectClick = (projectId) => {
     navigate(`/project/${projectId}`);

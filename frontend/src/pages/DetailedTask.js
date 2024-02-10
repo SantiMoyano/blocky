@@ -9,24 +9,25 @@ import Subtasks from "../components/subtasks/Subtasks";
 import UpdateTask from "../features/update/UpdateTask";
 import SwitchButton from "../utils/SwitchButton";
 import Title from "../components/ui/Title";
+import DialogDefault from "../utils/Dialog";
+import { Chip } from "@material-tailwind/react";
+import ChipDismissible from "../utils/ChipDismissible";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function DetailedTask() {
   const dispatch = useDispatch();
   const { taskId } = useParams();
   const [showEditForm, setShowEditForm] = useState();
   const { task, loading, error } = useSelector((state) => state.task);
+  const [actionClicked, setActionClicked] = useState(false);
 
   useEffect(() => {
     if (taskId) loadTask();
-  }, []);
+  }, [dispatch]);
 
   if (loading) return <p>Loading Task details...</p>;
 
   if (error) return <p>Error: {error}</p>;
-
-  function handleEdit() {
-    setShowEditForm(!showEditForm);
-  }
 
   function loadTask() {
     dispatch(getTaskDetails(taskId));
@@ -36,17 +37,44 @@ function DetailedTask() {
     dispatch(deleteTask(taskId));
   }
 
+  function handleEdit() {
+    setShowEditForm(!showEditForm);
+    setActionClicked(!actionClicked);
+  }
+
   return (
     <section>
       <Title titleName={task.name} />
-      <button onClick={handleEdit}>Edit task</button>
-      <button onClick={handleDelete}>Delete task</button>
-      <p>{task.name}</p>
-      <p>{task.categoryId}</p>
-      <p>{task.progress}</p>
-      <p>{task.description}</p>
+      <Chip size="lg" value="Frontend" className="mt-1" />
 
-      {showEditForm && <UpdateTask task={task} loadTask={loadTask} />}
+      <div className="">
+        <DialogDefault
+          dialogName="Description"
+          dialogDescription={task.description}
+        />
+      </div>
+
+      {!actionClicked ? (
+        <div className="flex justify-evenly mt-4">
+          <Chip onClick={handleEdit} variant="ghost" value="Edit task" />
+          <ChipDismissible
+            handleAction={handleDelete}
+            actionText="delete task"
+          />
+        </div>
+      ) : (
+        <div className="flex justify-end mt-4 mr-8">
+          <button onClick={handleEdit} className="focus:outline-none">
+            <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
+          </button>
+        </div>
+      )}
+
+      <hr className="mt-8 border-2" />
+
+      {showEditForm && (
+        <UpdateTask task={task} loadTask={loadTask} toggleForm={handleEdit} />
+      )}
       <Subtasks taskId={taskId} />
     </section>
   );

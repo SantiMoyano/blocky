@@ -4,8 +4,7 @@ import Subtask from "./Subtask";
 function SubtasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
   return (
     <>
-      {!isDone ? <h2>To Do</h2> : <h2>Done tasks</h2>}
-      <ul>
+      <ul className="border-t-2">
         {list.map((elem) => (
           <Subtask
             key={elem.id}

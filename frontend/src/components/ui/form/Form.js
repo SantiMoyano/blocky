@@ -6,8 +6,8 @@ import ButtonCustom from "../buttons/ButtonCustom";
 
 function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
   return (
-    <div className="flex justify-center pt-6 h-screen blue-bg">
-      <Card color="transparent" shadow={false}>
+    <div className="flex justify-center pt-6 blue-bg w-full px-10">
+      <Card color="transparent" shadow={false} className="w-80">
         <Typography
           variant="h2"
           color="white"
@@ -15,10 +15,7 @@ function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
         >
           {buttonInfo}
         </Typography>
-        <form
-          onSubmit={handleSubmit}
-          className="mb-2 w-80 max-w-screen-lg sm:w-96"
-        >
+        <form onSubmit={handleSubmit} className="mb-2 w-full">
           <div className="mb-1 flex flex-col gap-6">
             {formData.map((el) => (
               <FormInput
@@ -31,7 +28,7 @@ function Form({ formData, handleChange, handleSubmit, buttonInfo }) {
               />
             ))}
           </div>
-          <div className="pt-10">
+          <div className="pt-10 pb-5">
             <ButtonCustom
               buttonText={buttonInfo}
               handleSubmit={handleSubmit}

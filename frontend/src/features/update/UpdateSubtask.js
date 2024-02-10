@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
 import { updateSubtask } from "../../services/redux/subtasks/updateSubtaskSlice";
+import { reset } from "../../services/redux/subtasks/updateSubtaskSlice";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Chip } from "@material-tailwind/react";
 
-function UpdateSubtask({ subtaskToUpdate, loadSubtasks }) {
+function UpdateSubtask({ subtaskToUpdate, loadSubtasks, closeUpdateForm }) {
   const dispatch = useDispatch();
   const { updating, success, error } = useSelector(
     (state) => state.updateSubtask
@@ -39,13 +42,23 @@ function UpdateSubtask({ subtaskToUpdate, loadSubtasks }) {
         request: subtaskRequest,
       })
     );
-    setTimeout(() => {
-      loadSubtasks();
-    }, 50);
   }
+
+  console.log(success);
+
+  useEffect(() => {
+    if (success === true) {
+      loadSubtasks();
+      dispatch(reset());
+      closeUpdateForm();
+    }
+  }, [success, loadSubtasks, closeUpdateForm]);
 
   return (
     <div>
+      <div className="flex items-end justify-end mr-8 mt-8">
+        <Chip onClick={closeUpdateForm} value="x" className="dark-red-bg" />
+      </div>
       <Form
         formData={subtaskData}
         handleChange={handleChange}
