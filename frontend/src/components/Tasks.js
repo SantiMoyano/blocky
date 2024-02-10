@@ -31,9 +31,11 @@ function Tasks({ epicId }) {
 
   return (
     <section>
-      <SwitchButton text="New Task" handleClick={handleSwitchClick} />
-      {showForm && <CreateTask loadTasks={loadTasks} epicId={epicId} />}
-      <BlockSection list={tasks} handleElemClick={handleTaskClick} />
+      <div className="mt-4">
+        <SwitchButton text="New Task" handleClick={handleSwitchClick} />
+        {showForm && <CreateTask loadTasks={loadTasks} epicId={epicId} />}
+        <BlockSection list={tasks} handleElemClick={handleTaskClick} />
+      </div>
     </section>
   );
 }

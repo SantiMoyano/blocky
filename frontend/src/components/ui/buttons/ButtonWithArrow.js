@@ -1,8 +1,9 @@
 import { Button } from "@material-tailwind/react";
 
-function ButtonWithArrow({ buttonText }) {
+function ButtonWithArrow({ buttonText, handleClick }) {
   return (
     <Button
+      onClick={handleClick}
       size="lg"
       fullWidth
       className="flex items-center justify-between font-custom rounded-none py-5 text-lg dark-red-bg" // Adjusted padding

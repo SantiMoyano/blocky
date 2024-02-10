@@ -44,8 +44,6 @@ function UpdateSubtask({ subtaskToUpdate, loadSubtasks, closeUpdateForm }) {
     );
   }
 
-  console.log(success);
-
   useEffect(() => {
     if (success === true) {
       loadSubtasks();

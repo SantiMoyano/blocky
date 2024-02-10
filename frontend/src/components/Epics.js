@@ -32,9 +32,11 @@ function Epics({ projectId }) {
   return (
     <>
       {/* Add any filtering or other options here if needed */}
-      <SwitchButton text="Add Epic" handleClick={handleSwitchClick} />
-      {showForm && <CreateEpic loadEpics={loadEpics} projectId={projectId} />}
-      <BlockSection list={epics} handleElemClick={handleEpicClick} />
+      <div className="mt-4">
+        <SwitchButton text="Add Epic" handleClick={handleSwitchClick} />
+        {showForm && <CreateEpic loadEpics={loadEpics} projectId={projectId} />}
+        <BlockSection list={epics} handleElemClick={handleEpicClick} />
+      </div>
     </>
   );
 }

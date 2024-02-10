@@ -18,7 +18,9 @@ function DialogDefault({ dialogName, dialogDescription }) {
       <ButtonCustom buttonText={dialogName} handleSubmit={handleOpen} />
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>{dialogName}</DialogHeader>
-        <DialogBody>{dialogDescription}</DialogBody>
+        <DialogBody>
+          {dialogDescription ? dialogDescription : "No description provided"}
+        </DialogBody>
         <DialogFooter>
           <Button variant="text" color="red" onClick={handleOpen}>
             <span>Close</span>

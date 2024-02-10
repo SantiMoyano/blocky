@@ -44,12 +44,14 @@ function Projects() {
   return (
     <section>
       <Title titleName="PROJECTS" />
-      <SwitchButton text="New Project" handleClick={handleSwitchClick} />
-      {showForm && <CreateProject loadProjects={loadProjects} />}
-      {/* Render only if projects exists */}
-      {projects && (
-        <BlockSection list={projects} handleElemClick={handleProjectClick} />
-      )}
+      <div className="mt-4">
+        <SwitchButton text="New Project" handleClick={handleSwitchClick} />
+        {showForm && <CreateProject loadProjects={loadProjects} />}
+        {/* Render only if projects exists */}
+        {projects && (
+          <BlockSection list={projects} handleElemClick={handleProjectClick} />
+        )}
+      </div>
     </section>
   );
 }
