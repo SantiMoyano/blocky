@@ -9,6 +9,7 @@ export const loginUser = createAsyncThunk(
       const response = await axios.post("/api/v1/auth/login", userData);
       const token = response.data.token;
       localStorage.setItem("authToken", token);
+      localStorage.setItem("username", userData.username);
       dispatch(loginSuccess());
     } catch (error) {
       error.message = "Incorrect username or password";
@@ -39,8 +40,14 @@ const loginSlice = createSlice({
       state.loggingIn = false;
       state.error = action.payload;
     },
+    reset: (state) => {
+      state.loggingIn = false;
+      state.error = null;
+      state.loginSuccess = false;
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailure } = loginSlice.actions;
+export const { loginRequest, loginSuccess, loginFailure, reset } =
+  loginSlice.actions;
 export default loginSlice.reducer;
