@@ -9,7 +9,7 @@ import ProgressLabel from "../../utils/ProgressLabel";
 
 function SimpleCard({ name, progress }) {
   return (
-    <Card className="flex  justify-center mt-6 max-w-80 min-w-80 min-h-80 dark-red-bg rounded-none">
+    <Card className="flex justify-center blocky dark-red-bg rounded-none">
       <CardBody>
         <Typography variant="h5" color="white" className="mb-2 font-custom">
           {name}
