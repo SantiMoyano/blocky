@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Navbar,
   Collapse,
@@ -8,53 +8,72 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
-function NavList() {
+function NavList({ isLoggedIn, handleLogout }) {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as={Link} // Render Link component instead of 'a' tag
-        to="/login"
-        variant="small"
-        className="p-1 font-medium font-custom"
-        color="white"
-      >
-        Login
-      </Typography>
-      <Typography
-        as={Link} // Render Link component instead of 'a' tag
-        to="/register"
-        variant="small"
-        className="p-1 font-medium font-custom"
-        color="white"
-      >
-        Register
-      </Typography>
-      <Typography
-        as={Link} // Render Link component instead of 'a' tag
-        to="/projects"
-        variant="small"
-        className="p-1 font-medium font-custom"
-        color="white"
-      >
-        Projects
-      </Typography>
+      {!isLoggedIn && (
+        <>
+          <Typography
+            as={Link} // Render Link component instead of 'a' tag
+            to="/login"
+            variant="small"
+            className="p-1 font-medium font-custom"
+            color="white"
+          >
+            Login
+          </Typography>
+          <Typography
+            as={Link} // Render Link component instead of 'a' tag
+            to="/register"
+            variant="small"
+            className="p-1 font-medium font-custom"
+            color="white"
+          >
+            Register
+          </Typography>
+        </>
+      )}
+
+      {isLoggedIn && (
+        <>
+          <Typography
+            as={Link} // Render Link component instead of 'a' tag
+            to="/projects"
+            variant="small"
+            className="p-1 font-medium font-custom"
+            color="white"
+          >
+            Projects
+          </Typography>
+          <Typography
+            as={Link}
+            onClick={handleLogout}
+            to="/"
+            variant="small"
+            className="p-1 font-medium font-custom"
+            color="white"
+          >
+            Logout
+          </Typography>
+        </>
+      )}
     </ul>
   );
 }
 
-function NavbarSimple() {
+function NavbarSimple({ isLoggedIn, handleLogout }) {
   const [openNav, setOpenNav] = React.useState(false);
 
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
 
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, []);
+  }, []); // Run only once when the component mounts
 
   return (
     <Navbar className="dark-red-bg mx-auto max-w-screen-xl px-6 py-3 rounded-none border-none">
@@ -69,7 +88,7 @@ function NavbarSimple() {
           BLOCKY
         </Typography>
         <div className="hidden lg:block">
-          <NavList />
+          <NavList isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         </div>
         <IconButton
           variant="text"
@@ -86,7 +105,7 @@ function NavbarSimple() {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
+        <NavList isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       </Collapse>
     </Navbar>
   );

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
 
-function Login() {
+function Login({ handleLogin }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggingIn = useSelector((state) => state.login.loggingIn);
@@ -58,6 +58,7 @@ function Login() {
     // Dispatch the action to log in the user
     dispatch(loginUser(loginReq));
     if (!error) navigateToProjects();
+    handleLogin();
   }
 
   function navigateToProjects() {

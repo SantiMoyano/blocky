@@ -6,22 +6,19 @@ import { useEffect, useState } from "react";
 import { DefaultHome } from "./DefaultHome";
 import { UserLoggedHome } from "./UserLoggedHome";
 
-function Home() {
+function Home({ handleLogin, handleLogout, username }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
   const { loginSuccess } = useSelector((state) => state.login);
 
   useEffect(() => {
-    // Check if the username exists in localStorage
-    const username = localStorage.getItem("username");
-    if (username) {
-      setUser(username);
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate(`/`);
+      handleLogout();
     }
-  }, []);
-
-  useEffect(() => {
     if (loginSuccess) {
+      handleLogin();
       navigate(`/projects`);
       dispatch(reset());
     }
@@ -44,13 +41,16 @@ function Home() {
     navigate(`/projects`);
   }
 
-  return !user ? (
+  return username === null ? (
     <DefaultHome
       handleQuickExample={loginWithExampleUser}
       handleCreateAccount={navigateToRegister}
     />
   ) : (
-    <UserLoggedHome username={user} handleViewProjects={navigateToProjects} />
+    <UserLoggedHome
+      username={username}
+      handleViewProjects={navigateToProjects}
+    />
   );
 }
 
