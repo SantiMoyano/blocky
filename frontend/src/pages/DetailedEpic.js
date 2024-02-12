@@ -54,7 +54,7 @@ function DetailedEpic() {
           />
         </div>
         {!actionClicked ? (
-          <div className="flex justify-evenly mt-4">
+          <div className="mt-4 actions">
             <Chip onClick={handleEdit} variant="ghost" value="Edit epic" />
             <ChipDismissible
               handleAction={handleDelete}

@@ -11,7 +11,11 @@ function SimpleCard({ name, progress }) {
   return (
     <Card className="flex justify-center blocky dark-red-bg rounded-none">
       <CardBody>
-        <Typography variant="h5" color="white" className="mb-2 font-custom">
+        <Typography
+          variant="h5"
+          color="white"
+          className="mb-2 font-custom word-break-blocky"
+        >
           {name}
         </Typography>
       </CardBody>

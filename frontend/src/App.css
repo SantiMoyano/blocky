@@ -35,12 +35,14 @@ section {
 }
 
 .top {
-  padding: 0 18px;
+  padding: 12px 18px;
   background-color: #173753;
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 36px;
+  line-height: 1.3;
+  word-wrap: break-word;
 }
 
 h2 {
@@ -48,6 +50,8 @@ h2 {
   font-size: 60px;
   font-weight: bolder;
   width: 100%;
+  line-height: 1.3;
+  word-wrap: break-word;
 }
 
 p {
@@ -68,17 +72,39 @@ p {
   height: 90dvw;
 }
 
-@media screen and (max-width: 299px) {
+.word-break-blocky {
+  word-wrap: break-word;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 318px) {
   h2 {
     font-size: 48px;
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 30px;
   }
 
   p {
     font-size: 18px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .done-btn {
+    margin-left: 0;
+  }
+
+  .add-subtask-btn {
+    margin-left: 0;
   }
 }
 

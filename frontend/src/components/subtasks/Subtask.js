@@ -10,8 +10,10 @@ function Subtask({
   handleDelete,
 }) {
   return (
-    <li className="flex justify-between px-8 py-4 border-b-2">
-      <p className=" flex p-0 text-sm items-center">{description}</p>
+    <li className="flex justify-between px-4 py-4 border-b-2">
+      <p className=" flex p-0 text-sm items-center word-break-blocky">
+        {description}
+      </p>
       {!isDone ? (
         <div className="flex gap-2">
           <button onClick={handleEdit}>

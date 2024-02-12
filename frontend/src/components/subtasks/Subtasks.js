@@ -81,15 +81,15 @@ function Subtasks({ taskId }) {
 
       {showSubtasks && (
         <>
-          <div className="flex items-center justify-between">
+          <div className="actions flex items-center justify-between">
             <div className="flex justify-center items-center">
               <Chip
                 value={!showDoneSubtask ? "Done" : "Todo"}
                 onClick={() => setShowDoneSubtask(!showDoneSubtask)}
-                className="w-20 dark-red-bg ml-8"
+                className="w-20 dark-red-bg ml-8 done-btn"
               />
             </div>
-            <div className="pb-2 ml-6">
+            <div className="pb-2 ml-6 add-subtask-btn">
               <SwitchButton
                 text="Add Subtask +"
                 handleClick={handleSwitchClick}

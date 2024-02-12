@@ -55,7 +55,7 @@ function DetailedTask() {
       </div>
 
       {!actionClicked ? (
-        <div className="flex justify-evenly mt-4">
+        <div className="actions mt-4">
           <Chip onClick={handleEdit} variant="ghost" value="Edit task" />
           <ChipDismissible
             handleAction={handleDelete}
