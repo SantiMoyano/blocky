@@ -16,13 +16,18 @@ function DialogDefault({ dialogName, dialogDescription }) {
   return (
     <div className="mt-1 mb-1">
       <ButtonCustom buttonText={dialogName} handleSubmit={handleOpen} />
-      <Dialog open={open} handler={handleOpen}>
-        <DialogHeader>{dialogName}</DialogHeader>
-        <DialogBody>
+      <Dialog open={open} handler={handleOpen} className="dark-red-bg">
+        <DialogHeader
+          style={{ textTransform: "uppercase" }}
+          className="font-custom text-white"
+        >
+          {dialogName}
+        </DialogHeader>
+        <DialogBody className="font-custom text-white">
           {dialogDescription ? dialogDescription : "No description provided"}
         </DialogBody>
         <DialogFooter>
-          <Button variant="text" color="red" onClick={handleOpen}>
+          <Button color="red" onClick={handleOpen}>
             <span>Close</span>
           </Button>
         </DialogFooter>
