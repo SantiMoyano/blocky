@@ -93,4 +93,17 @@ public class ProjectService {
         projectRepository.delete(project);
         return new ProjectResponseDTO(project.getId(), project.getName(), project.getDescription(), project.getGoal(), project.getProgress());
     }
+
+    public void updateProgress(Long projectId) {
+        Project project = projectRepository.findById(projectId).orElseThrow();
+        List<Epic> epics = project.getEpics();
+        if (!epics.isEmpty()) {
+            int totalProgress = epics.stream()
+                    .mapToInt(Epic::getProgress)
+                    .sum();
+            int averageProgress = totalProgress / epics.size();
+            project.setProgress(averageProgress);
+            projectRepository.save(project);
+        }
+    }
 }

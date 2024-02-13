@@ -4,6 +4,7 @@ import dev.santiagom.blocky.tables.epic.dtos.EpicDTO;
 import dev.santiagom.blocky.tables.epic.dtos.EpicResponseDTO;
 import dev.santiagom.blocky.tables.project.Project;
 import dev.santiagom.blocky.tables.project.ProjectRepository;
+import dev.santiagom.blocky.tables.project.ProjectService;
 import dev.santiagom.blocky.tables.task.Task;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class EpicService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private ProjectService projectService;
 
     public List<EpicResponseDTO> allEpics(Long projectId) {
         // Retrieve a list of Epics from the repository
@@ -81,14 +85,15 @@ public class EpicService {
 
     public void updateProgress(Long epicId) {
         Epic epic = epicRepository.findById(epicId).orElseThrow();
-            List<Task> tasks = epic.getTasks();
-            if (!tasks.isEmpty()) {
-                int totalProgress = tasks.stream()
-                        .mapToInt(Task::getProgress)
-                        .sum();
-                int averageProgress = totalProgress / tasks.size();
-                epic.setProgress(averageProgress);
-                epicRepository.save(epic);
-            }
+        List<Task> tasks = epic.getTasks();
+        if (!tasks.isEmpty()) {
+            int totalProgress = tasks.stream()
+                    .mapToInt(Task::getProgress)
+                    .sum();
+            int averageProgress = totalProgress / tasks.size();
+            epic.setProgress(averageProgress);
+            epicRepository.save(epic);
+        }
+        projectService.updateProgress(epic.getProject().getId());
     }
 }
