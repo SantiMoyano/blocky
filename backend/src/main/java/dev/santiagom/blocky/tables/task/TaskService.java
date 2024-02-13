@@ -4,6 +4,7 @@ import dev.santiagom.blocky.tables.category.Category;
 import dev.santiagom.blocky.tables.category.CategoryRepository;
 import dev.santiagom.blocky.tables.epic.Epic;
 import dev.santiagom.blocky.tables.epic.EpicRepository;
+import dev.santiagom.blocky.tables.epic.EpicService;
 import dev.santiagom.blocky.tables.subtask.Subtask;
 import dev.santiagom.blocky.tables.task.dtos.TaskDTO;
 import dev.santiagom.blocky.tables.task.dtos.TaskResponseDTO;
@@ -29,6 +30,9 @@ public class TaskService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private EpicService epicService;
 
     public List<TaskResponseDTO> allTasks(Long epicId) {
         return taskRepository.findAllByEpic_Id(epicId)
@@ -113,5 +117,6 @@ public class TaskService {
         Task task = taskRepository.findById(taskId).orElseThrow();
         task.setProgress(percentageCompleted);
         taskRepository.save(task);
+        epicService.updateProgress(task.getEpic().getId());
     }
 }
