@@ -26,6 +26,10 @@
   background-color: #173753;
 }
 
+.gray-bg {
+  background-color: rgb(28, 28, 28);
+}
+
 /* STYLES FOR HOME */
 
 section {
@@ -79,6 +83,20 @@ p {
 .actions {
   display: flex;
   justify-content: space-evenly;
+}
+
+.loading-container {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 318px) {

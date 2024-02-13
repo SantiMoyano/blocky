@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { DefaultHome } from "./DefaultHome";
 import { UserLoggedHome } from "./UserLoggedHome";
+import Loading from "../../utils/Loading";
 
 function Home({ handleLogin, handleLogout, username }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loginSuccess } = useSelector((state) => state.login);
+  const [forceLoading, setForceLoading] = useState(true);
+  const { loggingIn, loginSuccess } = useSelector((state) => state.login);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -40,6 +42,8 @@ function Home({ handleLogin, handleLogout, username }) {
   function navigateToProjects() {
     navigate(`/projects`);
   }
+
+  if (loggingIn) return <Loading />;
 
   return username === null ? (
     <DefaultHome

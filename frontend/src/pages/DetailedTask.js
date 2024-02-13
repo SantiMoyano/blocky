@@ -13,6 +13,7 @@ import DialogDefault from "../utils/Dialog";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../utils/ChipDismissible";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import Loading from "../utils/Loading";
 
 function DetailedTask() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function DetailedTask() {
     if (taskId) loadTask();
   }, [dispatch]);
 
-  if (loading) return <p>Loading Task details...</p>;
+  if (loading) return <Loading />;
 
   if (error) return <p>Error: {error}</p>;
 

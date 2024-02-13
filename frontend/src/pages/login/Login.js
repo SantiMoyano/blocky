@@ -84,7 +84,7 @@ function Login({ handleLogin }) {
         formData={loginData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Login"
+        buttonInfo={loggingIn ? "Login in..." : "Login"}
       />
       {loginSuccess ? (
         <>

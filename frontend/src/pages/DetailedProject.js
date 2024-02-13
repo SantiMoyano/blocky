@@ -12,6 +12,7 @@ import DialogDefault from "../utils/Dialog";
 import { Chip } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import ChipDismissible from "../utils/ChipDismissible";
+import Loading from "../utils/Loading";
 
 function DetailedProject() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function DetailedProject() {
     }
   }, [dispatch, projectId]);
 
-  if (loading) return <p>Loading project details...</p>;
+  if (loading) return <Loading />;
 
   if (error) return <p>Error: {error}</p>;
 

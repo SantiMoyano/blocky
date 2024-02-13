@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../services/redux/auth/registerSlice";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import Loading from "../../utils/Loading";
 
 function Register() {
   const dispatch = useDispatch();
@@ -92,6 +93,8 @@ function Register() {
     }
     return false;
   }
+
+  if (registering) return <Loading />;
 
   return (
     <div className="h-screen blue-bg">

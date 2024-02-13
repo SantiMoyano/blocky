@@ -6,12 +6,12 @@ import BlockSection from "./blocks/BlockSection";
 import CreateProject from "../features/create/CreateProject";
 import Title from "./ui/Title";
 import SwitchButton from "../utils/SwitchButton";
+import Loading from "../utils/Loading";
 
 function Projects() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { projects, loading, error } = useSelector((state) => state.projects);
-  const [projectList, setProjectList] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function Projects() {
 
   // Check if loading is true or error exists
   if (loading || error) {
-    return <h1>Loading</h1>;
+    return <Loading />;
   }
 
   return (

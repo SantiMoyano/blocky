@@ -12,6 +12,7 @@ import DialogDefault from "../utils/Dialog";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../utils/ChipDismissible";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import Loading from "../utils/Loading";
 
 function DetailedEpic() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function DetailedEpic() {
     }
   }, [dispatch, epicId]);
 
-  if (loading) return <p>Loading epic details...</p>;
+  if (loading) return <Loading />;
 
   if (error) return <p>Error: {error}</p>;
 
