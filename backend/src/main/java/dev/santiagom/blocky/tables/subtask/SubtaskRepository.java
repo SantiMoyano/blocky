@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface SubtaskRepository extends JpaRepository<Subtask, Long> {
     List<Subtask> findAllByTask_Id(Long taskId);
+
+    List<Subtask> findAllByTask_IdAndIsDone(Long taskId, boolean isDone);
 }

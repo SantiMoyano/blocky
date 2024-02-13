@@ -108,4 +108,10 @@ public class TaskService {
                 task.getCategory().getId(),
                 task.getEpic().getId());
     }
+
+    public void updateProgress(Long taskId, int percentageCompleted) {
+        Task task = taskRepository.findById(taskId).orElseThrow();
+        task.setProgress(percentageCompleted);
+        taskRepository.save(task);
+    }
 }

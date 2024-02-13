@@ -4,6 +4,7 @@ import dev.santiagom.blocky.tables.subtask.dtos.SubtaskDTO;
 import dev.santiagom.blocky.tables.subtask.dtos.SubtaskResponseDTO;
 import dev.santiagom.blocky.tables.task.Task;
 import dev.santiagom.blocky.tables.task.TaskRepository;
+import dev.santiagom.blocky.tables.task.TaskService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubtaskService {
+
+    @Autowired
+    private TaskService taskService;
 
     @Autowired
     private SubtaskRepository subtaskRepository;
@@ -41,6 +45,7 @@ public class SubtaskService {
                         .task(task)
                         .build()
         );
+        calculateTaskProgress(task.getId());
 
         return new SubtaskResponseDTO(null, subtask.getDescription(), false, subtask.getTaskId());
     }
@@ -59,6 +64,7 @@ public class SubtaskService {
 
         subtaskToToggle.setDone(!subtaskToToggle.isDone());
         subtaskRepository.save(subtaskToToggle);
+        calculateTaskProgress(subtaskToToggle.getTask().getId());
 
         return new SubtaskResponseDTO(subtaskId, subtaskToToggle.getDescription(), subtaskToToggle.isDone(), subtaskToToggle.getTask().getId());
     }
@@ -66,6 +72,19 @@ public class SubtaskService {
     public SubtaskResponseDTO deleteSubtask(Long subtaskId) {
         Subtask subtask = subtaskRepository.findById(subtaskId).orElseThrow();
         subtaskRepository.delete(subtask);
+        calculateTaskProgress(subtask.getTask().getId());
         return new SubtaskResponseDTO(subtaskId, subtask.getDescription(), subtask.isDone(), subtask.getTask().getId());
+    }
+
+    public void calculateTaskProgress(Long taskId) {
+        List<Subtask> allSubtasks = subtaskRepository.findAllByTask_Id(taskId);
+        List<Subtask> doneSubtasks = subtaskRepository.findAllByTask_IdAndIsDone(taskId, true);
+
+        double percentageCompleted = 0.0;
+        if (!allSubtasks.isEmpty()) {
+            percentageCompleted = ((double) doneSubtasks.size() / allSubtasks.size()) * 100;
+        }
+
+        taskService.updateProgress(taskId, (int) percentageCompleted);
     }
 }
