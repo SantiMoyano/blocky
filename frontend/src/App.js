@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Header from "./layout/Header";
 import { useEffect, useState } from "react";
+import Footer from "./layout/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,6 +59,7 @@ function App() {
         <Route path="/epic/:epicId" element={<DetailedEpic />} />
         <Route path="/task/:taskId" element={<DetailedTask />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

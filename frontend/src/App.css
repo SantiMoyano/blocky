@@ -33,7 +33,7 @@
 /* STYLES FOR HOME */
 
 section {
-  min-height: 100dvh;
+  min-height: 90dvh;
   background-color: #2892d7;
   text-align: center;
 }
@@ -90,6 +90,10 @@ p {
   animation: fadeIn 0.5s ease-in-out forwards;
 }
 
+.footer-content {
+  padding: 32px 0px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0.5;
@@ -132,5 +136,9 @@ p {
     min-height: 12rem;
     width: 12rem;
     height: 12rem;
+  }
+
+  .footer-content {
+    padding: 32px 120px;
   }
 }
