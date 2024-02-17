@@ -6,6 +6,7 @@ import BlockSection from "./blocks/BlockSection";
 import CreateTask from "../features/create/CreateTask";
 import SwitchButton from "../utils/SwitchButton";
 import Title from "./ui/Title";
+import Subtitle from "./ui/Subtitle";
 
 function Tasks({ epicId }) {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ function Tasks({ epicId }) {
 
   return (
     <section>
-      <div className="mt-4">
+      <div className="mt-6">
+        <Subtitle subtitleName="TASKS" />
         <SwitchButton text="New Task" handleClick={handleSwitchClick} />
         {showForm && <CreateTask loadTasks={loadTasks} epicId={epicId} />}
         <BlockSection list={tasks} handleElemClick={handleTaskClick} />

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import BlockSection from "./blocks/BlockSection";
 import CreateEpic from "../features/create/CreateEpic";
 import SwitchButton from "../utils/SwitchButton";
+import Subtitle from "./ui/Subtitle";
 
 function Epics({ projectId }) {
   const dispatch = useDispatch();
@@ -32,7 +33,9 @@ function Epics({ projectId }) {
   return (
     <>
       {/* Add any filtering or other options here if needed */}
-      <div className="mt-4">
+
+      <div className="mt-6">
+        <Subtitle subtitleName="EPICS/FUNCTIONALITIES" />
         <SwitchButton text="Add Epic" handleClick={handleSwitchClick} />
         {showForm && <CreateEpic loadEpics={loadEpics} projectId={projectId} />}
         <BlockSection list={epics} handleElemClick={handleEpicClick} />

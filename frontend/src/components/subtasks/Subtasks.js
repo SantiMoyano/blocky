@@ -12,6 +12,7 @@ import SwitchButton from "../../utils/SwitchButton";
 import { Chip } from "@material-tailwind/react";
 import Title from "../ui/Title";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import Subtitle from "../ui/Subtitle";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();
@@ -70,14 +71,16 @@ function Subtasks({ taskId }) {
 
   return (
     <>
-      <Title titleName="Subtasks" />
-      <button onClick={() => setShowSubtasks(!showSubtasks)}>
-        {!showSubtasks ? (
-          <ChevronDownIcon className="w-8 h-8 text-white border-2 mt-2 rounded-md" />
-        ) : (
-          <ChevronUpIcon className="w-8 h-8 text-white border-2 mt-2 rounded-md" />
-        )}
-      </button>
+      <div className="flex items-center justify-center gap-2 mt-4 mb-2">
+        <h3 className="font-bold text-white word-break-blocky">Subtasks</h3>
+        <button onClick={() => setShowSubtasks(!showSubtasks)}>
+          {!showSubtasks ? (
+            <ChevronDownIcon className="w-6 h-6 text-white border-2 rounded-md" />
+          ) : (
+            <ChevronUpIcon className="w-6 h-6 text-white border-2 rounded-md" />
+          )}
+        </button>
+      </div>
 
       {showSubtasks && (
         <>
@@ -86,7 +89,7 @@ function Subtasks({ taskId }) {
               <Chip
                 value={!showDoneSubtask ? "Done" : "Todo"}
                 onClick={() => setShowDoneSubtask(!showDoneSubtask)}
-                className="w-20 dark-red-bg ml-8 done-btn"
+                className=" dark-red-bg ml-8 done-btn"
               />
             </div>
             <div className="pb-2 ml-6 add-subtask-btn">

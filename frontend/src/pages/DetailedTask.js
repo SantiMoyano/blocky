@@ -7,23 +7,30 @@ import {
 import { useParams } from "react-router-dom";
 import Subtasks from "../components/subtasks/Subtasks";
 import UpdateTask from "../features/update/UpdateTask";
-import SwitchButton from "../utils/SwitchButton";
 import Title from "../components/ui/Title";
 import DialogDefault from "../utils/Dialog";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../utils/ChipDismissible";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Loading from "../utils/Loading";
+import { getAllCategories } from "../services/redux/categories/categoriesSlice";
 
 function DetailedTask() {
   const dispatch = useDispatch();
   const { taskId } = useParams();
   const [showEditForm, setShowEditForm] = useState();
   const { task, loading, error } = useSelector((state) => state.task);
+  const { categories } = useSelector((state) => state.categories);
   const [actionClicked, setActionClicked] = useState(false);
+  const [taskCategory, setTaskCategory] = useState(null);
 
   useEffect(() => {
     if (taskId) loadTask();
+    dispatch(getAllCategories());
+    if (categories && task) {
+      const category = categories.find((c) => c.id === task.categoryId);
+      setTaskCategory(category.name);
+    }
   }, [dispatch]);
 
   if (loading) return <Loading />;
@@ -45,8 +52,8 @@ function DetailedTask() {
 
   return (
     <section>
-      <Title titleName={task.name} />
-      <Chip size="lg" value="Frontend" className="mt-1" />
+      <Title titleName={`${task.name} TASK`} />
+      <Chip size="lg" value={taskCategory} className="mt-1" />
 
       <div className="">
         <DialogDefault
@@ -70,8 +77,6 @@ function DetailedTask() {
           </button>
         </div>
       )}
-
-      <hr className="mt-8 border-2" />
 
       {showEditForm && (
         <UpdateTask task={task} loadTask={loadTask} toggleForm={handleEdit} />

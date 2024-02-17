@@ -51,7 +51,7 @@ function DetailedProject() {
 
   return (
     <section>
-      <Title titleName={project.name} />
+      <Title titleName={`${project.name} PROJECT`} />
 
       <div className="">
         <DialogDefault

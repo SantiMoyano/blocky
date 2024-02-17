@@ -47,7 +47,7 @@ function DetailedEpic() {
   return (
     <>
       <section>
-        <Title titleName={epic.name} />
+        <Title titleName={`${epic.name} EPIC`} />
         <div className="">
           <DialogDefault
             dialogName="Description"
