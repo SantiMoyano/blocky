@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  getTaskDetails,
   deleteTask,
+  getTaskDetails,
 } from "../services/redux/tasks/taskDetailSlice";
-import { useParams } from "react-router-dom";
-import Subtasks from "../components/subtasks/Subtasks";
-import UpdateTask from "../features/update/UpdateTask";
-import Title from "../components/ui/Title";
-import DialogDefault from "../utils/Dialog";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../utils/ChipDismissible";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import DialogDefault from "../utils/Dialog";
 import Loading from "../utils/Loading";
+import Subtasks from "../components/subtasks/Subtasks";
+import Title from "../components/ui/Title";
+import UpdateTask from "../features/update/UpdateTask";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { getAllCategories } from "../services/redux/categories/categoriesSlice";
+import { useParams } from "react-router-dom";
 
 function DetailedTask() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function DetailedTask() {
     dispatch(getAllCategories());
     if (categories && task) {
       const category = categories.find((c) => c.id === task.categoryId);
-      setTaskCategory(category.name);
+      if (category) setTaskCategory(category.name);
     }
   }, [dispatch]);
 

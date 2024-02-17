@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  getEpicDetails,
   deleteEpic,
-} from "../services/redux/epics/epicDetailSlice";
-import { useParams } from "react-router-dom";
-import Tasks from "../components/Tasks";
-import UpdateEpic from "../features/update/UpdateEpic";
-import Title from "../components/ui/Title";
-import DialogDefault from "../utils/Dialog";
+  getEpicDetails,
+} from "../../services/redux/epics/epicDetailSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Chip } from "@material-tailwind/react";
-import ChipDismissible from "../utils/ChipDismissible";
+import ChipDismissible from "../../utils/ChipDismissible";
+import DialogDefault from "../../utils/Dialog";
+import Loading from "../../utils/Loading";
+import Tasks from "../../components/tasks/Tasks";
+import Title from "../../components/ui/Title";
+import UpdateEpic from "../../features/update/UpdateEpic";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import Loading from "../utils/Loading";
+import { useParams } from "react-router-dom";
 
 function DetailedEpic() {
   const dispatch = useDispatch();

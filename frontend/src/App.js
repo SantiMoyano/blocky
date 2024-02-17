@@ -1,15 +1,17 @@
 import "./App.css";
-import Register from "./pages/register/Register";
+
+import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import DetailedEpic from "./pages/epic/DetailedEpic";
+import DetailedProject from "./pages/DetailedProject";
+import DetailedTask from "./pages/DetailedTask";
+import Footer from "./layout/Footer";
+import Header from "./layout/Header";
+import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Projects from "./components/Projects";
-import DetailedProject from "./pages/DetailedProject";
-import DetailedEpic from "./pages/DetailedEpic";
-import DetailedTask from "./pages/DetailedTask";
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Header from "./layout/Header";
-import { useEffect, useState } from "react";
-import Footer from "./layout/Footer";
+import Register from "./pages/register/Register";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

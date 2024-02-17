@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllEpics } from "../services/redux/epics/epicsSlice";
-import { useNavigate } from "react-router-dom";
+
 import BlockSection from "./blocks/BlockSection";
 import CreateEpic from "../features/create/CreateEpic";
-import SwitchButton from "../utils/SwitchButton";
 import Subtitle from "./ui/Subtitle";
+import SwitchButton from "../utils/SwitchButton";
+import { getAllEpics } from "../services/redux/epics/epicsSlice";
+import { useNavigate } from "react-router-dom";
 
 function Epics({ projectId }) {
   const dispatch = useDispatch();

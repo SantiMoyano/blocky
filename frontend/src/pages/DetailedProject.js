@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  getProjects,
   deleteProject,
+  getProjects,
 } from "../services/redux/projects/projectSlice";
-import { useParams } from "react-router-dom";
-import Epics from "../components/Epics";
-import UpdateProject from "../features/update/UpdateProject";
-import Title from "../components/ui/Title";
-import DialogDefault from "../utils/Dialog";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Chip } from "@material-tailwind/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import ChipDismissible from "../utils/ChipDismissible";
+import DialogDefault from "../utils/Dialog";
+import Epics from "../components/Epics";
 import Loading from "../utils/Loading";
+import Title from "../components/ui/Title";
+import UpdateProject from "../features/update/UpdateProject";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useParams } from "react-router-dom";
 
 function DetailedProject() {
   const dispatch = useDispatch();
