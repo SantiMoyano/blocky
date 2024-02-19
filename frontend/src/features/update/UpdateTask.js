@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import CategoriesList from "../../components/Categories";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
-import CategoriesList from "../../components/Categories";
 import { updateTask } from "../../services/redux/tasks/updateTaskSlice";
+import { useState } from "react";
 
 function UpdateTask({ task, loadTask, toggleForm }) {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function UpdateTask({ task, loadTask, toggleForm }) {
     },
     {
       label: "Description",
-      type: "text",
+      type: "textarea",
       name: "description",
       value: taskRequest.description,
     },

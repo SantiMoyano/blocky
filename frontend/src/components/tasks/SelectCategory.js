@@ -17,7 +17,7 @@ function SelectCategory({ handleChange }) {
       <Select
         label="Sort by Category"
         onChange={handleChange}
-        className="text-white font-semibold"
+        className="text-white font-semibold label-select"
       >
         {categories.map((category) => (
           <Option value={category.id} className="font-semibold">

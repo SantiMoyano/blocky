@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createTask } from "../../services/redux/tasks/createTaskSlice";
+
+import CategoriesList from "../../components/Categories";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
-import CategoriesList from "../../components/Categories";
+import { createTask } from "../../services/redux/tasks/createTaskSlice";
 
 function CreateTask({ loadTasks, epicId }) {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function CreateTask({ loadTasks, epicId }) {
     },
     {
       label: "Description",
-      type: "text",
+      type: "textarea",
       name: "description",
       value: taskRequest.description,
     },

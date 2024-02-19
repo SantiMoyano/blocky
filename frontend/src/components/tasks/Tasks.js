@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { getAllTasks, reset } from "../../services/redux/tasks/tasksSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import BlockSection from "../blocks/BlockSection";
 import CreateTask from "../../features/create/CreateTask";
+import Loading from "../../utils/Loading";
 import SelectCategory from "./SelectCategory";
 import Subtitle from "../ui/Subtitle";
 import SwitchButton from "../../utils/SwitchButton";
-import { getAllTasks } from "../../services/redux/tasks/tasksSlice";
 import { useNavigate } from "react-router-dom";
 
 function Tasks({ epicId }) {
@@ -17,8 +18,13 @@ function Tasks({ epicId }) {
   const [taskList, setTaskList] = useState([]);
 
   useEffect(() => {
-    loadTasks();
+    dispatch(reset());
+    dispatch(getAllTasks(epicId));
   }, []);
+
+  useEffect(() => {
+    setTaskList(tasks);
+  }, [tasks]);
 
   function handleTaskClick(taskId) {
     navigate(`/task/${taskId}`);
@@ -26,7 +32,7 @@ function Tasks({ epicId }) {
 
   function loadTasks() {
     dispatch(getAllTasks(epicId));
-    setTaskList(tasks);
+    if (tasks) setTaskList(tasks);
   }
 
   function handleSwitchClick() {
@@ -40,6 +46,10 @@ function Tasks({ epicId }) {
       (task) => task.categoryId === categoryId
     );
     setTaskList(filteredTasks);
+  }
+
+  if (loading || error) {
+    return <Loading />;
   }
 
   return (

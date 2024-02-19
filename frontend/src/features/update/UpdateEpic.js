@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
-import { useState } from "react";
 import { updateEpic } from "../../services/redux/epics/updateEpicSlice";
+import { useState } from "react";
 
 function UpdateEpic({ epic, loadEpic, toggleForm }) {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function UpdateEpic({ epic, loadEpic, toggleForm }) {
     },
     {
       label: "Description",
-      type: "text",
+      type: "textarea",
       name: "description",
       value: epicRequest.description,
     },

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProject } from "../../services/redux/projects/createProjectSlice";
+
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import { createProject } from "../../services/redux/projects/createProjectSlice";
 
 function CreateProject({ loadProjects }) {
   const dispatch = useDispatch();
@@ -25,13 +26,13 @@ function CreateProject({ loadProjects }) {
     },
     {
       label: "Description",
-      type: "text",
+      type: "textarea",
       name: "description",
       value: projectRequest.description,
     },
     {
       label: "Goal",
-      type: "text",
+      type: "textarea",
       name: "goal",
       value: projectRequest.goal,
     },

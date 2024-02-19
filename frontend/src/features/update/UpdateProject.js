@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
-import { useDispatch, useSelector } from "react-redux";
 import { updateProject } from "../../services/redux/projects/updateProjectSlice";
+import { useState } from "react";
 
 function UpdateProject({ project, loadProject, toggleForm }) {
   const dispatch = useDispatch();
@@ -25,13 +26,13 @@ function UpdateProject({ project, loadProject, toggleForm }) {
     },
     {
       label: "Description",
-      type: "text",
+      type: "textarea",
       name: "description",
       value: projectRequest.description,
     },
     {
       label: "Goal",
-      type: "text",
+      type: "textarea",
       name: "goal",
       value: projectRequest.goal,
     },

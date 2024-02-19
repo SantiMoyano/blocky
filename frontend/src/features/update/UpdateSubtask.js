@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
+import { Chip } from "@material-tailwind/react";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
-import { updateSubtask } from "../../services/redux/subtasks/updateSubtaskSlice";
-import { reset } from "../../services/redux/subtasks/updateSubtaskSlice";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Chip } from "@material-tailwind/react";
+import { reset } from "../../services/redux/subtasks/updateSubtaskSlice";
+import { updateSubtask } from "../../services/redux/subtasks/updateSubtaskSlice";
 
 function UpdateSubtask({ subtaskToUpdate, loadSubtasks, closeUpdateForm }) {
   const dispatch = useDispatch();

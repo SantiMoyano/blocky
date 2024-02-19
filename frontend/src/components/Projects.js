@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getAllProjects } from "../services/redux/projects/projectSlices";
+
 import BlockSection from "./blocks/BlockSection";
 import CreateProject from "../features/create/CreateProject";
-import Title from "./ui/Title";
-import SwitchButton from "../utils/SwitchButton";
 import Loading from "../utils/Loading";
+import SwitchButton from "../utils/SwitchButton";
+import Title from "./ui/Title";
+import { getAllProjects } from "../services/redux/projects/projectSlices";
+import { useNavigate } from "react-router-dom";
 
 function Projects() {
   const dispatch = useDispatch();

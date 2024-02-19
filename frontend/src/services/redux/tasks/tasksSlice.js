@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import axios from "axios";
 
 // Define an asynchronous thunk for getting all tasks
@@ -48,6 +49,11 @@ const tasksSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    reset: (state) => {
+      state.tasks = [];
+      state.loading = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     // Handle the pending action for getAllTasks
@@ -59,6 +65,10 @@ const tasksSlice = createSlice({
 });
 
 // Export the actions and reducer for the tasks slice
-export const { getAllTasksRequest, getAllTasksSuccess, getAllTasksFailure } =
-  tasksSlice.actions;
+export const {
+  getAllTasksRequest,
+  getAllTasksSuccess,
+  getAllTasksFailure,
+  reset,
+} = tasksSlice.actions;
 export default tasksSlice.reducer;

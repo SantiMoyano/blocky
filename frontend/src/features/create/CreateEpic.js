@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createEpic } from "../../services/redux/epics/createEpicSlice";
+
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import { createEpic } from "../../services/redux/epics/createEpicSlice";
 
 function CreateEpic({ loadEpics, projectId }) {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function CreateEpic({ loadEpics, projectId }) {
     },
     {
       label: "Description",
-      type: "text",
+      type: "textarea",
       name: "description",
       value: epicRequest.description,
     },

@@ -94,6 +94,10 @@ p {
   padding: 32px 0px;
 }
 
+.label-select * {
+  color: white;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0.5;
