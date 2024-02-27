@@ -74,7 +74,7 @@ function Subtasks({ taskId }) {
   return (
     <>
       <div className="flex items-center justify-center gap-2 mt-8 mb-2">
-        <h3 className="font-bold text-white word-break-blocky">Subtasks</h3>
+        <h3 className="font-bold text-white word-break-blocky">TASKS</h3>
         <button onClick={() => setShowSubtasks(!showSubtasks)}>
           {!showSubtasks ? (
             <ChevronDownIcon className="w-6 h-6 text-white border-2 rounded-md" />
@@ -86,20 +86,21 @@ function Subtasks({ taskId }) {
 
       {showSubtasks && (
         <div className="pt-2">
-          <div className="actions flex items-center justify-between">
+          <div className="actions flex justify-between gap-1">
             <div className="flex justify-center items-center">
               <Chip
                 value={!showDoneSubtask ? "Done" : "Todo"}
                 onClick={() => setShowDoneSubtask(!showDoneSubtask)}
-                className=" dark-red-bg ml-8 done-btn px-2 py-2"
+                className="dark-red-bg done-btn px-2 py-2 edit-btn"
               />
             </div>
-            <div className="pb-2 add-subtask-btn">
+            <div className="mb-1">
               <DialogWithForm
                 childComponent={
                   <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
                 }
-                buttonInfo="New subtask"
+                buttonInfo="New task"
+                isEdit={true}
               />
             </div>
           </div>

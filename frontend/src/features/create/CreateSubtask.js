@@ -44,7 +44,7 @@ function CreateSubtask({ loadSubtasks, taskId }) {
         formData={subtaskData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Create subtask"
+        buttonInfo="Create Task"
       />
       {success && (
         <Notification message="Subtask created successfully" type="success" />

@@ -46,15 +46,9 @@ function DetailedEpic() {
   return (
     <>
       <section>
-        <Title titleName={`${epic.name} EPIC`} />
-        <div className="">
-          <DialogDefault
-            dialogName="Description"
-            dialogDescription={epic.description}
-          />
-        </div>
+        <Title titleName={epic.name} />
         {!actionClicked ? (
-          <div className="mt-4 actions">
+          <div className="my-4 actions">
             <DialogWithForm
               childComponent={
                 <UpdateEpic
@@ -64,6 +58,7 @@ function DetailedEpic() {
                 />
               }
               buttonInfo="Edit Epic"
+              isEdit={true}
             />
             <ChipDismissible
               handleAction={handleDelete}
@@ -77,6 +72,13 @@ function DetailedEpic() {
             </button>
           </div>
         )}
+        <div className="">
+          <DialogDefault
+            dialogName="Description"
+            dialogDescription={epic.description}
+          />
+        </div>
+
         <Tasks epicId={epicId} />
       </section>
     </>

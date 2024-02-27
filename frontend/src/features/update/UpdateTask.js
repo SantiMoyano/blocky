@@ -58,7 +58,7 @@ function UpdateTask({ task, loadTask, toggleForm }) {
 
   return (
     <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
-      <h3 className="flex justify-center text-white font-bold mt-4">
+      <h3 className="flex justify-center text-white font-bold mt-4 text-center">
         UPDATE FEATURE
       </h3>
       <SelectCategory handleChange={handleSetCategory} />

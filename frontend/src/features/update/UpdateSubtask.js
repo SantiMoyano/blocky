@@ -62,7 +62,7 @@ function UpdateSubtask({ subtaskToUpdate, loadSubtasks, closeUpdateForm }) {
         formData={subtaskData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Edit subtask"
+        buttonInfo="Edit task"
       />
       {success && (
         <Notification message="Subtask updated successfully" type="success" />

@@ -1,5 +1,5 @@
-import React from "react";
 import { Chip } from "@material-tailwind/react";
+import React from "react";
 
 function ChipDismissible({ handleAction, actionText }) {
   const [open, setOpen] = React.useState(true);
@@ -17,6 +17,7 @@ function ChipDismissible({ handleAction, actionText }) {
           color="red"
           value="Confirm delete"
           onClick={handleClick}
+          className="edit-btn"
         />
       )}
       <Chip
@@ -25,6 +26,7 @@ function ChipDismissible({ handleAction, actionText }) {
         value={actionText}
         open={open}
         onClose={() => setOpen(false)}
+        className="edit-btn"
       />
     </>
   );

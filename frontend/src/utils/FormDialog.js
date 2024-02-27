@@ -2,16 +2,18 @@ import { Button, Card, Dialog } from "@material-tailwind/react";
 
 import React from "react";
 
-function DialogWithForm({ childComponent, buttonInfo }) {
+function DialogWithForm({ childComponent, buttonInfo, isEdit }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
   return (
     <>
-      <div className="flex justify-end">
+      <div className={` flex justify-end`}>
         <Button
           onClick={handleOpen}
-          className="dark-red-bg font-custom px-2 py-2"
+          className={`${
+            isEdit ? "edit-btn" : ""
+          } dark-red-bg font-custom px-2 py-2`}
         >
           {buttonInfo}
         </Button>

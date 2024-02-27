@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BlockSection from "./blocks/BlockSection";
 import CreateEpic from "../features/create/CreateEpic";
 import DialogWithForm from "../utils/FormDialog";
+import { PopoverInfo } from "../utils/PopoverInfo";
 import Subtitle from "./ui/Subtitle";
 import SwitchButton from "../utils/SwitchButton";
 import { getAllEpics } from "../services/redux/epics/epicsSlice";
@@ -11,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 function Epics({ projectId }) {
   const dispatch = useDispatch();
-  const [showForm, setShowForm] = useState(false);
   const { epics, loading, error } = useSelector((state) => state.epics);
   const navigate = useNavigate();
 
@@ -28,17 +28,17 @@ function Epics({ projectId }) {
     dispatch(getAllEpics(projectId));
   }
 
-  function handleSwitchClick() {
-    setShowForm(!showForm);
-  }
-
   return (
     <>
       {/* Add any filtering or other options here if needed */}
 
-      <div className="mt-6 px-6">
-        <Subtitle subtitleName="EPICS/FUNCTIONALITIES" />
-        <div className="py-6">
+      <div className="mt-12 px-6">
+        <div className="flex justify-center">
+          <Subtitle subtitleName="EPICS" />
+          <PopoverInfo popoverInfo="Container for features, such as user authentication functionality" />
+        </div>
+
+        <div className="py-2">
           <DialogWithForm
             childComponent={
               <CreateEpic loadEpics={loadEpics} projectId={projectId} />

@@ -18,7 +18,6 @@ import { useParams } from "react-router-dom";
 
 function DetailedProject() {
   const dispatch = useDispatch();
-  const [showEditForm, setShowEditForm] = useState();
   const { projectId } = useParams();
   const { project, loading, error } = useSelector((state) => state.project);
   const [actionClicked, setActionClicked] = useState(false);
@@ -45,36 +44,29 @@ function DetailedProject() {
 
   return (
     <section>
-      <Title titleName={`${project.name} PROJECT`} />
+      <Title titleName={project.name} />
 
-      <div className="">
+      <div className="actions my-4">
+        <DialogWithForm
+          childComponent={
+            <UpdateProject project={project} loadProject={loadProject} />
+          }
+          buttonInfo="Edit Project"
+          isEdit={true}
+        />
+        <ChipDismissible
+          handleAction={handleDelete}
+          actionText="delete project"
+        />
+      </div>
+
+      <div>
         <DialogDefault
           dialogName="Description"
           dialogDescription={project.description}
         />
         <DialogDefault dialogName="Goal" dialogDescription={project.goal} />
       </div>
-
-      {!actionClicked ? (
-        <div className="actions mt-4">
-          <DialogWithForm
-            childComponent={
-              <UpdateProject project={project} loadProject={loadProject} />
-            }
-            buttonInfo="Edit Project"
-          />
-          <ChipDismissible
-            handleAction={handleDelete}
-            actionText="delete project"
-          />
-        </div>
-      ) : (
-        <div className="flex justify-end mt-4 mr-8">
-          <button onClick={handleEdit} className="focus:outline-none">
-            <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
-          </button>
-        </div>
-      )}
 
       <Epics projectId={projectId} />
     </section>

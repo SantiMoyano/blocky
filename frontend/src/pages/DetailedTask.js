@@ -51,18 +51,11 @@ function DetailedTask() {
 
   return (
     <section>
-      <Title titleName={`${task.name} TASK`} />
+      <Title titleName={task.name} />
       <Chip size="lg" value={taskCategory} className="mt-1" />
 
-      <div className="">
-        <DialogDefault
-          dialogName="Description"
-          dialogDescription={task.description}
-        />
-      </div>
-
       {!actionClicked ? (
-        <div className="actions mt-4">
+        <div className="actions my-4">
           <DialogWithForm
             childComponent={
               <UpdateTask
@@ -72,6 +65,7 @@ function DetailedTask() {
               />
             }
             buttonInfo="Edit Feature"
+            isEdit={true}
           />
           <ChipDismissible
             handleAction={handleDelete}
@@ -85,6 +79,14 @@ function DetailedTask() {
           </button>
         </div>
       )}
+
+      <div className="">
+        <DialogDefault
+          dialogName="Description"
+          dialogDescription={task.description}
+        />
+      </div>
+
       <Subtasks taskId={taskId} />
     </section>
   );
