@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BlockSection from "./blocks/BlockSection";
 import CreateEpic from "../features/create/CreateEpic";
+import DialogWithForm from "../utils/FormDialog";
 import Subtitle from "./ui/Subtitle";
 import SwitchButton from "../utils/SwitchButton";
 import { getAllEpics } from "../services/redux/epics/epicsSlice";
@@ -35,11 +36,17 @@ function Epics({ projectId }) {
     <>
       {/* Add any filtering or other options here if needed */}
 
-      <div className="mt-6">
+      <div className="mt-6 px-6">
         <Subtitle subtitleName="EPICS/FUNCTIONALITIES" />
-        <SwitchButton text="Add Epic" handleClick={handleSwitchClick} />
-        {showForm && <CreateEpic loadEpics={loadEpics} projectId={projectId} />}
-        <BlockSection list={epics} handleElemClick={handleEpicClick} />
+        <div className="py-6">
+          <DialogWithForm
+            childComponent={
+              <CreateEpic loadEpics={loadEpics} projectId={projectId} />
+            }
+            buttonInfo="Add Epic"
+          />
+          <BlockSection list={epics} handleElemClick={handleEpicClick} />
+        </div>
       </div>
     </>
   );

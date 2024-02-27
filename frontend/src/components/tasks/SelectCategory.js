@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../../services/redux/categories/categoriesSlice";
 import { useEffect } from "react";
 
-function SelectCategory({ handleChange }) {
+function SelectCategory({ handleChange, labelInfo }) {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
 
@@ -15,7 +15,7 @@ function SelectCategory({ handleChange }) {
   return (
     <div className="flex justify-center w-full px-12 py-2">
       <Select
-        label="Sort by Category"
+        label={labelInfo}
         onChange={handleChange}
         className="text-white font-semibold label-select"
       >

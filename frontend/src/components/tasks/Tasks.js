@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BlockSection from "../blocks/BlockSection";
 import CreateTask from "../../features/create/CreateTask";
+import DialogWithForm from "../../utils/FormDialog";
 import Loading from "../../utils/Loading";
 import SelectCategory from "./SelectCategory";
 import Subtitle from "../ui/Subtitle";
@@ -54,12 +55,21 @@ function Tasks({ epicId }) {
 
   return (
     <section>
-      <div className="mt-6">
+      <div className="mt-6 ">
         <Subtitle subtitleName="TASKS" />
-        <SelectCategory handleChange={handleCategorySelection} />
-        <SwitchButton text="New Task" handleClick={handleSwitchClick} />
-        {showForm && <CreateTask loadTasks={loadTasks} epicId={epicId} />}
-        <BlockSection list={taskList} handleElemClick={handleTaskClick} />
+        <SelectCategory
+          handleChange={handleCategorySelection}
+          labelInfo="Category"
+        />
+        <div className="py-4 px-6">
+          <DialogWithForm
+            childComponent={
+              <CreateTask loadTasks={loadTasks} epicId={epicId} />
+            }
+            buttonInfo="New feature"
+          />
+          <BlockSection list={taskList} handleElemClick={handleTaskClick} />
+        </div>
       </div>
     </section>
   );

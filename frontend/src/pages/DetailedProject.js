@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../utils/ChipDismissible";
 import DialogDefault from "../utils/Dialog";
+import DialogWithForm from "../utils/FormDialog";
 import Epics from "../components/Epics";
 import Loading from "../utils/Loading";
 import Title from "../components/ui/Title";
@@ -36,18 +37,10 @@ function DetailedProject() {
     dispatch(getProjects(projectId));
   }
 
-  function handleEdit() {
-    toggleForm();
-    setActionClicked(!actionClicked);
-  }
+  function handleEdit() {}
 
   function handleDelete() {
     dispatch(deleteProject(projectId));
-  }
-
-  function toggleForm() {
-    setShowEditForm(!showEditForm);
-    setActionClicked(!actionClicked);
   }
 
   return (
@@ -64,7 +57,12 @@ function DetailedProject() {
 
       {!actionClicked ? (
         <div className="actions mt-4">
-          <Chip onClick={handleEdit} variant="ghost" value="Edit project" />
+          <DialogWithForm
+            childComponent={
+              <UpdateProject project={project} loadProject={loadProject} />
+            }
+            buttonInfo="Edit Project"
+          />
           <ChipDismissible
             handleAction={handleDelete}
             actionText="delete project"
@@ -78,13 +76,6 @@ function DetailedProject() {
         </div>
       )}
 
-      {showEditForm && (
-        <UpdateProject
-          project={project}
-          loadProject={loadProject}
-          toggleForm={toggleForm}
-        />
-      )}
       <Epics projectId={projectId} />
     </section>
   );

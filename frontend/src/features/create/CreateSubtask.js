@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createSubtask } from "../../services/redux/subtasks/createSubtaskSlice";
+
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import { createSubtask } from "../../services/redux/subtasks/createSubtaskSlice";
 
 function CreateSubtask({ loadSubtasks, taskId }) {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function CreateSubtask({ loadSubtasks, taskId }) {
   }
 
   return (
-    <>
+    <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
       <Form
         formData={subtaskData}
         handleChange={handleChange}
@@ -49,7 +50,7 @@ function CreateSubtask({ loadSubtasks, taskId }) {
         <Notification message="Subtask created successfully" type="success" />
       )}
       {error && <Notification message="An error has occurred" type="error" />}
-    </>
+    </div>
   );
 }
 

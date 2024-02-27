@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import CategoriesList from "../../components/Categories";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import SelectCategory from "../../components/tasks/SelectCategory";
 import { createTask } from "../../services/redux/tasks/createTaskSlice";
 
 function CreateTask({ loadTasks, epicId }) {
@@ -34,7 +34,7 @@ function CreateTask({ loadTasks, epicId }) {
   ];
 
   function handleSetCategory(e) {
-    setCategoryId(e.target.value);
+    setCategoryId(e);
   }
 
   function handleChange(e) {
@@ -52,11 +52,17 @@ function CreateTask({ loadTasks, epicId }) {
   }
 
   return (
-    <div>
-      <h1>Create new Task</h1>
-      <CategoriesList handleSetCategory={handleSetCategory} />
+    <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
+      <h3 className="flex justify-center text-white font-bold mt-4 text-center">
+        CREATE FEATURE
+      </h3>
+      <SelectCategory
+        handleChange={handleSetCategory}
+        labelInfo="Select category"
+      />
       <Form
         formData={taskData}
+        formInfo=" "
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         buttonInfo="Create task"

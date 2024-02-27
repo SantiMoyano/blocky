@@ -52,7 +52,7 @@ function UpdateEpic({ epic, loadEpic, toggleForm }) {
   }
 
   return (
-    <div>
+    <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
       <Form
         formData={epicData}
         handleChange={handleChange}

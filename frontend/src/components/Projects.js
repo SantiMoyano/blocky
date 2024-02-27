@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BlockSection from "./blocks/BlockSection";
 import CreateProject from "../features/create/CreateProject";
+import DialogWithForm from "../utils/FormDialog";
 import Loading from "../utils/Loading";
 import SwitchButton from "../utils/SwitchButton";
 import Title from "./ui/Title";
@@ -21,6 +22,8 @@ function Projects() {
     // No need to set projectList here
     setShowForm(false);
   }, [dispatch]);
+
+  useEffect(() => {}, [projects]);
 
   const handleProjectClick = (projectId) => {
     navigate(`/project/${projectId}`);
@@ -45,9 +48,11 @@ function Projects() {
   return (
     <section>
       <Title titleName="PROJECTS" />
-      <div className="mt-4">
-        <SwitchButton text="New Project" handleClick={handleSwitchClick} />
-        {showForm && <CreateProject loadProjects={loadProjects} />}
+      <div className="mt-4 px-6">
+        <DialogWithForm
+          childComponent={<CreateProject loadProjects={loadProjects} />}
+          buttonInfo="New project"
+        />
         {projects && (
           <BlockSection list={projects} handleElemClick={handleProjectClick} />
         )}

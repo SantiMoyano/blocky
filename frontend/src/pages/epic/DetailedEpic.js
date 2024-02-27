@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../../utils/ChipDismissible";
 import DialogDefault from "../../utils/Dialog";
+import DialogWithForm from "../../utils/FormDialog";
 import Loading from "../../utils/Loading";
 import Tasks from "../../components/tasks/Tasks";
 import Title from "../../components/ui/Title";
@@ -40,10 +41,7 @@ function DetailedEpic() {
     dispatch(deleteEpic(epicId));
   }
 
-  function handleEdit() {
-    setShowEditForm(!showEditForm);
-    setActionClicked(!actionClicked);
-  }
+  function handleEdit() {}
 
   return (
     <>
@@ -57,7 +55,16 @@ function DetailedEpic() {
         </div>
         {!actionClicked ? (
           <div className="mt-4 actions">
-            <Chip onClick={handleEdit} variant="ghost" value="Edit epic" />
+            <DialogWithForm
+              childComponent={
+                <UpdateEpic
+                  epic={epic}
+                  loadEpic={loadEpic}
+                  toggleForm={handleEdit}
+                />
+              }
+              buttonInfo="Edit Epic"
+            />
             <ChipDismissible
               handleAction={handleDelete}
               actionText="delete epic"
@@ -69,9 +76,6 @@ function DetailedEpic() {
               <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
             </button>
           </div>
-        )}
-        {showEditForm && (
-          <UpdateEpic epic={epic} loadEpic={loadEpic} toggleForm={handleEdit} />
         )}
         <Tasks epicId={epicId} />
       </section>

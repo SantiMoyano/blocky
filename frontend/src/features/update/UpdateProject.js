@@ -60,7 +60,7 @@ function UpdateProject({ project, loadProject, toggleForm }) {
   }
 
   return (
-    <div>
+    <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
       <Form
         formData={projectData}
         handleChange={handleChange}

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import CategoriesList from "../../components/Categories";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import SelectCategory from "../../components/tasks/SelectCategory";
 import { updateTask } from "../../services/redux/tasks/updateTaskSlice";
 import { useState } from "react";
 
@@ -36,7 +36,7 @@ function UpdateTask({ task, loadTask, toggleForm }) {
   ];
 
   function handleSetCategory(e) {
-    setCategoryId(e.target.value);
+    setCategoryId(e);
   }
 
   function handleChange(e) {
@@ -57,11 +57,14 @@ function UpdateTask({ task, loadTask, toggleForm }) {
   }
 
   return (
-    <div>
-      <h1>Update Task</h1>
-      <CategoriesList handleSetCategory={handleSetCategory} />
+    <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
+      <h3 className="flex justify-center text-white font-bold mt-4">
+        UPDATE FEATURE
+      </h3>
+      <SelectCategory handleChange={handleSetCategory} />
       <Form
         formData={taskData}
+        formInfo=" "
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         buttonInfo="Update task"

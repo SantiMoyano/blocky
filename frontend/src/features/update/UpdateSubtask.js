@@ -54,7 +54,7 @@ function UpdateSubtask({ subtaskToUpdate, loadSubtasks, closeUpdateForm }) {
   }, [success, loadSubtasks, closeUpdateForm]);
 
   return (
-    <div>
+    <div className="pb-2 blue-bg rounded rounded-lg">
       <div className="flex items-end justify-end mr-8 mt-8">
         <Chip onClick={closeUpdateForm} value="x" className="dark-red-bg" />
       </div>
@@ -62,7 +62,7 @@ function UpdateSubtask({ subtaskToUpdate, loadSubtasks, closeUpdateForm }) {
         formData={subtaskData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Update subtask"
+        buttonInfo="Edit subtask"
       />
       {success && (
         <Notification message="Subtask updated successfully" type="success" />

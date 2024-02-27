@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../utils/ChipDismissible";
 import DialogDefault from "../utils/Dialog";
+import DialogWithForm from "../utils/FormDialog";
 import Loading from "../utils/Loading";
 import Subtasks from "../components/subtasks/Subtasks";
 import Title from "../components/ui/Title";
@@ -46,10 +47,7 @@ function DetailedTask() {
     dispatch(deleteTask(taskId));
   }
 
-  function handleEdit() {
-    setShowEditForm(!showEditForm);
-    setActionClicked(!actionClicked);
-  }
+  function handleEdit() {}
 
   return (
     <section>
@@ -65,7 +63,16 @@ function DetailedTask() {
 
       {!actionClicked ? (
         <div className="actions mt-4">
-          <Chip onClick={handleEdit} variant="ghost" value="Edit task" />
+          <DialogWithForm
+            childComponent={
+              <UpdateTask
+                task={task}
+                loadTask={loadTask}
+                toggleForm={handleEdit}
+              />
+            }
+            buttonInfo="Edit Feature"
+          />
           <ChipDismissible
             handleAction={handleDelete}
             actionText="delete task"
@@ -77,10 +84,6 @@ function DetailedTask() {
             <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
           </button>
         </div>
-      )}
-
-      {showEditForm && (
-        <UpdateTask task={task} loadTask={loadTask} toggleForm={handleEdit} />
       )}
       <Subtasks taskId={taskId} />
     </section>

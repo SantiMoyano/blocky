@@ -1,18 +1,20 @@
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteSubtask } from "../../services/redux/subtasks/deleteSubtaskSlice";
 import {
   getAllSubtasks,
   toggleIsDone,
 } from "../../services/redux/subtasks/subtasksSlice";
-import SubtasksList from "./SubtasksList";
-import CreateSubtask from "../../features/create/CreateSubtask";
-import UpdateSubtask from "../../features/update/UpdateSubtask";
-import SwitchButton from "../../utils/SwitchButton";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Chip } from "@material-tailwind/react";
-import Title from "../ui/Title";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import CreateSubtask from "../../features/create/CreateSubtask";
+import DialogWithForm from "../../utils/FormDialog";
+import SubtasksList from "./SubtasksList";
 import Subtitle from "../ui/Subtitle";
+import SwitchButton from "../../utils/SwitchButton";
+import Title from "../ui/Title";
+import UpdateSubtask from "../../features/update/UpdateSubtask";
+import { deleteSubtask } from "../../services/redux/subtasks/deleteSubtaskSlice";
 
 function Subtasks({ taskId }) {
   const dispatch = useDispatch();
@@ -71,7 +73,7 @@ function Subtasks({ taskId }) {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-2 mt-4 mb-2">
+      <div className="flex items-center justify-center gap-2 mt-8 mb-2">
         <h3 className="font-bold text-white word-break-blocky">Subtasks</h3>
         <button onClick={() => setShowSubtasks(!showSubtasks)}>
           {!showSubtasks ? (
@@ -83,25 +85,24 @@ function Subtasks({ taskId }) {
       </div>
 
       {showSubtasks && (
-        <>
+        <div className="pt-2">
           <div className="actions flex items-center justify-between">
             <div className="flex justify-center items-center">
               <Chip
                 value={!showDoneSubtask ? "Done" : "Todo"}
                 onClick={() => setShowDoneSubtask(!showDoneSubtask)}
-                className=" dark-red-bg ml-8 done-btn"
+                className=" dark-red-bg ml-8 done-btn px-2 py-2"
               />
             </div>
-            <div className="pb-2 ml-6 add-subtask-btn">
-              <SwitchButton
-                text="Add Subtask +"
-                handleClick={handleSwitchClick}
+            <div className="pb-2 add-subtask-btn">
+              <DialogWithForm
+                childComponent={
+                  <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
+                }
+                buttonInfo="New subtask"
               />
             </div>
           </div>
-          {showForm && (
-            <CreateSubtask loadSubtasks={loadSubtasks} taskId={taskId} />
-          )}
           {showSubtaskToUpdate && (
             <UpdateSubtask
               subtaskToUpdate={subtaskToUpdate}
@@ -125,7 +126,7 @@ function Subtasks({ taskId }) {
               handleDelete={handleDelete}
             />
           )}
-        </>
+        </div>
       )}
     </>
   );
