@@ -2,57 +2,69 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-// Define an asynchronous thunk for getting all tasks
+// Define an async thunk for getting all Tasks
 export const getAllTasks = createAsyncThunk(
-  "epics/getAllTasks",
-  async (epicId, { dispatch }) => {
+  "task/getAllTasks",
+  async (featureId, { dispatch }) => {
     try {
-      // Dispatch the action to indicate the start of the request
       dispatch(getAllTasksRequest());
-      // Make the API request to fetch all tasks for the given epic
-      const response = await axios.get(`/api/v1/task/${epicId}`);
-      // Dispatch the action with the received data on success
+      const response = await axios.get("/api/v1/task/" + featureId);
       dispatch(getAllTasksSuccess(response.data));
     } catch (error) {
-      // Dispatch the action with the error information on failure
       dispatch(getAllTasksFailure(error.response.data));
-      // Rethrow the error to be caught by the component or other error handling mechanisms
       throw error.response.data;
     }
   }
 );
 
-// Define the initial state for the task slice
-const initialState = {
-  tasks: [],
-  loading: false,
-  error: null,
-};
+// Define a separate async thunk for toggling the "isDone" property
+export const toggleIsDone = createAsyncThunk(
+  "task/toggleIsDone",
+  async (taskId, { dispatch }) => {
+    try {
+      // Use separate action types and action creators for this thunk
+      dispatch(toggleIsDoneRequest());
+      const response = await axios.put(`/api/v1/task/toggle/${taskId}`);
+      dispatch(toggleIsDoneSuccess(response.data));
+    } catch (error) {
+      dispatch(toggleIsDoneFailure(error.response.data));
+      throw error.response.data;
+    }
+  }
+);
 
-// Create the Redux slice for tasks
 const tasksSlice = createSlice({
-  name: "tasks",
-  initialState,
+  name: "subtask",
+  initialState: {
+    tasks: [],
+    loading: false,
+    error: null,
+  },
   reducers: {
-    // Reducer for indicating the start of the request
     getAllTasksRequest: (state) => {
       state.loading = true;
       state.error = null;
     },
-    // Reducer for handling the success of the request
     getAllTasksSuccess: (state, action) => {
       state.loading = false;
       state.tasks = action.payload;
     },
-    // Reducer for handling the failure of the request
     getAllTasksFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
-    reset: (state) => {
-      state.tasks = [];
-      state.loading = false;
+    // Define separate action types and action creators for toggleIsDone
+    toggleIsDoneRequest: (state) => {
+      state.loading = true;
       state.error = null;
+    },
+    toggleIsDoneSuccess: (state, action) => {
+      state.loading = false;
+      state.tasks = action.payload; // Update the state accordingly
+    },
+    toggleIsDoneFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -64,11 +76,12 @@ const tasksSlice = createSlice({
   },
 });
 
-// Export the actions and reducer for the tasks slice
 export const {
   getAllTasksRequest,
   getAllTasksSuccess,
   getAllTasksFailure,
-  reset,
+  toggleIsDoneRequest,
+  toggleIsDoneSuccess,
+  toggleIsDoneFailure,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;

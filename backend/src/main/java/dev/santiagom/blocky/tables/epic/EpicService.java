@@ -5,7 +5,7 @@ import dev.santiagom.blocky.tables.epic.dtos.EpicResponseDTO;
 import dev.santiagom.blocky.tables.project.Project;
 import dev.santiagom.blocky.tables.project.ProjectRepository;
 import dev.santiagom.blocky.tables.project.ProjectService;
-import dev.santiagom.blocky.tables.task.Task;
+import dev.santiagom.blocky.tables.feature.Feature;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,12 +85,12 @@ public class EpicService {
 
     public void updateProgress(Long epicId) {
         Epic epic = epicRepository.findById(epicId).orElseThrow();
-        List<Task> tasks = epic.getTasks();
-        if (!tasks.isEmpty()) {
-            int totalProgress = tasks.stream()
-                    .mapToInt(Task::getProgress)
+        List<Feature> features = epic.getFeatures();
+        if (!features.isEmpty()) {
+            int totalProgress = features.stream()
+                    .mapToInt(Feature::getProgress)
                     .sum();
-            int averageProgress = totalProgress / tasks.size();
+            int averageProgress = totalProgress / features.size();
             epic.setProgress(averageProgress);
             epicRepository.save(epic);
         }

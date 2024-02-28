@@ -1,19 +1,15 @@
 package dev.santiagom.blocky.tables.task;
 
-import dev.santiagom.blocky.tables.category.Category;
-import dev.santiagom.blocky.tables.category.CategoryRepository;
-import dev.santiagom.blocky.tables.epic.Epic;
-import dev.santiagom.blocky.tables.epic.EpicRepository;
-import dev.santiagom.blocky.tables.epic.EpicService;
-import dev.santiagom.blocky.tables.subtask.Subtask;
 import dev.santiagom.blocky.tables.task.dtos.TaskDTO;
 import dev.santiagom.blocky.tables.task.dtos.TaskResponseDTO;
+import dev.santiagom.blocky.tables.feature.Feature;
+import dev.santiagom.blocky.tables.feature.FeatureRepository;
+import dev.santiagom.blocky.tables.feature.FeatureService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,100 +19,72 @@ import java.util.stream.Collectors;
 public class TaskService {
 
     @Autowired
+    private FeatureService featureService;
+
+    @Autowired
     private TaskRepository taskRepository;
 
     @Autowired
-    private EpicRepository epicRepository;
+    private FeatureRepository featureRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private EpicService epicService;
-
-    public List<TaskResponseDTO> allTasks(Long epicId) {
-        return taskRepository.findAllByEpic_Id(epicId)
+    public List<TaskResponseDTO> allTasks(Long featureId) {
+        return taskRepository.findAllByFeature_Id(featureId)
                 .stream()
-                .map(t -> new TaskResponseDTO(
-                        t.getId(),
-                        t.getName(),
-                        t.getDescription(),
-                        t.getProgress(),
-                        t.getCategory().getId(),
-                        t.getEpic().getId()))
+                .map(t -> new TaskResponseDTO(t.getId(), t.getDescription(), t.isDone(), t.getFeature().getId()))
                 .collect(Collectors.toList());
     }
 
     public TaskResponseDTO createTask(TaskDTO task) {
-        Epic epic = epicRepository.findById(task.getEpicId()).orElseThrow();
-        Category category = categoryRepository.findById(task.getCategoryId()).orElseThrow();
+        Feature feature = featureRepository.findById(task.getFeatureId()).orElseThrow();
 
+        // Create and save new Task
         taskRepository.save(
                 Task.builder()
-                        .name(task.getName())
                         .description(task.getDescription())
-                        .progress(0)
-                        .category(category)
-                        .epic(epic)
-                        .Subtasks(new ArrayList<Subtask>())
+                        .isDone(false)
+                        .feature(feature)
                         .build()
         );
+        calculateTaskProgress(feature.getId());
 
-        return new TaskResponseDTO(null, task.getName(), task.getDescription(), 0, task.getCategoryId(), task.getEpicId());
+        return new TaskResponseDTO(null, task.getDescription(), false, task.getFeatureId());
     }
 
     public TaskResponseDTO updateTask(Long taskId, TaskDTO task) {
-        // Retrieve the task to be updated from the repository
         Task taskToUpdate = taskRepository.findById(taskId).orElseThrow();
 
-        // Update task details with the new data
-        taskToUpdate.setName(task.getName());
         taskToUpdate.setDescription(task.getDescription());
-
-        // Check if a new category is selected and update the task's category accordingly
-        if (taskToUpdate.getCategory().getId() != task.getCategoryId()) {
-            Category newCategory = categoryRepository.findById(task.getCategoryId()).orElseThrow();
-            taskToUpdate.setCategory(newCategory);
-        }
         taskRepository.save(taskToUpdate);
 
-        // Return a TaskResponseDTO containing the updated task details
-        return new TaskResponseDTO(
-                taskId,
-                task.getDescription(),
-                task.getName(),
-                taskToUpdate.getProgress(),
-                task.getCategoryId(),
-                task.getEpicId());
+        return new TaskResponseDTO(taskToUpdate.getId(), task.getDescription(), taskToUpdate.isDone(), taskToUpdate.getFeature().getId());
     }
 
-    public TaskResponseDTO getTaskDetails(Long id) {
-        Task task = taskRepository.findById(id).orElseThrow();
-        return new TaskResponseDTO(
-                task.getId(),
-                task.getName(),
-                task.getDescription(),
-                task.getProgress(),
-                task.getCategory().getId(),
-                task.getEpic().getId());
+    public TaskResponseDTO toggleIsDone(Long taskId) {
+        Task taskToToggle = taskRepository.findById(taskId).orElseThrow();
+
+        taskToToggle.setDone(!taskToToggle.isDone());
+        taskRepository.save(taskToToggle);
+        calculateTaskProgress(taskToToggle.getFeature().getId());
+
+        return new TaskResponseDTO(taskId, taskToToggle.getDescription(), taskToToggle.isDone(), taskToToggle.getFeature().getId());
     }
 
     public TaskResponseDTO deleteTask(Long taskId) {
         Task task = taskRepository.findById(taskId).orElseThrow();
         taskRepository.delete(task);
-        return new TaskResponseDTO(
-                task.getId(),
-                task.getName(),
-                task.getDescription(),
-                task.getProgress(),
-                task.getCategory().getId(),
-                task.getEpic().getId());
+        calculateTaskProgress(task.getFeature().getId());
+        return new TaskResponseDTO(taskId, task.getDescription(), task.isDone(), task.getFeature().getId());
     }
 
-    public void updateProgress(Long taskId, int percentageCompleted) {
-        Task task = taskRepository.findById(taskId).orElseThrow();
-        task.setProgress(percentageCompleted);
-        taskRepository.save(task);
-        epicService.updateProgress(task.getEpic().getId());
+    public void calculateTaskProgress(Long taskId) {
+        List<Task> allTasks = taskRepository.findAllByFeature_Id(taskId);
+        List<Task> doneTasks = taskRepository.findAllByFeature_IdAndIsDone(taskId, true);
+
+        double percentageCompleted = 0.0;
+        if (!allTasks.isEmpty()) {
+            percentageCompleted = ((double) doneTasks.size() / allTasks.size()) * 100;
+        }
+
+        featureService.updateProgress(taskId, (int) percentageCompleted);
     }
 }

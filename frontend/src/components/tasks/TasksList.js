@@ -1,12 +1,12 @@
 import React from "react";
-import Subtask from "./Subtask";
+import Task from "./Task";
 
-function SubtasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
+function TasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
   return (
     <>
       <ul className="border-t-2">
         {list.map((elem) => (
-          <Subtask
+          <Task
             key={elem.id}
             description={elem.description}
             color={elem.color}
@@ -14,9 +14,9 @@ function SubtasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
             handleClick={() => handleClick(elem.id)}
             handleEdit={() =>
               handleEdit({
-                subtaskId: elem.id,
+                taskId: elem.id,
                 description: elem.description,
-                taskId: elem.taskId,
+                featureId: elem.featureId,
               })
             }
             handleDelete={() => handleDelete(elem.id)}
@@ -27,4 +27,4 @@ function SubtasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
   );
 }
 
-export default SubtasksList;
+export default TasksList;

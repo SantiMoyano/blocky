@@ -17,13 +17,9 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/{epicId}")
-    public ResponseEntity<List<TaskResponseDTO>> getAllTasks(@PathVariable Long epicId) {
-        return new ResponseEntity<List<TaskResponseDTO>>(taskService.allTasks(epicId), HttpStatus.OK);
-    }
-    @GetMapping("/details/{id}")
-    public ResponseEntity<TaskResponseDTO> getTaskDetails(@PathVariable Long id) {
-        return new ResponseEntity<TaskResponseDTO>(taskService.getTaskDetails(id), HttpStatus.OK);
+    @GetMapping("/{taskId}")
+    public ResponseEntity<List<TaskResponseDTO>> getAllTasks(@PathVariable Long taskId) {
+        return new ResponseEntity<List<TaskResponseDTO>>(taskService.allTasks(taskId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -32,13 +28,19 @@ public class TaskController {
     }
 
     @PutMapping("/{taskId}")
-    public ResponseEntity<TaskResponseDTO> updateTask(
-            @PathVariable Long taskId, @RequestBody TaskDTO task) {
+    public ResponseEntity<TaskResponseDTO> updateTask
+            (@PathVariable Long taskId, @RequestBody TaskDTO task) {
         return new ResponseEntity<TaskResponseDTO>(taskService.updateTask(taskId, task), HttpStatus.OK);
+    }
+
+    @PutMapping("/toggle/{taskId}")
+    public ResponseEntity<TaskResponseDTO> toggleIsDone(@PathVariable Long taskId) {
+        return new ResponseEntity<TaskResponseDTO>(taskService.toggleIsDone(taskId), HttpStatus.OK);
     }
 
     @DeleteMapping("/{taskId}")
     public ResponseEntity<TaskResponseDTO> deleteTask(@PathVariable Long taskId) {
         return new ResponseEntity<TaskResponseDTO>(taskService.deleteTask(taskId), HttpStatus.OK);
     }
+
 }

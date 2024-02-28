@@ -1,9 +1,8 @@
 package dev.santiagom.blocky.tables.category;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import dev.santiagom.blocky.tables.task.Task;
+import dev.santiagom.blocky.tables.feature.Feature;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +27,5 @@ public class Category {
 
     // One category can have multiple tasks
     @OneToMany(mappedBy = "category")
-    private List<Task> tasks;
+    private List<Feature> features;
 }

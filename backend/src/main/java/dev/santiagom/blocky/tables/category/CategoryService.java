@@ -1,7 +1,7 @@
 package dev.santiagom.blocky.tables.category;
 
 import dev.santiagom.blocky.tables.category.dtos.CategoryResponseDTO;
-import dev.santiagom.blocky.tables.task.Task;
+import dev.santiagom.blocky.tables.feature.Feature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class CategoryService {
                 Category.builder()
                         .name(category.getName())
                         .color(category.getColor())
-                        .tasks(new ArrayList<Task>())
+                        .features(new ArrayList<Feature>())
                         .build()
         );
         // Return simple response

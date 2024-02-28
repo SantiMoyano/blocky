@@ -9,8 +9,8 @@ import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../../utils/ChipDismissible";
 import DialogDefault from "../../utils/Dialog";
 import DialogWithForm from "../../utils/FormDialog";
+import Features from "../../components/features/Features";
 import Loading from "../../utils/Loading";
-import Tasks from "../../components/tasks/Tasks";
 import Title from "../../components/ui/Title";
 import UpdateEpic from "../../features/update/UpdateEpic";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -79,7 +79,7 @@ function DetailedEpic() {
           />
         </div>
 
-        <Tasks epicId={epicId} />
+        <Features epicId={epicId} />
       </section>
     </>
   );

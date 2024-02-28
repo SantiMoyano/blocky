@@ -2,7 +2,7 @@ import { CheckIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 import React from "react";
 
-function Subtask({
+function Task({
   description,
   color,
   isDone,
@@ -36,4 +36,4 @@ function Subtask({
   );
 }
 
-export default Subtask;
+export default Task;

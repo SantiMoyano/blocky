@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import axios from "axios";
 
 export const createTask = createAsyncThunk(
@@ -30,12 +31,12 @@ const createTaskSlice = createSlice({
       state.success = null;
       state.error = null;
     },
-    createTaskSuccess: (state, action) => {
+    createTaskSuccess: (state) => {
       state.creating = false;
       state.success = true;
       state.error = null;
     },
-    createTaskFailure: (state, action) => {
+    createTaskFailure: (state) => {
       state.creating = false;
       state.success = null;
       state.error = true;

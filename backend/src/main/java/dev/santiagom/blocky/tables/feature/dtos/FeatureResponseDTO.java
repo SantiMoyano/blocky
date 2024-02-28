@@ -1,4 +1,4 @@
-package dev.santiagom.blocky.tables.subtask.dtos;
+package dev.santiagom.blocky.tables.feature.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubtaskResponseDTO {
+public class FeatureResponseDTO {
     private Long id;
+    private String name;
     private String description;
-    private Boolean isDone;
-    private Long taskId;
+    private int progress;
+    private Long categoryId;
+    private Long epicId;
 }

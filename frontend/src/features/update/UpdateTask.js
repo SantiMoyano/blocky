@@ -1,43 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
+import { Chip } from "@material-tailwind/react";
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
-import SelectCategory from "../../components/tasks/SelectCategory";
+import { reset } from "../../services/redux/tasks/updateTaskSlice";
 import { updateTask } from "../../services/redux/tasks/updateTaskSlice";
-import { useState } from "react";
 
-function UpdateTask({ task, loadTask, toggleForm }) {
+function UpdateTask({ taskToUpdate, loadTasks, closeUpdateForm }) {
   const dispatch = useDispatch();
-  const { updating, success, error } = useSelector(
-    (state) => state.updateSubtask
-  );
-  const [categoryId, setCategoryId] = useState(0);
+  const { updating, success, error } = useSelector((state) => state.updateTask);
 
   const [taskRequest, setTaskRequest] = useState({
-    name: task.name,
-    description: task.description,
-    categoryId: task.categoryId,
-    epicId: task.epicId,
+    description: taskToUpdate.description,
+    featureId: taskToUpdate.featureId,
   });
 
   const taskData = [
     {
-      label: "Task Name",
-      type: "text",
-      name: "name",
-      value: taskRequest.name,
-    },
-    {
       label: "Description",
-      type: "textarea",
+      type: "text",
       name: "description",
       value: taskRequest.description,
     },
   ];
-
-  function handleSetCategory(e) {
-    setCategoryId(e);
-  }
 
   function handleChange(e) {
     setTaskRequest({
@@ -48,26 +34,32 @@ function UpdateTask({ task, loadTask, toggleForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (categoryId !== 0) taskRequest.categoryId = categoryId;
-    dispatch(updateTask({ taskId: task.id, request: taskRequest }));
-    setTimeout(() => {
-      toggleForm();
-      loadTask();
-    }, 100);
+    dispatch(
+      updateTask({
+        taskId: taskToUpdate.taskId,
+        request: taskRequest,
+      })
+    );
   }
 
+  useEffect(() => {
+    if (success === true) {
+      loadTasks();
+      dispatch(reset());
+      closeUpdateForm();
+    }
+  }, [success, loadTasks, closeUpdateForm]);
+
   return (
-    <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
-      <h3 className="flex justify-center text-white font-bold mt-4 text-center">
-        UPDATE FEATURE
-      </h3>
-      <SelectCategory handleChange={handleSetCategory} />
+    <div className="pb-2 blue-bg rounded rounded-lg">
+      <div className="flex items-end justify-end mr-8 mt-8">
+        <Chip onClick={closeUpdateForm} value="x" className="dark-red-bg" />
+      </div>
       <Form
         formData={taskData}
-        formInfo=" "
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Update task"
+        buttonInfo="Edit task"
       />
       {success && (
         <Notification message="Task updated successfully" type="success" />

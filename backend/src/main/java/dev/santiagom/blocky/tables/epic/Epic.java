@@ -3,7 +3,7 @@ package dev.santiagom.blocky.tables.epic;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import dev.santiagom.blocky.tables.project.Project;
-import dev.santiagom.blocky.tables.task.Task;
+import dev.santiagom.blocky.tables.feature.Feature;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,5 +33,5 @@ public class Epic {
     private Project project;
 
     @OneToMany(mappedBy = "epic", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    private List<Feature> features;
 }

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import axios from "axios";
 
 export const updateTask = createAsyncThunk(
@@ -40,10 +41,19 @@ const updateTaskSlice = createSlice({
       state.success = null;
       state.error = true;
     },
+    reset: (state) => {
+      state.updating = false;
+      state.success = null;
+      state.error = null;
+    },
   },
 });
 
-export const { updateTaskRequest, updateTaskSuccess, updateTaskFailure } =
-  updateTaskSlice.actions;
+export const {
+  updateTaskRequest,
+  updateTaskSuccess,
+  updateTaskFailure,
+  reset,
+} = updateTaskSlice.actions;
 
 export default updateTaskSlice.reducer;

@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import DetailedEpic from "./pages/epic/DetailedEpic";
+import DetailedFeature from "./pages/DetailedFeature";
 import DetailedProject from "./pages/DetailedProject";
-import DetailedTask from "./pages/DetailedTask";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import Home from "./pages/home/Home";
@@ -59,7 +59,7 @@ function App() {
         <Route path="/projects" element={<Projects />}></Route>
         <Route path="/project/:projectId" element={<DetailedProject />} />
         <Route path="/epic/:epicId" element={<DetailedEpic />} />
-        <Route path="/task/:taskId" element={<DetailedTask />} />
+        <Route path="/feature/:featureId" element={<DetailedFeature />} />
       </Routes>
       <Footer />
     </div>
