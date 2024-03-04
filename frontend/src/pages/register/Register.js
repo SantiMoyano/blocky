@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../services/redux/auth/registerSlice";
+
 import Form from "../../components/ui/form/Form";
-import Notification from "../../utils/Notification";
 import Loading from "../../utils/Loading";
+import Notification from "../../utils/Notification";
+import { registerUser } from "../../services/redux/auth/registerSlice";
 
 function Register() {
   const dispatch = useDispatch();
@@ -97,7 +98,7 @@ function Register() {
   if (registering) return <Loading />;
 
   return (
-    <div className="h-screen blue-bg">
+    <div className="blue-bg auth-form min-height-app py-8">
       <Form
         formData={registerData}
         handleChange={handleChange}

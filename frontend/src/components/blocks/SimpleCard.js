@@ -1,10 +1,13 @@
+import "./blocky.css";
+
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
   Typography,
-  Button,
 } from "@material-tailwind/react";
+
 import ProgressLabel from "../../utils/ProgressLabel";
 
 function SimpleCard({ name, progress }) {

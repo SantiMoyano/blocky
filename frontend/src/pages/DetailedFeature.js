@@ -50,7 +50,7 @@ function DetailedFeature() {
   function handleEdit() {}
 
   return (
-    <section>
+    <section className="min-height-app">
       <Title titleName={feature.name} />
       <Chip size="lg" value={featureCategory} className="mt-1" />
 

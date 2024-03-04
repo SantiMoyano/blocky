@@ -2,7 +2,7 @@ import ButtonWithArrow from "../../components/ui/buttons/ButtonWithArrow";
 
 export function UserLoggedHome({ username, handleViewProjects }) {
   return (
-    <section className={`section pt-10`}>
+    <section className={`section min-height-app`}>
       <div className={`top`}>
         <h2>BLOCKY</h2>
       </div>

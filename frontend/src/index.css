@@ -18,3 +18,15 @@ p {
   margin: 0;
   padding: 0;
 }
+
+@media screen and (min-width: 540px) {
+  .App {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .app-content {
+    width: 100%;
+  }
+}

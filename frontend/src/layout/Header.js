@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import {
-  Navbar,
-  Collapse,
-  Typography,
-  IconButton,
-} from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Collapse,
+  IconButton,
+  Navbar,
+  Typography,
+} from "@material-tailwind/react";
+import React, { useEffect } from "react";
+
 import { Link } from "react-router-dom";
 
 function NavList({ isLoggedIn, handleLogout }) {
@@ -76,7 +77,7 @@ function NavbarSimple({ isLoggedIn, handleLogout }) {
   }, []); // Run only once when the component mounts
 
   return (
-    <Navbar className="dark-red-bg mx-auto max-w-screen-xl px-6 py-3 rounded-none border-none">
+    <Navbar className="dark-red-bg w-full min-w-full px-6 py-3 rounded-none border-none">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as={Link}

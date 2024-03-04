@@ -43,7 +43,7 @@ function DetailedProject() {
   }
 
   return (
-    <section>
+    <section className="min-height-app">
       <Title titleName={project.name} />
 
       <div className="actions my-4">

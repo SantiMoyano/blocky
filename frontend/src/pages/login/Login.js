@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../services/redux/auth/loginSlice";
-import { useNavigate } from "react-router-dom";
+
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import { loginUser } from "../../services/redux/auth/loginSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login({ handleLogin }) {
   const dispatch = useDispatch();
@@ -79,7 +80,7 @@ function Login({ handleLogin }) {
   }
 
   return (
-    <div className="h-screen blue-bg">
+    <div className="blue-bg auth-form min-height-app py-8">
       <Form
         formData={loginData}
         handleChange={handleChange}

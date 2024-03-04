@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import BlockSection from "./blocks/BlockSection";
+import { Chip } from "@material-tailwind/react";
 import CreateProject from "../features/create/CreateProject";
 import DialogWithForm from "../utils/FormDialog";
 import Loading from "../utils/Loading";
@@ -46,13 +47,16 @@ function Projects() {
   }
 
   return (
-    <section>
+    <section className="min-height-app">
       <Title titleName="PROJECTS" />
-      <div className="mt-4 px-6">
-        <DialogWithForm
-          childComponent={<CreateProject loadProjects={loadProjects} />}
-          buttonInfo="New project"
-        />
+      <div className="mt-4 px-6 list-content">
+        <div className="select-actions">
+          <Chip value="order by" className="dark-red-bg" />
+          <DialogWithForm
+            childComponent={<CreateProject loadProjects={loadProjects} />}
+            buttonInfo="New project"
+          />
+        </div>
         {projects && (
           <BlockSection list={projects} handleElemClick={handleProjectClick} />
         )}

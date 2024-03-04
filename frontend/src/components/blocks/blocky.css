@@ -1,0 +1,46 @@
+.blocky {
+  min-height: 300px;
+  max-height: 300px;
+  aspect-ratio: 1/1;
+  margin: 20px 20px;
+}
+
+.blocky:hover {
+  cursor: pointer;
+}
+
+.blockylist {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 774px) {
+  .blocky {
+    min-height: 200px;
+    max-height: 80dvw;
+  }
+
+  .select-actions {
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    min-width: 440px;
+  }
+}
+
+@media screen and (max-width: 529px) {
+  .blocky {
+    min-height: 80dvw;
+    max-height: 80dvw;
+  }
+
+  .select-actions {
+    display: flex;
+    justify-content: space-between;
+    max-width: 80dvw;
+    min-width: 80dvw;
+  }
+}

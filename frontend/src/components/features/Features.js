@@ -58,7 +58,7 @@ function Features({ epicId }) {
   }
 
   return (
-    <section>
+    <section className="min-height-app">
       <div className="mt-6 ">
         <div className="flex justify-center">
           <Subtitle subtitleName="FEATURES" />

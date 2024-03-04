@@ -45,7 +45,7 @@ function DetailedEpic() {
 
   return (
     <>
-      <section>
+      <section className="min-height-app">
         <Title titleName={epic.name} />
         {!actionClicked ? (
           <div className="my-4 actions">

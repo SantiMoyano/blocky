@@ -39,29 +39,31 @@ function App() {
 
   return (
     <div className="App">
-      <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              handleLogin={handleSuccessfullLogin}
-              handleLogout={handleLogout}
-              username={username}
-            />
-          }
-        />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/login"
-          element={<Login handleLogin={() => setIsLoggedIn(true)} />}
-        ></Route>
-        <Route path="/projects" element={<Projects />}></Route>
-        <Route path="/project/:projectId" element={<DetailedProject />} />
-        <Route path="/epic/:epicId" element={<DetailedEpic />} />
-        <Route path="/feature/:featureId" element={<DetailedFeature />} />
-      </Routes>
-      <Footer />
+      <div className="app-content">
+        <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                handleLogin={handleSuccessfullLogin}
+                handleLogout={handleLogout}
+                username={username}
+              />
+            }
+          />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={<Login handleLogin={() => setIsLoggedIn(true)} />}
+          ></Route>
+          <Route path="/projects" element={<Projects />}></Route>
+          <Route path="/project/:projectId" element={<DetailedProject />} />
+          <Route path="/epic/:epicId" element={<DetailedEpic />} />
+          <Route path="/feature/:featureId" element={<DetailedFeature />} />
+        </Routes>
+        <Footer />
+      </div>
     </div>
   );
 }
