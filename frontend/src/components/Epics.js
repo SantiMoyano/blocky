@@ -33,7 +33,7 @@ function Epics({ projectId }) {
     <>
       {/* Add any filtering or other options here if needed */}
 
-      <div className="mt-12 px-6 min-height-app">
+      <div className="mt-2 px-6 min-height-app border-8 border-x-0 py-4 border-b-0">
         <div className="flex justify-center">
           <Subtitle subtitleName="EPICS" />
           <PopoverInfo popoverInfo="Container for features, such as user authentication functionality" />

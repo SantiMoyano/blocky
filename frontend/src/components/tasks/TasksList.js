@@ -1,10 +1,12 @@
+import "../blocks/blocky.css";
+
 import React from "react";
 import Task from "./Task";
 
 function TasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
   return (
-    <>
-      <ul className="border-t-2">
+    <div className="flex justify-center">
+      <ul className="border-t-2 tasklist">
         {list.map((elem) => (
           <Task
             key={elem.id}
@@ -23,7 +25,7 @@ function TasksList({ list, isDone, handleClick, handleEdit, handleDelete }) {
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 

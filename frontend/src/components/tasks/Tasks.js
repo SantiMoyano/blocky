@@ -1,3 +1,5 @@
+import "../blocks/blocky.css";
+
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import {
@@ -70,7 +72,7 @@ function Tasks({ featureId }) {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-2 mt-8 mb-2">
+      <div className="flex items-center justify-center gap-2 mt-2 border-8 border-x-0 py-4 border-b-0">
         <h3 className="font-bold text-white word-break-blocky">TASKS</h3>
         <button onClick={() => setShowTasks(!showTasks)}>
           {!showTasks ? (
@@ -82,8 +84,8 @@ function Tasks({ featureId }) {
       </div>
 
       {showTasks && (
-        <div className="pt-2">
-          <div className="actions flex justify-between gap-1">
+        <div className=" taskactions-parent">
+          <div className="flex justify-between gap-1 px-2 taskactions">
             <div className="flex justify-center items-center">
               <Chip
                 value={!showDoneTask ? "Done" : "Todo"}

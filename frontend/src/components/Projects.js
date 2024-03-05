@@ -49,7 +49,7 @@ function Projects() {
   return (
     <section className="min-height-app">
       <Title titleName="PROJECTS" />
-      <div className="mt-4 px-6 list-content">
+      <div className="mt-4 px-6 list-content border-8 border-x-0 py-4 border-b-0">
         <div className="select-actions">
           <Chip value="order by" className="dark-red-bg" />
           <DialogWithForm

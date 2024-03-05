@@ -53,7 +53,7 @@ function Features({ epicId }) {
 
   return (
     <section className="min-height-app">
-      <div className="mt-6 ">
+      <div className="mt-2 border-8 border-x-0 py-4">
         <div className="flex justify-center">
           <Subtitle subtitleName="FEATURES" />
           <PopoverInfo popoverInfo="Features represent specific functionalities or capabilities of the application, categorized into frontend and backend. For example, at the epic level of 'User Authentication', features could include 'Login Form', 'Login Endpoint', etc." />
