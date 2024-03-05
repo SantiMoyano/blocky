@@ -5,6 +5,7 @@ import {
 } from "../../services/redux/epics/epicDetailSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import Chevron from "../../utils/Chevron";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../../utils/ChipDismissible";
 import DialogDefault from "../../utils/Dialog";
@@ -19,9 +20,8 @@ import { useParams } from "react-router-dom";
 function DetailedEpic() {
   const dispatch = useDispatch();
   const { epicId } = useParams();
-  const [showEditForm, setShowEditForm] = useState();
   const { epic, loading, error } = useSelector((state) => state.epic);
-  const [actionClicked, setActionClicked] = useState(false);
+  const [showManageActions, setShowManageActions] = useState(false);
 
   useEffect(() => {
     if (epicId) {
@@ -47,7 +47,12 @@ function DetailedEpic() {
     <>
       <section className="min-height-app">
         <Title titleName={epic.name} />
-        {!actionClicked ? (
+
+        <Chevron
+          toggleChevron={() => setShowManageActions(!showManageActions)}
+          text="MANAGE"
+        />
+        {showManageActions && (
           <div className="my-4 actions">
             <DialogWithForm
               childComponent={
@@ -65,20 +70,13 @@ function DetailedEpic() {
               actionText="delete epic"
             />
           </div>
-        ) : (
-          <div className="flex justify-end mt-4 mr-8">
-            <button onClick={handleEdit} className="focus:outline-none">
-              <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
-            </button>
-          </div>
         )}
-        <div className="">
+        <div className="descriptions-container">
           <DialogDefault
             dialogName="Description"
             dialogDescription={epic.description}
           />
         </div>
-
         <Features epicId={epicId} />
       </section>
     </>

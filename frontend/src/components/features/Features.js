@@ -12,12 +12,10 @@ import Loading from "../../utils/Loading";
 import { PopoverInfo } from "../../utils/PopoverInfo";
 import SelectCategory from "./SelectCategory";
 import Subtitle from "../ui/Subtitle";
-import SwitchButton from "../../utils/SwitchButton";
 import { useNavigate } from "react-router-dom";
 
 function Features({ epicId }) {
   const dispatch = useDispatch();
-  const [showForm, setShowForm] = useState(false);
   const { features, loading, error } = useSelector((state) => state.features);
   const navigate = useNavigate();
   const [featureList, setFeatureList] = useState([]);
@@ -40,10 +38,6 @@ function Features({ epicId }) {
     if (features) setFeatureList(features);
   }
 
-  function handleSwitchClick() {
-    setShowForm(!showForm);
-  }
-
   function handleCategorySelection(e) {
     const categoryId = e;
 
@@ -64,17 +58,20 @@ function Features({ epicId }) {
           <Subtitle subtitleName="FEATURES" />
           <PopoverInfo popoverInfo="Features represent specific functionalities or capabilities of the application, categorized into frontend and backend. For example, at the epic level of 'User Authentication', features could include 'Login Form', 'Login Endpoint', etc." />
         </div>
-        <SelectCategory
-          handleChange={handleCategorySelection}
-          labelInfo="Category"
-        />
-        <div className="py-4 px-6">
-          <DialogWithForm
-            childComponent={
-              <CreateFeature loadFeatures={loadFeatures} epicId={epicId} />
-            }
-            buttonInfo="New feature"
-          />
+
+        <div className="py-4 px-6 list-content">
+          <div className="select-actions features-actions">
+            <SelectCategory
+              handleChange={handleCategorySelection}
+              labelInfo="Category"
+            />
+            <DialogWithForm
+              childComponent={
+                <CreateFeature loadFeatures={loadFeatures} epicId={epicId} />
+              }
+              buttonInfo="New feature"
+            />
+          </div>
           <BlockSection
             list={featureList}
             handleElemClick={handleFeatureClick}

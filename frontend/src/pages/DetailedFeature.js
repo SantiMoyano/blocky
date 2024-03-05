@@ -5,6 +5,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
+import Chevron from "../utils/Chevron";
 import { Chip } from "@material-tailwind/react";
 import ChipDismissible from "../utils/ChipDismissible";
 import DialogDefault from "../utils/Dialog";
@@ -20,11 +21,10 @@ import { useParams } from "react-router-dom";
 function DetailedFeature() {
   const dispatch = useDispatch();
   const { featureId } = useParams();
-  const [showEditForm, setShowEditForm] = useState();
   const { feature, loading, error } = useSelector((state) => state.feature);
   const { categories } = useSelector((state) => state.categories);
-  const [actionClicked, setActionClicked] = useState(false);
   const [featureCategory, setFeatureCategory] = useState(null);
+  const [showManageActions, setShowManageActions] = useState(false);
 
   useEffect(() => {
     if (featureId) loadFeature();
@@ -33,7 +33,9 @@ function DetailedFeature() {
       const category = categories.find((c) => c.id === feature.categoryId);
       if (category) setFeatureCategory(category.name);
     }
-  }, [dispatch]);
+  }, [dispatch, featureCategory]);
+
+  useEffect(() => {}, [featureCategory]);
 
   if (loading) return <Loading />;
 
@@ -52,9 +54,13 @@ function DetailedFeature() {
   return (
     <section className="min-height-app">
       <Title titleName={feature.name} />
-      <Chip size="lg" value={featureCategory} className="mt-1" />
 
-      {!actionClicked ? (
+      <Chevron
+        toggleChevron={() => setShowManageActions(!showManageActions)}
+        text="MANAGE"
+      />
+
+      {showManageActions && (
         <div className="actions my-4">
           <DialogWithForm
             childComponent={
@@ -72,21 +78,13 @@ function DetailedFeature() {
             actionText="delete feature"
           />
         </div>
-      ) : (
-        <div className="flex justify-end mt-4 mr-8">
-          <button onClick={handleEdit} className="focus:outline-none">
-            <XMarkIcon color="white" strokeWidth={4} className="h-6 w-6" />
-          </button>
-        </div>
       )}
-
-      <div className="">
+      <div className="descriptions-container">
         <DialogDefault
           dialogName="Description"
           dialogDescription={feature.description}
         />
       </div>
-
       <Tasks featureId={featureId} />
     </section>
   );

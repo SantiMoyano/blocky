@@ -1,12 +1,13 @@
-import React from "react";
 import {
   Button,
   Dialog,
-  DialogHeader,
   DialogBody,
   DialogFooter,
+  DialogHeader,
 } from "@material-tailwind/react";
+
 import ButtonCustom from "../components/ui/buttons/ButtonCustom";
+import React from "react";
 
 function DialogDefault({ dialogName, dialogDescription }) {
   const [open, setOpen] = React.useState(false);

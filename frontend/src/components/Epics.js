@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import BlockSection from "./blocks/BlockSection";
+import { Chip } from "@material-tailwind/react";
 import CreateEpic from "../features/create/CreateEpic";
 import DialogWithForm from "../utils/FormDialog";
 import { PopoverInfo } from "../utils/PopoverInfo";
@@ -38,13 +39,16 @@ function Epics({ projectId }) {
           <PopoverInfo popoverInfo="Container for features, such as user authentication functionality" />
         </div>
 
-        <div className="py-2">
-          <DialogWithForm
-            childComponent={
-              <CreateEpic loadEpics={loadEpics} projectId={projectId} />
-            }
-            buttonInfo="Add Epic"
-          />
+        <div className="py-2 list-content">
+          <div className="select-actions">
+            <Chip value="order by" className="dark-red-bg" />
+            <DialogWithForm
+              childComponent={
+                <CreateEpic loadEpics={loadEpics} projectId={projectId} />
+              }
+              buttonInfo="Add Epic"
+            />
+          </div>
           <BlockSection list={epics} handleElemClick={handleEpicClick} />
         </div>
       </div>

@@ -13,11 +13,11 @@ function SelectCategory({ handleChange, labelInfo }) {
   }, [dispatch]);
 
   return (
-    <div className="flex justify-center w-full px-12 py-2">
+    <div className="flex justify-center">
       <Select
         label={labelInfo}
         onChange={handleChange}
-        className="text-white font-semibold label-select"
+        className="text-white font-semibold label-select "
       >
         {categories.map((category) => (
           <Option value={category.id} className="font-semibold">

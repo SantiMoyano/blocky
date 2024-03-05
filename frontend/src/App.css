@@ -166,6 +166,23 @@ p {
   .footer-content {
     padding: 32px 120px;
   }
+
+  .actions {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .descriptions-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .descriptions {
+    min-width: 200px;
+    border-radius: 4px;
+    padding: 4px 0;
+  }
 }
 
 @media screen and (min-width: 540px) {
@@ -194,5 +211,14 @@ p {
 @media screen and (max-width: 719px) {
   .min-height-app {
     min-height: calc(100dvh - 204px);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .features-actions {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
 }
