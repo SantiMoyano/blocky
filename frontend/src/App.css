@@ -130,6 +130,10 @@ p {
   }
 }
 
+.feature-btn {
+  padding-left: 8px;
+}
+
 @media screen and (max-width: 318px) {
   h2 {
     font-size: 48px;
@@ -159,6 +163,16 @@ p {
 
   .add-subtask-btn {
     margin-left: 0;
+  }
+
+  .column-responsive {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-btn {
+    padding-left: 0;
+    padding-bottom: 8px;
   }
 }
 

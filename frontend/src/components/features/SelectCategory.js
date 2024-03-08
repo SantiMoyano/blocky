@@ -17,7 +17,7 @@ function SelectCategory({ handleChange, labelInfo }) {
       <Select
         label={labelInfo}
         onChange={handleChange}
-        className="text-white font-semibold label-select "
+        className="text-white font-semibold label-select border-2"
       >
         {categories.map((category) => (
           <Option value={category.id} className="font-semibold">

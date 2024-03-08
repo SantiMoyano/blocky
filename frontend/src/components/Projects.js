@@ -50,12 +50,13 @@ function Projects() {
     <section className="min-height-app">
       <Title titleName="PROJECTS" />
       <div className="mt-4 px-6 list-content border-8 border-x-0 py-4 border-b-0">
-        <div className="select-actions">
-          <Chip value="order by" className="dark-red-bg" />
-          <DialogWithForm
-            childComponent={<CreateProject loadProjects={loadProjects} />}
-            buttonInfo="New project"
-          />
+        <div className="flex justify-center items-center select-actions">
+          <div className="pb-2">
+            <DialogWithForm
+              childComponent={<CreateProject loadProjects={loadProjects} />}
+              buttonInfo="New project"
+            />
+          </div>
         </div>
         {projects && (
           <BlockSection list={projects} handleElemClick={handleProjectClick} />

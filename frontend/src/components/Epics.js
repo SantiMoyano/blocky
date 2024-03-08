@@ -33,22 +33,25 @@ function Epics({ projectId }) {
     <>
       {/* Add any filtering or other options here if needed */}
 
-      <div className="mt-2 px-6 min-height-app border-8 border-x-0 py-4 border-b-0">
-        <div className="flex justify-center">
-          <Subtitle subtitleName="EPICS" />
-          <PopoverInfo popoverInfo="Container for features, such as user authentication functionality" />
+      <div className="mt-2 min-height-app border-8 border-x-0 py-4 border-b-0">
+        <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center select-actions column-responsive">
+            <div className="flex">
+              <Subtitle subtitleName="EPICS" />
+              <PopoverInfo popoverInfo="Container for features, such as user authentication functionality" />
+            </div>
+            <div className="">
+              <DialogWithForm
+                childComponent={
+                  <CreateEpic loadEpics={loadEpics} projectId={projectId} />
+                }
+                buttonInfo="Add Epic"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="py-2 list-content">
-          <div className="select-actions">
-            <Chip value="order by" className="dark-red-bg" />
-            <DialogWithForm
-              childComponent={
-                <CreateEpic loadEpics={loadEpics} projectId={projectId} />
-              }
-              buttonInfo="Add Epic"
-            />
-          </div>
           <BlockSection list={epics} handleElemClick={handleEpicClick} />
         </div>
       </div>
