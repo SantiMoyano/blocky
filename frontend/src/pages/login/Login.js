@@ -83,21 +83,17 @@ function Login({ handleLogin }) {
     <div className="blue-bg auth-form min-height-app py-8">
       <Form
         formData={loginData}
+        formInfo="Login"
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         buttonInfo={loggingIn ? "Login in..." : "Login"}
       />
-      {loginSuccess ? (
-        <>
-          <Notification message={"Login successful!"} type={"success"} />
-          {navigateToProjects()}
-        </>
-      ) : (
-        error && <Notification message={error.message} type={"failure"} />
-      )}
-      {formError.formIsInvalid && (
-        <Notification message={formError.message} type={"failure"} />
-      )}
+      <div className="flex justify-center items-center">
+        {error && <Notification message={error.message} type={"failure"} />}
+        {formError.formIsInvalid && (
+          <Notification message={formError.message} type={"failure"} />
+        )}
+      </div>
     </div>
   );
 }

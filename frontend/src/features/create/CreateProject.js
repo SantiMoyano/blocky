@@ -10,6 +10,10 @@ function CreateProject({ loadProjects }) {
   const { creating, success, error } = useSelector(
     (state) => state.createProject
   );
+  const [formError, setFormError] = useState({
+    message: "",
+    formIsInvalid: false,
+  });
 
   const [projectRequest, setProjectRequest] = useState({
     name: "",
@@ -47,24 +51,47 @@ function CreateProject({ loadProjects }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!formIsValid()) return;
     const token = localStorage.getItem("authToken");
     dispatch(createProject({ token, request: projectRequest }));
     setTimeout(() => loadProjects(), 50);
+  }
+
+  function formIsValid() {
+    const emptyFields = Object.values(projectRequest).some(
+      (value) => value === ""
+    );
+    const longFields = Object.values(projectRequest).some(
+      (value) => value.length > 200
+    );
+    if (emptyFields) {
+      setFormError({ message: "There are empty fields", formIsInvalid: true });
+      return false;
+    }
+    if (longFields) {
+      setFormError({ message: "Too long fields!", formIsInvalid: true });
+      return false;
+    }
+    return true;
   }
 
   return (
     <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
       <Form
         formData={projectData}
+        formInfo="Create Project"
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Create project"
+        buttonInfo={creating ? "Creating..." : "Create Project"}
       />
-
-      {success && (
-        <Notification message="Project created successfully" type="success" />
-      )}
-      {error && <Notification message="An error has ocurred" type="error" />}
+      <div className="flex justify-center items-center">
+        {error && (
+          <Notification message="An error has ocurred" type={"failure"} />
+        )}
+        {formError.formIsInvalid && (
+          <Notification message={formError.message} type={"failure"} />
+        )}
+      </div>
     </div>
   );
 }

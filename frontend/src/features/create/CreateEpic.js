@@ -9,6 +9,11 @@ function CreateEpic({ loadEpics, projectId }) {
   const dispatch = useDispatch();
   const { creating, success, error } = useSelector((state) => state.createEpic);
 
+  const [formError, setFormError] = useState({
+    message: "",
+    formIsInvalid: false,
+  });
+
   const [epicRequest, setEpicRequest] = useState({
     name: "",
     description: "",
@@ -39,23 +44,46 @@ function CreateEpic({ loadEpics, projectId }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!formIsValid()) return;
     dispatch(createEpic(epicRequest));
     setTimeout(() => loadEpics(), 50);
+  }
+
+  function formIsValid() {
+    const emptyFields = Object.values(epicRequest).some(
+      (value) => value === ""
+    );
+    const longFields = Object.values(epicRequest).some(
+      (value) => value.length > 200
+    );
+    if (emptyFields) {
+      setFormError({ message: "There are empty fields", formIsInvalid: true });
+      return false;
+    }
+    if (longFields) {
+      setFormError({ message: "Too long fields!", formIsInvalid: true });
+      return false;
+    }
+    return true;
   }
 
   return (
     <div className="pt-6 pb-2 blue-bg rounded rounded-lg">
       <Form
         formData={epicData}
+        formInfo="Create Epic"
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Create epic"
+        buttonInfo={creating ? "Creating..." : "Create Epic"}
       />
-
-      {success && (
-        <Notification message="Epic created successfully" type="success" />
-      )}
-      {error && <Notification message="An error has occurred" type="error" />}
+      <div className="flex justify-center items-center">
+        {error && (
+          <Notification message="An error has occurred" type={"failure"} />
+        )}
+        {formError.formIsInvalid && (
+          <Notification message={formError.message} type={"failure"} />
+        )}
+      </div>
     </div>
   );
 }

@@ -15,13 +15,10 @@ function Projects() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { projects, loading, error } = useSelector((state) => state.projects);
-  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     dispatch(getAllProjects(token));
-    // No need to set projectList here
-    setShowForm(false);
   }, [dispatch]);
 
   useEffect(() => {}, [projects]);
@@ -33,12 +30,6 @@ function Projects() {
   async function loadProjects() {
     const token = localStorage.getItem("authToken");
     dispatch(getAllProjects(token));
-    // No need to set projectList here
-    setShowForm(false);
-  }
-
-  function handleSwitchClick() {
-    setShowForm(!showForm);
   }
 
   // Check if loading is true or error exists
@@ -47,9 +38,9 @@ function Projects() {
   }
 
   return (
-    <section className="min-height-app">
+    <section className="min-height-app gradient-bg">
       <Title titleName="PROJECTS" />
-      <div className="mt-4 px-6 list-content border-8 border-x-0 py-4 border-b-0">
+      <div className="mt-4 px-6 list-content py-4">
         <div className="flex justify-center items-center select-actions">
           <div className="pb-2">
             <DialogWithForm

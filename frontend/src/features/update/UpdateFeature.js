@@ -1,17 +1,22 @@
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
 import SelectCategory from "../../components/features/SelectCategory";
 import { updateFeature } from "../../services/redux/features/updateFeatureSlice";
-import { useState } from "react";
 
-function UpdateFeature({ feature, loadFeature, toggleForm }) {
+function UpdateFeature({ feature, loadFeature }) {
   const dispatch = useDispatch();
   const { updating, success, error } = useSelector(
-    (state) => state.updateSubtask
+    (state) => state.updateFeature
   );
-  const [categoryId, setCategoryId] = useState(0);
+  const [categoryId, setCategoryId] = useState(feature.categoryId);
+
+  const [formError, setFormError] = useState({
+    message: "",
+    formIsInvalid: false,
+  });
 
   const [featureRequest, setFeatureRequest] = useState({
     name: feature.name,
@@ -48,12 +53,29 @@ function UpdateFeature({ feature, loadFeature, toggleForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (categoryId !== 0) featureRequest.categoryId = categoryId;
+    if (!formIsValid()) return;
     dispatch(updateFeature({ featureId: feature.id, request: featureRequest }));
     setTimeout(() => {
-      toggleForm();
       loadFeature();
     }, 100);
+  }
+
+  function formIsValid() {
+    const emptyFields = Object.values(featureRequest).some(
+      (value) => value === ""
+    );
+    const longFields = Object.values(featureRequest).some(
+      (value) => typeof value === "string" && value.length > 200
+    );
+    if (emptyFields) {
+      setFormError({ message: "There are empty fields", formIsInvalid: true });
+      return false;
+    }
+    if (longFields) {
+      setFormError({ message: "Too long fields!", formIsInvalid: true });
+      return false;
+    }
+    return true;
   }
 
   return (
@@ -61,18 +83,27 @@ function UpdateFeature({ feature, loadFeature, toggleForm }) {
       <h3 className="flex justify-center text-white font-bold mt-4 text-center">
         UPDATE FEATURE
       </h3>
-      <SelectCategory handleChange={handleSetCategory} />
+      <div className="px-8 pt-4">
+        <SelectCategory
+          handleChange={handleSetCategory}
+          selectedCategory={categoryId}
+        />
+      </div>
       <Form
         formData={featureData}
         formInfo=" "
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Update feature"
+        buttonInfo={updating ? "Updating..." : "Update feature"}
       />
-      {success && (
-        <Notification message="Feature updated successfully" type="success" />
-      )}
-      {error && <Notification message="An error has occurred" type="error" />}
+      <div className="flex justify-center items-center">
+        {error && (
+          <Notification message="An error has occurred" type={"failure"} />
+        )}
+        {formError.formIsInvalid && (
+          <Notification message={formError.message} type={"failure"} />
+        )}
+      </div>
     </div>
   );
 }

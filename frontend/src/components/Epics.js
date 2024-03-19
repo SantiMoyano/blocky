@@ -33,7 +33,7 @@ function Epics({ projectId }) {
     <>
       {/* Add any filtering or other options here if needed */}
 
-      <div className="mt-2 min-height-app border-8 border-x-0 py-4 border-b-0">
+      <div className="mt-2 min-height-app py-4">
         <div className="flex justify-center items-center">
           <div className="flex justify-center items-center select-actions column-responsive">
             <div className="flex">

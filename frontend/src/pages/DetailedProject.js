@@ -41,7 +41,7 @@ function DetailedProject() {
   }
 
   return (
-    <section className=" min-height-app">
+    <section className=" min-height-app gradient-bg">
       <Title titleName={project.name} />
 
       <Chevron
@@ -65,10 +65,10 @@ function DetailedProject() {
       )}
       <div className="descriptions-container">
         <DialogDefault
-          dialogName="Description"
+          dialogName="description"
           dialogDescription={project.description}
         />
-        <DialogDefault dialogName="Goal" dialogDescription={project.goal} />
+        <DialogDefault dialogName="goal" dialogDescription={project.goal} />
       </div>
       <Epics projectId={projectId} />
     </section>

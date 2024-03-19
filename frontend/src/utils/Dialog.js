@@ -16,7 +16,13 @@ function DialogDefault({ dialogName, dialogDescription }) {
 
   return (
     <div className="mt-1 mb-1">
-      <ButtonCustom buttonText={dialogName} handleSubmit={handleOpen} />
+      <ButtonCustom
+        buttonText={dialogName}
+        handleSubmit={handleOpen}
+        isDesc={
+          dialogName === "description" || dialogName === "goal" ? true : false
+        }
+      />
       <Dialog open={open} handler={handleOpen} className="dark-red-bg">
         <DialogHeader
           style={{ textTransform: "uppercase" }}

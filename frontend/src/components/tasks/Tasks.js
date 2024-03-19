@@ -23,7 +23,7 @@ function Tasks({ featureId }) {
   const [doneTaskList, setDoneTaskList] = useState([]);
   const [showTaskToUpdate, setShowTaskToUpdate] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
-  const [showTasks, setShowTasks] = useState(false);
+  const [showTasks, setShowTasks] = useState(true);
   const { tasks, loading, error } = useSelector((state) => state.tasks);
   const { deleting } = useSelector((state) => state.deleteTask);
 
@@ -72,7 +72,7 @@ function Tasks({ featureId }) {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-2 mt-2 border-8 border-x-0 py-4 border-b-0">
+      <div className="flex items-center justify-center gap-2 mt-2 py-4">
         <h3 className="font-bold text-white word-break-blocky">TASKS</h3>
         <button onClick={() => setShowTasks(!showTasks)}>
           {!showTasks ? (

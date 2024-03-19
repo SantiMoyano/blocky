@@ -13,6 +13,11 @@ function CreateFeature({ loadFeatures, epicId }) {
   );
   const [categoryId, setCategoryId] = useState(0);
 
+  const [formError, setFormError] = useState({
+    message: "",
+    formIsInvalid: false,
+  });
+
   const [featureRequest, setFeatureRequest] = useState({
     name: "",
     description: "",
@@ -48,9 +53,28 @@ function CreateFeature({ loadFeatures, epicId }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!formIsValid()) return;
     featureRequest.categoryId = categoryId;
     dispatch(createFeature(featureRequest));
     setTimeout(() => loadFeatures(), 50);
+  }
+
+  function formIsValid() {
+    const emptyFields = Object.values(featureRequest).some(
+      (value) => value === ""
+    );
+    const longFields = Object.values(featureRequest).some(
+      (value) => value.length > 200
+    );
+    if (emptyFields) {
+      setFormError({ message: "There are empty fields", formIsInvalid: true });
+      return false;
+    }
+    if (longFields) {
+      setFormError({ message: "Too long fields!", formIsInvalid: true });
+      return false;
+    }
+    return true;
   }
 
   return (
@@ -58,21 +82,27 @@ function CreateFeature({ loadFeatures, epicId }) {
       <h3 className="flex justify-center text-white font-bold mt-4 text-center">
         CREATE FEATURE
       </h3>
-      <SelectCategory
-        handleChange={handleSetCategory}
-        labelInfo="Select category"
-      />
+      <div className="px-8 pt-4">
+        <SelectCategory
+          handleChange={handleSetCategory}
+          labelInfo="Select category"
+        />
+      </div>
       <Form
         formData={featureData}
         formInfo=" "
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Create feature"
+        buttonInfo={creating ? "Creating..." : "Create feature"}
       />
-      {success && (
-        <Notification message="Feature created successfully" type="success" />
-      )}
-      {error && <Notification message="An error has occurred" type="error" />}
+      <div className="flex justify-center items-center">
+        {error && (
+          <Notification message="An error has occurred" type={"failure"} />
+        )}
+        {formError.formIsInvalid && (
+          <Notification message={formError.message} type={"failure"} />
+        )}
+      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ function Notification({ message, type }) {
   }
 
   return (
-    <p style={{ color: type === "success" ? "green" : "red" }}>
+    <p style={{ color: type === "success" ? "green" : "red", fontSize: 18 }}>
       {renderedMessage}
     </p>
   );

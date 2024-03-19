@@ -44,42 +44,40 @@ function DetailedEpic() {
   function handleEdit() {}
 
   return (
-    <>
-      <section className="min-height-app">
-        <Title titleName={epic.name} />
+    <section className="min-height-app">
+      <Title titleName={epic.name} />
 
-        <Chevron
-          toggleChevron={() => setShowManageActions(!showManageActions)}
-          text="MANAGE"
-        />
-        {showManageActions && (
-          <div className="my-4 actions">
-            <DialogWithForm
-              childComponent={
-                <UpdateEpic
-                  epic={epic}
-                  loadEpic={loadEpic}
-                  toggleForm={handleEdit}
-                />
-              }
-              buttonInfo="Edit Epic"
-              isEdit={true}
-            />
-            <ChipDismissible
-              handleAction={handleDelete}
-              actionText="delete epic"
-            />
-          </div>
-        )}
-        <div className="descriptions-container">
-          <DialogDefault
-            dialogName="Description"
-            dialogDescription={epic.description}
+      <Chevron
+        toggleChevron={() => setShowManageActions(!showManageActions)}
+        text="MANAGE"
+      />
+      {showManageActions && (
+        <div className="my-4 actions">
+          <DialogWithForm
+            childComponent={
+              <UpdateEpic
+                epic={epic}
+                loadEpic={loadEpic}
+                toggleForm={handleEdit}
+              />
+            }
+            buttonInfo="Edit Epic"
+            isEdit={true}
+          />
+          <ChipDismissible
+            handleAction={handleDelete}
+            actionText="delete epic"
           />
         </div>
-        <Features epicId={epicId} />
-      </section>
-    </>
+      )}
+      <div className="descriptions-container">
+        <DialogDefault
+          dialogName="description"
+          dialogDescription={epic.description}
+        />
+      </div>
+      <Features epicId={epicId} />
+    </section>
   );
 }
 

@@ -6,7 +6,7 @@ function ButtonWithArrow({ buttonText, handleClick }) {
       onClick={handleClick}
       size="lg"
       fullWidth
-      className="flex items-center justify-between font-custom rounded-none py-5 text-lg dark-red-bg" // Adjusted padding
+      className="flex items-center justify-between font-custom rounded-none py-5 text-lg dark-red-bg border-2" // Adjusted padding
     >
       {buttonText}
       <svg

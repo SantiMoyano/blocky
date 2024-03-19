@@ -11,6 +11,11 @@ function UpdateTask({ taskToUpdate, loadTasks, closeUpdateForm }) {
   const dispatch = useDispatch();
   const { updating, success, error } = useSelector((state) => state.updateTask);
 
+  const [formError, setFormError] = useState({
+    message: "",
+    formIsInvalid: false,
+  });
+
   const [taskRequest, setTaskRequest] = useState({
     description: taskToUpdate.description,
     featureId: taskToUpdate.featureId,
@@ -34,6 +39,7 @@ function UpdateTask({ taskToUpdate, loadTasks, closeUpdateForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!formIsValid()) return;
     dispatch(
       updateTask({
         taskId: taskToUpdate.taskId,
@@ -42,11 +48,25 @@ function UpdateTask({ taskToUpdate, loadTasks, closeUpdateForm }) {
     );
   }
 
+  function formIsValid() {
+    if (taskRequest.description.trim() === "") {
+      setFormError({
+        message: "Description cannot be empty",
+        formIsInvalid: true,
+      });
+      return false;
+    }
+    if (taskRequest.description.length > 65) {
+      setFormError({ message: "Too long fields!", formIsInvalid: true });
+      return false;
+    }
+    return true;
+  }
+
   useEffect(() => {
     if (success === true) {
       loadTasks();
       dispatch(reset());
-      closeUpdateForm();
     }
   }, [success, loadTasks, closeUpdateForm]);
 
@@ -57,14 +77,19 @@ function UpdateTask({ taskToUpdate, loadTasks, closeUpdateForm }) {
       </div>
       <Form
         formData={taskData}
+        formInfo="Edit task"
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Edit task"
+        buttonInfo={updating ? "Updating..." : "Edit task"}
       />
-      {success && (
-        <Notification message="Task updated successfully" type="success" />
-      )}
-      {error && <Notification message="An error has occurred" type="error" />}
+      <div className="flex justify-center items-center">
+        {error && (
+          <Notification message="An error has occurred" type={"failure"} />
+        )}
+        {formError.formIsInvalid && (
+          <Notification message={formError.message} type={"failure"} />
+        )}
+      </div>
     </div>
   );
 }

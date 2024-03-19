@@ -30,7 +30,15 @@
   background-color: rgb(28, 28, 28);
 }
 
+.gradient-bg {
+  background: linear-gradient(to top, #173753, #2892d7);
+}
+
 /* STYLES FOR HOME */
+
+body {
+  scroll-behavior: smooth;
+}
 
 section {
   min-height: 90dvh;
@@ -234,5 +242,19 @@ p {
     align-items: center;
     justify-content: center;
     gap: 8px;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .header-width {
+    min-width: 1000px;
+    max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .header-width {
+    min-width: 100%;
+    max-width: 100%;
   }
 }

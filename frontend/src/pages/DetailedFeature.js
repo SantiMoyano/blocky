@@ -14,7 +14,6 @@ import Loading from "../utils/Loading";
 import Tasks from "../components/tasks/Tasks";
 import Title from "../components/ui/Title";
 import UpdateFeature from "../features/update/UpdateFeature";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { getAllCategories } from "../services/redux/categories/categoriesSlice";
 import { useParams } from "react-router-dom";
 
@@ -49,10 +48,8 @@ function DetailedFeature() {
     dispatch(deleteFeature(featureId));
   }
 
-  function handleEdit() {}
-
   return (
-    <section className="min-height-app">
+    <section className="min-height-app gradient-bg">
       <Title titleName={feature.name} />
 
       <Chevron
@@ -64,11 +61,7 @@ function DetailedFeature() {
         <div className="actions my-4">
           <DialogWithForm
             childComponent={
-              <UpdateFeature
-                feature={feature}
-                loadFeature={loadFeature}
-                toggleForm={handleEdit}
-              />
+              <UpdateFeature feature={feature} loadFeature={loadFeature} />
             }
             buttonInfo="Edit Feature"
             isEdit={true}
@@ -81,7 +74,7 @@ function DetailedFeature() {
       )}
       <div className="descriptions-container">
         <DialogDefault
-          dialogName="Description"
+          dialogName="description"
           dialogDescription={feature.description}
         />
       </div>

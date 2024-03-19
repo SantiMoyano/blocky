@@ -101,20 +101,19 @@ function Register() {
     <div className="blue-bg auth-form min-height-app py-8">
       <Form
         formData={registerData}
+        formInfo="Create Account"
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo="Register"
+        buttonInfo={registering ? "Creating account..." : "Register"}
       />
-      {registrationSuccess ? (
-        <Notification message={"User created successfully!"} type={"success"} />
-      ) : (
-        error && (
+      <div className="flex justify-center items-center">
+        {error && (
           <Notification message={"User already exists!"} type={"failure"} />
-        )
-      )}
-      {formError.formIsInvalid && (
-        <Notification message={formError.message} type={"failure"} />
-      )}
+        )}
+        {formError.formIsInvalid && (
+          <Notification message={formError.message} type={"failure"} />
+        )}
+      </div>
     </div>
   );
 }

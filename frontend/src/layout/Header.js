@@ -17,8 +17,8 @@ function NavList({ isLoggedIn, handleLogout }) {
           <Typography
             as={Link} // Render Link component instead of 'a' tag
             to="/login"
-            variant="small"
-            className="p-1 font-medium font-custom"
+            variant="medium"
+            className="p-1  font-custom hover:text-black transition duration-300 ease-in-out"
             color="white"
           >
             Login
@@ -26,8 +26,8 @@ function NavList({ isLoggedIn, handleLogout }) {
           <Typography
             as={Link} // Render Link component instead of 'a' tag
             to="/register"
-            variant="small"
-            className="p-1 font-medium font-custom"
+            variant="medium"
+            className="p-1  font-custom hover:text-black transition duration-300 ease-in-out"
             color="white"
           >
             Register
@@ -40,8 +40,8 @@ function NavList({ isLoggedIn, handleLogout }) {
           <Typography
             as={Link} // Render Link component instead of 'a' tag
             to="/projects"
-            variant="small"
-            className="p-1 font-medium font-custom"
+            variant="medium"
+            className="p-1 font-custom hover:text-black transition duration-300 ease-in-out"
             color="white"
           >
             Projects
@@ -50,8 +50,8 @@ function NavList({ isLoggedIn, handleLogout }) {
             as={Link}
             onClick={handleLogout}
             to="/"
-            variant="small"
-            className="p-1 font-medium font-custom"
+            variant="medium"
+            className="p-1 font-custom hover:text-black transition duration-300 ease-in-out"
             color="white"
           >
             Logout
@@ -77,33 +77,35 @@ function NavbarSimple({ isLoggedIn, handleLogout }) {
   }, []); // Run only once when the component mounts
 
   return (
-    <Navbar className="dark-red-bg w-full min-w-full px-6 py-3 rounded-none border-none">
-      <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as={Link}
-          to="/"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5 font-custom"
-          color="white"
-        >
-          BLOCKY
-        </Typography>
-        <div className="hidden lg:block">
-          <NavList isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+    <Navbar className="dark-red-bg w-full min-w-full rounded-none shadow-none border-0 border-b-2">
+      <div className="flex justify-center items-center">
+        <div className="flex items-center justify-between text-blue-gray-900 header-width">
+          <Typography
+            as={Link}
+            to="/"
+            variant="h5"
+            className="cursor-pointer py-1.5 font-custom hover:text-black transition duration-300 ease-in-out"
+            color="white"
+          >
+            BLOCKY
+          </Typography>
+          <div className="hidden lg:block">
+            <NavList isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+          </div>
+          <IconButton
+            variant="text"
+            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+            ripple={false}
+            onClick={() => setOpenNav(!openNav)}
+            color="white"
+          >
+            {openNav ? (
+              <XMarkIcon color="white" className="h-6 w-6" strokeWidth={2} />
+            ) : (
+              <Bars3Icon color="white" className="h-6 w-6" strokeWidth={2} />
+            )}
+          </IconButton>
         </div>
-        <IconButton
-          variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-          ripple={false}
-          onClick={() => setOpenNav(!openNav)}
-          color="white"
-        >
-          {openNav ? (
-            <XMarkIcon color="white" className="h-6 w-6" strokeWidth={2} />
-          ) : (
-            <Bars3Icon color="white" className="h-6 w-6" strokeWidth={2} />
-          )}
-        </IconButton>
       </div>
       <Collapse open={openNav}>
         <NavList isLoggedIn={isLoggedIn} handleLogout={handleLogout} />

@@ -1,6 +1,6 @@
 import "./blocky.css";
 
-import { Button, Option, Select } from "@material-tailwind/react";
+import { Option, Select } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 
 import Block from "./Block";
@@ -51,7 +51,6 @@ function SelectBlockOrder({ handleSortByChange }) {
     <div className="flex justify-center items-center blocky-select">
       <div className="rounded-sm ">
         <Select
-          color="black"
           label="Sort by"
           className="text-white font-bold border-2 select-width"
           onChange={(e) => handleSortByChange(e)}

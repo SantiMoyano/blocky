@@ -53,11 +53,9 @@ function Features({ epicId }) {
     return <Loading />;
   }
 
-  console.log(featureList);
-
   return (
-    <section className="min-height-app">
-      <div className="mt-2 border-8 border-x-0 py-4 border-b-0">
+    <section className="min-height-app gradient-bg">
+      <div className="mt-2 py-4 ">
         <div className="flex justify-center items-center">
           <div className="flex justify-center items-center select-actions features-flex">
             <div className="flex column-responsive items-center">
