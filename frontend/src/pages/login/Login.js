@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../../components/ui/form/Form";
 import Notification from "../../utils/Notification";
+import { Typography } from "@material-tailwind/react";
 import { loginUser } from "../../services/redux/auth/loginSlice";
-import { useNavigate } from "react-router-dom";
 
 function Login({ handleLogin }) {
   const dispatch = useDispatch();
@@ -16,6 +17,13 @@ function Login({ handleLogin }) {
     message: "",
     formIsInvalid: false,
   });
+
+  useEffect(() => {
+    if (loginSuccess) {
+      navigateToProjects();
+      handleLogin();
+    }
+  }, [loginSuccess]);
 
   // Request data for login
   const [loginRequest, setLoginRequest] = useState({
@@ -58,8 +66,6 @@ function Login({ handleLogin }) {
     };
     // Dispatch the action to log in the user
     dispatch(loginUser(loginReq));
-    if (!error) navigateToProjects();
-    handleLogin();
   }
 
   function navigateToProjects() {
@@ -88,7 +94,18 @@ function Login({ handleLogin }) {
         handleSubmit={handleSubmit}
         buttonInfo={loggingIn ? "Login in..." : "Login"}
       />
-      <div className="flex justify-center items-center">
+      <div className="gap-2">
+        <Typography color="white">Don't have an account?</Typography>
+        <Typography
+          as={Link}
+          to="/register"
+          color="white"
+          className="text-center font-bold underline"
+        >
+          Sing in
+        </Typography>
+      </div>
+      <div className="flex justify-center items-center py-2">
         {error && <Notification message={error.message} type={"failure"} />}
         {formError.formIsInvalid && (
           <Notification message={formError.message} type={"failure"} />

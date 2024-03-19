@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../../components/ui/form/Form";
+import { Link } from "react-router-dom";
 import Loading from "../../utils/Loading";
 import Notification from "../../utils/Notification";
+import { Typography } from "@material-tailwind/react";
 import { registerUser } from "../../services/redux/auth/registerSlice";
 
 function Register() {
@@ -106,7 +108,18 @@ function Register() {
         handleSubmit={handleSubmit}
         buttonInfo={registering ? "Creating account..." : "Register"}
       />
-      <div className="flex justify-center items-center">
+      <div className="gap-2">
+        <Typography color="white">Already have an account?</Typography>
+        <Typography
+          as={Link}
+          to="/login"
+          color="white"
+          className="text-center font-bold underline"
+        >
+          Login
+        </Typography>
+      </div>
+      <div className="flex justify-center items-center py-2">
         {error && (
           <Notification message={"User already exists!"} type={"failure"} />
         )}
