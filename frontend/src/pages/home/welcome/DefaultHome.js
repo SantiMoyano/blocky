@@ -1,7 +1,7 @@
-import "./home.css";
+import "../home.css";
 
-import ButtonWithArrow from "../../components/ui/buttons/ButtonWithArrow";
-import HomeContent from "./HomeContent";
+import ButtonWithArrow from "../../../components/ui/buttons/ButtonWithArrow";
+import HomeContent from "../content/HomeContent";
 import Logo from "./Logo";
 
 export function DefaultHome({ handleQuickExample, handleCreateAccount }) {

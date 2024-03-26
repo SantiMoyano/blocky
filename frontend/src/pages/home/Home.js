@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import { loginUser, reset } from "../../services/redux/auth/loginSlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { DefaultHome } from "./DefaultHome";
-import { UserLoggedHome } from "./UserLoggedHome";
+
+import { DefaultHome } from "./welcome/DefaultHome";
 import Loading from "../../utils/Loading";
+import { UserLoggedHome } from "./welcome/UserLoggedHome";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Home({ handleLogin, handleLogout, username }) {
   const dispatch = useDispatch();

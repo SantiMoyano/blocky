@@ -6,7 +6,7 @@ import React from "react";
 
 function Form({ formData, formInfo, handleChange, handleSubmit, buttonInfo }) {
   return (
-    <div className="flex justify-center blue-bg w-full px-6">
+    <div className="flex justify-center w-full px-6">
       <Card color="transparent" shadow={false} className="w-80">
         <Typography
           variant="h3"

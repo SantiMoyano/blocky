@@ -18,7 +18,7 @@ function NavList({ isLoggedIn, handleLogout }) {
             as={Link} // Render Link component instead of 'a' tag
             to="/register"
             variant="medium"
-            className="p-1  font-custom hover:text-black transition duration-300 ease-in-out"
+            className="p-1 font-bold font-custom hover:text-black transition duration-300 ease-in-out"
             color="white"
           >
             Sing in
@@ -32,7 +32,7 @@ function NavList({ isLoggedIn, handleLogout }) {
             as={Link} // Render Link component instead of 'a' tag
             to="/projects"
             variant="medium"
-            className="p-1 font-custom hover:text-black transition duration-300 ease-in-out"
+            className="p-1 font-bold font-custom hover:text-black transition duration-300 ease-in-out"
             color="white"
           >
             Projects
@@ -42,7 +42,7 @@ function NavList({ isLoggedIn, handleLogout }) {
             onClick={handleLogout}
             to="/"
             variant="medium"
-            className="p-1 font-custom hover:text-black transition duration-300 ease-in-out"
+            className="p-1 font-bold font-custom hover:text-black transition duration-300 ease-in-out"
             color="white"
           >
             Logout
@@ -68,7 +68,7 @@ function NavbarSimple({ isLoggedIn, handleLogout }) {
   }, []); // Run only once when the component mounts
 
   return (
-    <Navbar className="dark-red-bg w-full min-w-full rounded-none shadow-none border-0 ">
+    <Navbar className="blue-bg w-full min-w-full rounded-none shadow-none border-0 ">
       <div className="flex justify-center items-center">
         <div className="flex items-center justify-between text-blue-gray-900 header-width">
           <Typography

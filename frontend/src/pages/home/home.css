@@ -25,17 +25,37 @@
   font-size: 40px;
 }
 
-@media (max-width: 1080px) {
-  .home-content div {
-    max-width: 800px;
+.card-list {
+  max-width: 1000px;
+}
+
+@media (min-width: 840px) {
+  .home-content {
+    flex-direction: row;
+    padding: 0 16px;
+    gap: 48px;
   }
+
+  .home-content div {
+    flex-direction: column;
+    max-width: 300px;
+    min-width: 300px;
+  }
+
   .home-content figure {
-    max-width: 400px;
-    min-width: 400px;
+    max-width: 300px;
+    min-width: 300px;
+  }
+
+  .image-text {
+    padding: 16px 16px;
   }
 
   .home-content-title p {
-    min-width: 800px;
+    justify-content: center;
+    max-width: 100%;
+    min-width: 100%;
+    font-size: 32px;
   }
 }
 

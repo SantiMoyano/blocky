@@ -86,7 +86,7 @@ function Login({ handleLogin }) {
   }
 
   return (
-    <div className="blue-bg auth-form min-height-app py-8">
+    <div className="gradient-bg auth-form min-height-app py-8">
       <Form
         formData={loginData}
         formInfo="Login"
@@ -95,12 +95,14 @@ function Login({ handleLogin }) {
         buttonInfo={loggingIn ? "Login in..." : "Login"}
       />
       <div className="gap-2">
-        <Typography color="white">Don't have an account?</Typography>
+        <Typography color="white" className="font-custom">
+          Don't have an account?
+        </Typography>
         <Typography
           as={Link}
           to="/register"
           color="white"
-          className="text-center font-bold underline"
+          className="text-center font-bold underline font-custom"
         >
           Sing in
         </Typography>

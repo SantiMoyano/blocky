@@ -39,7 +39,7 @@ function Projects() {
 
   return (
     <section className="min-height-app gradient-bg">
-      <Title titleName="PROJECTS" />
+      <Title titleName="YOUR SOFTWARE PROJECTS" />
       <div className="mt-4 px-6 list-content py-4">
         <div className="flex justify-center items-center select-actions">
           <div className="pb-2">

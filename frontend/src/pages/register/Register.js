@@ -100,21 +100,23 @@ function Register() {
   if (registering) return <Loading />;
 
   return (
-    <div className="blue-bg auth-form min-height-app py-8">
+    <div className="gradient-bg auth-form min-height-app py-8">
       <Form
         formData={registerData}
         formInfo="Create Account"
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        buttonInfo={registering ? "Creating account..." : "Register"}
+        buttonInfo={registering ? "Creating account..." : "Sing in"}
       />
       <div className="gap-2">
-        <Typography color="white">Already have an account?</Typography>
+        <Typography color="white" className="font-custom">
+          Already have an account?
+        </Typography>
         <Typography
           as={Link}
           to="/login"
           color="white"
-          className="text-center font-bold underline"
+          className="text-center font-bold underline font-custom"
         >
           Login
         </Typography>
