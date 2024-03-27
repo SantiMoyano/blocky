@@ -1,0 +1,19 @@
+.methodology-container {
+  max-width: 1025px;
+}
+
+.structure-text {
+  padding-left: 52px;
+}
+
+@media screen and (max-width: 847px) {
+  .structure-text {
+    justify-content: center;
+    padding-left: 0;
+    padding: 0 24px;
+  }
+
+  .structure-text h2 {
+    font-size: 28px;
+  }
+}

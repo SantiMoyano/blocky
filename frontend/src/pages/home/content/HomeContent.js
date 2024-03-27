@@ -1,4 +1,5 @@
 import { CardList } from "./CardList";
+import { RecommendedMethodologySection } from "./RecommendedMethodologySection";
 import { Typography } from "@material-tailwind/react";
 
 const listCardsInfo = [
@@ -28,10 +29,15 @@ const listCardsInfo = [
 function HomeContent() {
   return (
     <div className="flex flex-col justify-center items-center gradient-bg py-16">
-      <Typography variant="h2" className="font-custom text-white font-bold">
-        What is Blocky?
-      </Typography>
+      <div className="methodology-container w-full flex justify-center structure-text">
+        <div>
+          <Typography variant="h2" className="font-custom text-white">
+            What is Blocky?
+          </Typography>
+        </div>
+      </div>
       <CardList list={listCardsInfo} />
+      <RecommendedMethodologySection />
     </div>
   );
 }
