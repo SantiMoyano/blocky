@@ -1,9 +1,8 @@
 .methodology-container {
-  max-width: 1025px;
+  max-width: 1120px;
 }
 
 .structure-text {
-  padding-left: 52px;
 }
 
 @media screen and (max-width: 847px) {

@@ -24,7 +24,7 @@ export function RecommendedMethodologySection() {
 
   return (
     <div className="flex flex-col justify-center items-center pt-16">
-      <div className="methodology-container w-full flex structure-text">
+      <div className="methodology-container w-full flex pl-14 structure-text">
         <div>
           <Typography variant="h2" className="font-custom text-white">
             How to Structure Your Software Project

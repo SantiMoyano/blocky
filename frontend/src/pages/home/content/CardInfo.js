@@ -7,7 +7,7 @@ import {
 
 export function CardInfo({ cardContent }) {
   return (
-    <Card className="max-w-[18rem] min-w-[18rem] overflow-hidden blue-bg shadow-none transform transition duration-300 ease-in-out hover:scale-105">
+    <Card className="max-w-[18rem] min-w-[18rem] mx-1 overflow-hidden blue-bg shadow-none transform transition duration-300 ease-in-out hover:scale-105">
       <CardHeader
         floated={false}
         shadow={false}
