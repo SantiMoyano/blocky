@@ -12,8 +12,8 @@
 .blockylist {
   display: flex;
   flex-wrap: wrap;
-  max-width: 900px;
-  justify-content: center;
+  max-width: 1020px;
+  justify-content: start;
   align-items: center;
 }
 
@@ -27,6 +27,7 @@
 }
 
 .select-actions {
+  min-width: 980px;
   justify-content: space-between;
 }
 
@@ -41,9 +42,27 @@
   display: flex;
   justify-content: start;
   align-items: start;
-  max-width: 640px;
+  max-width: 980px;
   min-width: 640px;
   width: 100%;
+}
+
+@media screen and (max-width: 1070px) {
+  .select-actions {
+    max-width: 640px;
+    min-width: 640px;
+    justify-content: space-between;
+  }
+
+  .blockylist {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .blocky-select {
+    max-width: 640px;
+    min-width: 640px;
+  }
 }
 
 @media screen and (max-width: 774px) {
